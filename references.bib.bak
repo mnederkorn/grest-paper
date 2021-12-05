@@ -1,0 +1,306 @@
+@inproceedings{kmd5,
+ author = {Mihir Bellare and Ran Canetti and Hugo Krawczyk},
+ title = {Keying Hash Functions for Message Authentication},
+ booktitle = {CRYPTO '96: Proceedings of the 16th Annual International Cryptology Conference on Advances in Cryptology},
+ year = {1996},
+ isbn = {3-540-61512-1},
+ pages = {1--15},
+ publisher = {Springer-Verlag},
+ address = {London, UK},
+ }
+ 
+ @misc{rfc2104,
+  author="H. Krawczyk and M. Bellare and R. Canetti",
+  title="{HMAC: Keyed-Hashing for Message Authentication}",
+  series="Request for Comments",
+  number="2104",
+  howpublished="RFC 2104 (Informational)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=1997,
+  month=feb,
+    url="http://www.ietf.org/rfc/rfc2104.txt",
+}
+
+@misc{rfc2145,
+  author="J. C. Mogul and R. Fielding and J. Gettys and H. Frystyk",
+  title="{Use and Interpretation of HTTP Version Numbers}",
+  series="Request for Comments",
+  number="2145",
+  howpublished="RFC 2145 (Informational)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=1997,
+  month=may,
+    url="http://www.ietf.org/rfc/rfc2145.txt",
+}
+
+@misc{rfc2817,
+  author="R. Khare and S. Lawrence",
+  title="{Upgrading to TLS Within HTTP/1.1}",
+  series="Request for Comments",
+  number="2817",
+  howpublished="RFC 2817 (Proposed Standard)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=2000,
+  month=may,
+    url="http://www.ietf.org/rfc/rfc2817.txt",
+}
+
+@book{schneier, 
+title = {Applied Cryptography},
+address = {New York},
+author = {Bruce Schneier},
+note = {TUB-HH: TIK-806},
+publisher = {John Wiley \& Sons},
+year = {1996},
+keywords = {Cryptography } 
+}
+
+@book{menezes, 
+title = {Handbook of Applied Cryptography},
+author = {Alfred J. Menezes and Paul C. van Oorschot and Scott A. Vanstone},
+publisher = {CRC Press},
+url = {http://www.cacr.math.uwaterloo.ca/hac/},
+year = {2001},
+keywords = {cryptography programming security } 
+}
+
+@article{voydock,
+ author = {Victor L. Voydock and Stephen T. Kent},
+ title = {Security Mechanisms in High-Level Network Protocols},
+ journal = {ACM Comput. Surv.},
+ volume = {15},
+ number = {2},
+ year = {1983},
+ issn = {0360-0300},
+ pages = {135--171},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ }
+ 
+ @book{rijndael, 
+title = {The Design of Rijndael: AES - The Advanced Encryption Standard},
+author = {Joan Daemen and Vincent Rijmen},
+publisher = {Springer},
+year = {2002},
+description = {dblp},
+isbn = {3-540-42580-2}, date = {2002-08-29},
+keywords = {dblp } 
+}
+
+@book{peltier,
+title= {Information Security Risk Analysis},
+author = {Thomas R. Peltier},
+publisher = {CRC Press Inc},
+year = {2001},
+isbn = { 0849308801 }, date = {2001-01-23},
+}
+
+@book{uml, 
+title = {The Unified Modeling Language Reference Manual},
+author = {J. Rumbaugh and I. Jacobson and G. Booch},
+publisher = {Addison-Wesley},
+year = {1999},
+}
+
+@misc{rfc2046,
+  author="N. Freed and N. Borenstein",
+  title="{Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types}",
+  series="Request for Comments",
+  number="2046",
+  howpublished="RFC 2046 (Draft Standard)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=1996,
+  month=nov,
+  note="Updated by RFCs 2646, 3798, 5147",
+  url="http://www.ietf.org/rfc/rfc2046.txt",
+}
+
+@misc{gnuhttp,
+	author="Free Software Foundation, Inc.",
+	title="GNU httptunnel",
+	howpublished="\url{http://www.gnu.org/software/httptunnel/}",
+	month=jul,
+	year=2008,
+}
+
+@misc{sfhttp,
+	author="Sebastian Weber",
+	title="HTTPTunnel",
+	howpublished="\url{http://http-tunnel.sourceforge.net/}",
+	month=jul,
+	year=2008,
+}
+
+@misc{rfc3986,
+  author="T. Berners-Lee and R. Fielding and L. Masinter",
+  title="{Uniform Resource Identifier (URI): Generic Syntax}",
+  series="Request for Comments",
+  number="3986",
+  howpublished="RFC 3986 (Standard)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=2005,
+  month=jan,
+  url="http://www.ietf.org/rfc/rfc3986.txt",
+}
+
+@misc{rfc3920,
+  author="P. Saint-Andre",
+  title="{Extensible Messaging and Presence Protocol (XMPP): Core}",
+  series="Request for Comments",
+  number="3920",
+  howpublished="RFC 3920 (Proposed Standard)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=2004,
+  month=oct,
+  url="http://www.ietf.org/rfc/rfc3920.txt",
+}
+
+@misc{bosh,
+	author="Ian Paterson and Dave Smith and Peter Saint-Andre",
+	title="Bidirectional-streams Over Synchronous HTTP (BOSH)",
+	howpublished="XEP-0124",
+	year=2007,
+	date={2007-02-21},
+	url="http://www.xmpp.org/extensions/xep-0124.html"
+}
+
+@misc{http-cert,
+	author="US-CERT",
+	title="HTTP proxy default configurations allow arbitrary TCP connections",
+	howpublished="VU\#150227",
+	year=2002,
+	url="https://www.kb.cert.org/CERT_WEB%5Cservices%5Cvul-notes.nsf/id/150227"
+}
+
+@misc{rfc2616,
+  author="R. Fielding and J. Gettys and J. Mogul and H. Frystyk and L. Masinter and P. Leach and T. Berners-Lee",
+  title="{Hypertext Transfer Protocol -- HTTP/1.1}",
+  series="Request for Comments",
+  number="2616",
+  howpublished="RFC 2616 (Draft Standard)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=1999,
+  month=jun,
+    note="Updated by RFC 2817",
+  url="http://www.ietf.org/rfc/rfc2616.txt",
+}
+
+@book{webproto,
+ title = {Web protocols and practice: HTTP/1.1, Networking protocols, caching, and traffic measurement},
+ author = {Balachander Krishnamurthy and Jennifer Rexford},
+ year = {2001},
+ isbn = {0-201-71088-9},
+ publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+ address = {Boston, MA, USA},
+ }
+ 
+ @Book{posix,
+  author =       "{IEEE}",
+  title =        "{IEEE Std 1003.1-2001 Standard for Information
+                 Technology --- Portable Operating System Interface
+                 (POSIX) System Interfaces, Issue 6}",
+	year =         "2001",
+}
+
+@misc{sunbug,
+	author="Sun Microsystems, Inc.",
+	title="Sun Developer Network -- Bug Database Community",
+	howpublished="\url{http://bugs.sun.com/bugdatabase/}",
+	month=jul,
+	year=2008,
+}
+
+ @misc{wp:ringbuffer,
+   author = "{Wikimedia Commons}",
+   title = "Image:Circular\_buffer.svg",
+   howpublished = "\url{http://commons.wikimedia.org/w/index.php?title=Image:Circular\_buffer.svg&oldid=6217884}",
+   month=jul,
+	 year=2008,
+ }
+ 
+@book{gof, 
+title = {Design Patterns},
+address = {Boston, MA},
+author = {Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides},
+howpublished = {Hardcover},
+month = {January},
+publisher = {Addison-Wesley},
+year = {1995},
+isbn = {0201633612},
+}
+
+@misc{sundl,
+	auhtor="Sun Microsystems, Inc.",
+	title="Java SE Downloads",
+	howpublished="\url{http://java.sun.com/javase/downloads/}",
+	month=jul,
+	year=2008,
+}
+
+@misc{rfc793,
+  author="J. Postel",
+  title="{Transmission Control Protocol}",
+  series="Request for Comments",
+  number="793",
+  howpublished="RFC 793 (Standard)",
+  publisher="IETF",
+  organisation="Internet Engineering Task Force",
+  year=1981,
+  month=sep,
+    note="Updated by RFC 3168",
+  url="http://www.ietf.org/rfc/rfc793.txt",
+}
+
+@misc{jana,
+	author="Thomas Hauck",
+	title="JanaServer 2",
+	howpublished="\url{http://www.janaserver.de/}",
+	month=jul,
+	year=2008,
+}
+
+@inproceedings{anderson,
+ author = {Ross J. Anderson},
+ title = {Crypto in Europe - Markets, Law and Policy},
+ booktitle = {Proceedings of the International Conference on Cryptography: Policy and Algorithms},
+ year = {1995},
+ isbn = {3-540-60759-5},
+ pages = {75--89},
+ publisher = {Springer-Verlag},
+ address = {London, UK},
+ }
+ 
+@misc{xstream,
+	author="Joe Walnes and {XStream Committers}",
+	title="XStream",
+	howpublished="\url{http://xstream.codehaus.org/}",
+	month=jul,
+	year=2008,
+}
+
+@misc{sha263,
+    author = {Martin Cochran},
+    title = {Notes on the Wang et al. $2^{63}$ SHA-1 Differential Path},
+    howpublished = {Cryptology ePrint Archive, Report 2007/474},
+    year = {2007/2008},
+}
+
+
+@book{BK08,
+  author    = {Christel Baier and
+               Joost{-}Pieter Katoen},
+  title     = {Principles of model checking},
+  publisher = {{MIT} Press},
+  year      = {2008},
+  isbn      = {978-0-262-02649-9},
+  timestamp = {Tue, 15 Feb 2011 11:22:37 +0100},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/books/daglib/0020348},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}

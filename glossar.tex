@@ -1,0 +1,90 @@
+\usepackage[latin1]{inputenc}
+\usepackage[toc]{glossaries}
+\makeglossaries
+\renewcommand{\glossaryname}{Glossar}
+
+\newglossaryentry{AES}{name=AES, description={Advanced Encryption Standard, auch Rijndael-Algorithmus; symmetrischer Blockchiffre \cite{rijndael}}}
+
+\newglossaryentry{ASCII}{name=ASCII, description={American Standard Code for Information Interchange; Zeichensatz mit 7-Bit-Kodierung}}
+
+\newglossaryentry{Base64}{name=Base64, description={Kodierung, die 8-Bit Binärdaten auf eine 6-Bit große Zeichenmenge abbildet}}
+
+\newglossaryentry{Brute-Force-Angriff}{name=Brute-Force-Angriff, description={Sicherheitsangriff auf ein Kryptosystem durch das Ausprobieren aller möglichen Lösungen. In der Theorie immer erfolgreich, in der Praxis meist aufgrund eines zu großen Lösungsraums nicht in einem akzeptablen Zeitraum durchführbar}}
+
+\newglossaryentry{CFB-Modus}{name=CFB-Modus, description={Cipher Feedback Mode; Betriebsmodus für Blockchiffre, siehe Kapitel \ref{cfb}}}
+
+\newglossaryentry{Denial-of-Service-Angriff}{name=Denial-of-Service-Angriff, description={Angriff auf die Verfügbarkeit eines Systems, häufig durch Überlastung eines Dienstes}}
+
+\newglossaryentry{Firewall}{name=Firewall, description={technisches Sicherheitskonzept zum Schutz von Rechnernetzen und deren \glslink{Host}{Hosts}}}
+
+\newglossaryentry{Handshake}{name=Handshake, description={Eröffnung einer Sitzung in einem Kommunikationsprotokoll}}
+
+\newglossaryentry{Hash-Algorithmus}{name={Hash-Algorithmus}, plural={Hash-Algorithmen}, description={bildet Eingabedaten eindeutig auf einen Ausgabewert (Hash-Wert) ab. Der Hash-Wert eines kryptographisch sicheren Algorithmus ermöglicht keine Rückschlüsse auf die Eingabedaten}}
+
+\newglossaryentry{HMAC}{name=HMAC, description={Keyed-Hash Message Authentication Code, siehe Kapitel \ref{hmac}}}
+
+\newglossaryentry{Host}{name=Host, plural=Hosts, description={Netzkomponente, die dem Rechnernetz Dienste zur Verfügung stellt}}
+
+\newglossaryentry{HTTP}{name=HTTP, description={Hypertext Transfer Protocol; Datenübertragungsprotokoll}}
+
+\newglossaryentry{HTTP-Proxy}{name=HTTP-Proxy, description={Netzkomponente, die \gls{HTTP}-Verbindungen vermittelt}}
+
+\newglossaryentry{HTTPS}{name=HTTPS, description={HTTP über \gls{SSL/TLS}}}
+
+\newglossaryentry{IP}{name=IP, description={Internet Protocol; Netzwerkprotokoll auf Vermittlungsschicht des \glslink{OSI-Modell}{OSI-Modells}}}
+
+\newglossaryentry{IP-Spoofing}{name=IP-Spoofing, description={Versenden von \gls{IP}-Paketen mit gefälschter Quelladresse zur Vortäuschung einer fremden Identität}}
+
+\newglossaryentry{Java SE}{name=Java SE, description={Java Platform, Standard Edition; Java-Laufzeitumgebung für Desktop- und Serversysteme}}
+
+\newglossaryentry{kerckhoff}{name={Kerckhoffs' Prinzip}, description={Kryptographisches Prinzip von Auguste Kerckhoffs (1835--1903), nach dem die Sicherheit eines Kryptosystems durch die Geheimhaltung des Schlüs\-sels und nicht der Geheimhaltung des Algorithmus hergestellt wird}}
+
+\newglossaryentry{Media Type}{name={Media Type}, description={auch MIME Type; Klassifizierungsschema für Datenformate \cite{rfc2046}}}
+
+\newglossaryentry{MITM-Angriff}{name=Man-in-the-Middle-Angriff, description={Sicherheitsangriff auf eine Datenübertragung, bei dem sich ein An\-grei\-fer zwischen den Kommunikationsteilnehmern befindet und deren Übertragung abhören und manipulieren kann}}
+
+\newglossaryentry{OSI-Modell}{name=OSI-Modell, description={siebenschichtiges Referenzmodell zum Entwurf von Kommunikationsprotokollen}}
+
+\newglossaryentry{Padding}{name=Padding, description={Auffüllen von Nutzdaten mit inhaltslosen Bytes, um eine Datenstruktur vorgegebener Größe einzuhalten}}
+
+\newglossaryentry{PMS}{name=PMS, description={Property Management System; Anwendung zur elektronischen Verwaltung und Abrechnung im Hotelgewerbe}}
+
+\newglossaryentry{Polling}{name=Polling, description={zyklisches Abfragen eines Zustands}}
+
+\newglossaryentry{POSIX}{name=POSIX, description={Portable Operating System Interface; standardisierte Betriebssystemschnittstelle für Anwendungen, insbesondere im Unix-Bereich gängig}}
+
+\newglossaryentry{Replay-Angriff}{name={Replay-Angriff}, plural={Replay-Angriffe}, description={Sicherheitsangriff durch Wiedereinspielung zuvor aufgezeichneter Daten}}
+
+\newglossaryentry{RFID}{name=RFID, description=Radio Frequency Identification; elektronisches Identifizierungsverfahren}
+
+\newglossaryentry{Router}{name=Router, description={vermittelnde Komponente in einem Rechnernetz}}
+
+\newglossaryentry{RS-232}{name=RS-232, description=eigentlich EIA/TIA-232; serielle Schnittstelle zum Anschluss von Peripheriegeräten}
+
+\newglossaryentry{Seitenkanalangriff}{name=Seitenkanalangriff, plural=Seitenkanalangriffe, description={Sicherheitsangriff auf eine bestimmte Implementation eines kryptographischen Verfahrens durch Beobachtung externer Parameter, etwa der verbrauchten Rechenzeit oder der Speichernutzung}}
+
+\newglossaryentry{SHA}{name=SHA, description={Secure Hash Algorithm; eine Familie von kryptographischen \glslink{Hash-Algorithmus}{Hash-Al\-go\-rith\-men} mit Ausgabegrößen von 160 bis 512 Bit}}
+
+\newglossaryentry{Sniffing}{name=Sniffing, description={Abhören des Datenverkehrs im lokalen Netzwerk}}
+
+\newglossaryentry{SSL/TLS}{name={SSL/TLS}, description={Secure Sockets Layer/Transport Layer Security; Kommunikationsprotokoll zur kryptographisch sicheren Datenübertragung}}
+
+\newglossaryentry{Stateful Packet Inspection}{name={Stateful Packet Inspection}, description={Mechanismus bei \glslink{Firewall}{Firewalls}, um jedes einzelne Datenpaket einer zustandsbehafteten Sitzung zuzuordnen}}
+
+\newglossaryentry{StAX}{name=StAX, description={Streaming API for XML; Programmierschnittstelle zur strombasierten Verarbeitung von XML-Daten}}
+
+\newglossaryentry{TCP}{name=TCP, description={Transmission Control Protocol; Netzwerkprotokoll auf Transportschicht des \glslink{OSI-Modell}{OSI-Modells} \cite{rfc793}}}
+
+\newglossaryentry{USB}{name=USB, description=Universal Serial Bus; serielles Bussystem zum Anschluss von Peripheriegeräten}
+
+\newglossaryentry{UML}{name=UML, description={Unified Modeling Language; grafische Notation zur Systemmodellierung}}
+
+\newglossaryentry{Unixzeit}{name=Unixzeit, description=geläufiges Format zur Angabe eines Zeitpunkts: Anzahl Sekunden seit dem 1. Januar 1970 00:00:00 UTC}
+
+\newglossaryentry{URL}{name=URL, description={Uniform Resource Locator; Klassifizierungsschema für Ressourcen in einem Rechnernetz \cite{rfc3986}}}
+
+\newglossaryentry{UTF-8}{name=UTF-8, description={8 Bit Unicode Transformation Format; ein Kodierungsformat des Unicode-Zei"-chen"-satzes}}
+
+\newglossaryentry{XMPP}{name=XMPP, description={Extensible Messaging and Presence Protocol; Netzwerkprotokoll, insbesondere für Instant Messaging \cite{rfc3920}}}
+
+\newglossaryentry{XML}{name=XML, description={Extensible Markup Language; textbasierte Auszeichnungssprache zur Speicherung und zum Austausch von Daten}}
