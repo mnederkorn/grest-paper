@@ -1,29 +1,69 @@
 \section{Introduction}
 \section{Definitions}
-Foundational to our task are the different kinds of \textit{Infinite Games}. We also want a notion of \textit{strategies} on such Infinite Games and the resolution of Infinite Games
+Foundational to our task are the different kinds of \textit{Infinite Games} and how to determine the outcome of each such game. To do so, we also want a notion of \textit{strategies} on such Infinite Games. To later reduce the games to one another, we furthermore want a definition of a \textit{Reduction} in the computational complexity sense.
 \subsection{Infinite Games}
+Infinite Games are a category of games played by two players on a finite, directed graph. They are infinite in the sense that we require the out-degree of every vertex to be at least one. As such, regardless of the strategies chosen by the players, they never terminate.
 \subsubsection{Directed Graphs}
+Let $V$ be a finite set of Vertices, let $E\subseteq V \times V$ be a set of Edges, then $G = (V,E)$ is a \textit{Directed Graph}.
+We also define $src\colon E\rightarrow V$ as $src((u,v))=u$ and
+$tgt\colon E\rightarrow V$ as $src((u,v))=v$.
+\subsubsection{Arenas}
+An arena is an extension of Directed Graphs, where the set of Vertices, $V$, is partitioned into two disjunct subsets $V_0$ and $V_1$, respectively denoting the regions where player 0 and player 1 are to play. We also require that the out-degree of every vertex is at least one, so that any play on the Arena is infinite.\newline
+Formally, let $(V,E)$ be a non-trivial Directed Graph, $V_0\cup V_1 = V,~V_0\cap V_1 = \emptyset$ be a partition of V and $\forall v\in V\colon \exists e \in E\colon src(e)=v$,
+then $A=(V,V_0,V_1,E)$ is an Arena.
+\subsubsection{Play}
 \subsubsection{Strategies}
 \subsubsection{Parity Games}
+Parity Games are played by two players, \textit{Even} or player 0, also represented by $\Square$ and \textit{Odd} or player 1, also represented by $\Circle$.\newline
+A Parity Game, $PG =(A,p)$, is played on an Arena $A$ with a priority function $p\colon V\rightarrow\{0,1,...|V|\}$.\newline
+Let $\pi_{\sigma, \tau}(PG)=\langle v_0, v_1, ...\rangle$ be the \textit{play} resulting from applying the strategies $\sigma$ and $\tau$ to Parity Game $PG$.\newline
+Let $\#_\infty(\pi_{\sigma, \tau}(PG))=\{i\in \langle p(v_0), p(v_1), ...\rangle|\forall j \in \mathbb{N}\colon j<|\{v\in \langle v_0, v_1, ...\rangle|p(v)=i\}|\}$ be the set of priorities that appear infinitely often in the play. If $max(\#_\infty(\pi_{\sigma, \tau}(PG)))$ is Even, then \textit{Even} wins and vice versa.
 \subsubsection{Mean Payoff Games}
+Mean Payoff Games are played by two players, \textit{Max} or player 0 ($\Square$) and \textit{Min} or player 1 ($\Circle$).\newline
+A Mean Payoff Game, $MPG = (A,\nu,d,w)$, is played on an Arena $A$, with threshold $\nu \in \mathbb{Z}$ and an edge-weight function $w\colon E\rightarrow\{-d, ..., -1, 0, 1, ..., d\}$, $d\in \mathbb{N}_0$.\newline
+\textit{Max} wins play $\pi_{\sigma, \tau}(MPG)=\langle v_0, v_1, ...\rangle$ if
+\begin{align*}
+	\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}w((v_i,v_{i+1}))\right)\geq\nu.
+\end{align*}
 \subsubsection{Energy Games}
+Energy Games are played by two players, \textit{Charging} or player 0 ($\Square$) and \textit{Depleting} or player 1 ($\Circle$).\newline
+An Energy Game, $EG = (A,c,d,w)$, is played on an Arena $A$, with credit $c\in\mathbb{N}_0$ and an edge-weight function $w\colon E\rightarrow\{-d, ..., -1, 0, 1, ..., d\}$, $d\in \mathbb{N}_0$.\newline
+\textit{Charging} wins play $\pi_{\sigma, \tau}(EG)=\langle v_0, v_1, ...\rangle$ if
+\begin{align*}
+	\forall k\in\mathbb{N}_0\colon\left(\sum_{i=0}^{k}w((v_i,v_{i+1}))\right)+c\geq0.
+\end{align*}
 \subsubsection{Discounted Payoff Games}
-\subsubsection{Simple Stochastic Games}
+Discounted Payoff Games are played by two players, \textit{Max} or player 0 ($\Square$) and \textit{Min} or player 1 ($\Circle$).\newline
+A Discounted Payoff Game, $DPG = (A,\nu,d,w,\lambda)$, is played on an Arena $A$, with threshold $\nu \in \mathbb{Z}$ and an edge-weight function $w\colon E\rightarrow\{-d, ..., -1, 0, 1, ..., d\}$, $d\in \mathbb{N}_0$ and a discount factor $0<\lambda<1$.\newline
+\textit{Max} wins play $\pi_{\sigma, \tau}(DPG)=\langle v_0, v_1, ...\rangle$ if
+\begin{align*}
+	(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)\geq\nu.
+\end{align*}
+\subsection{Simple Stochastic Games}
+Simple Stochastic Games are played by two players, \textit{Max} or player 0 ($\Square$) and \textit{Min} or player 1 ($\Circle$).\newline
+A Simple Stochastic Game, $SSG = (G, (V_{max}, V_{min}, V_{avg}), V_0, V_1, p)$, is played on a Directed Graph G, with a partition $(V_{max}, V_{min}, V_{avg})$, two sink vertices $V_0, V_1$ and a probability function $p\colon E\supset (V_{avg},V)\rightarrow (0,1]$.
+We also require that the out-degree of every vertex is at least one, with the exception of $V_0, V_1$, for which it is zero.
+We say that a SSG is \textit{stopping} if for every possible combination of strategies $\sigma, \tau$ every vertex has a path to one of the sink vertices.\newline
+\textit{Max} wins if the $V_1$ sink is reached, \textit{Min} wins if the $V_0$ sink is reached or the game doesn't terminate.
+Since the result of a play $\pi_{\sigma, \tau}(SSG)$ is probablistic, it is assigned a probabilty to reach the $V_1$ sink rather than a distinct fixed value.
 \subsection{Reductions}
-\section{Reductions in Theory}
-\subsection{PGs to MPGs}
-\subsection{MPGs to DPGs}
-\subsection{MPGs to EGs}
-\subsection{DPGs to SSGs}
-\section{Solutions in Theory}
-\subsection{Value Iteration}
-\subsection{Strategy Iteration}
-\subsection{PGs}
-\subsection{MPGs}
-\subsection{DPGs}
-\subsection{EGs}
-\subsection{SSGs}
-\section{Reductions in Practise}
-\section{Solutions in Practise}
+\section{Reductions and Solutions in Theory}
+\subsection{Reductions in Theory}
+\subsubsection{PGs to MPGs}
+\subsubsection{MPGs to DPGs}
+\subsubsection{MPGs to EGs}
+\subsubsection{DPGs to SSGs}
+\subsection{Solutions in Theory}
+\subsubsection{Value Iteration}
+\subsubsection{Strategy Iteration}
+\subsubsection{PGs}
+\subsubsection{MPGs}
+\subsubsection{DPGs}
+\subsubsection{EGs}
+\subsubsection{SSGs}
+\section{Reductions and Solutions in Practise}
+\subsection{Reductions in Practise}
+\subsection{Solutions in Practise}
+\section{Implementation}
 \section{Evaluation}
 \section{Conclusion and Future}
