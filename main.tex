@@ -51,7 +51,7 @@
 %\tracingstats=2
 %\usepackage{layout}
 % german language support (hyphenation etc)  
-\usepackage{ngerman}
+%\usepackage{ngerman}
 
 % support for latin1 characters. That means you can enter ä ö ü ß directly
 % no need for "a "u "ü "s anymore
@@ -66,7 +66,7 @@
 %\selectbiblanguage{ngerman}
 
 %\usepackage[comma,numbers,sort&compress,nonamebreak]{natbib}
-\usepackage{bibgerm}
+%\usepackage{bibgerm}
 \bibliographystyle{alphadin}
 
 % allows text flowing around figures.
@@ -167,6 +167,52 @@
 \usetikzlibrary{arrows}
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{shapes.misc}
+
+% ---------------------------------------------------------------------------- %
+% Tikz definitions
+
+\tikzset{port/.style={shape=circle,inner sep=0,draw=black,fill=white,minimum height=2pt,minimum width=2.5pt}}
+\tikzset{point/.style={shape=circle,inner sep=0,fill=black,minimum height=1pt,minimum width=1pt}}
+%\tikzset{gnode/.style={shape=circle,inner sep=0,fill=black,minimum height=.1cm,minimum width=.1cm}}
+\tikzset{hyperedge/.style={shape=rectangle,draw,inner sep=0,minimum width=.4cm,minimum height=.4cm}}
+\tikzset{marr/.style={shorten <=2pt,shorten >=2pt,->}}
+%\tikzset{nodelabel/.style={minimum height=.4cm,font=\scriptsize}}
+\tikzset{edgelabel/.style={circle,inner sep=1pt}}
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},cross/.default={1pt}}
+
+\tikzset{gnode/.style={shape=circle,fill=black,inner sep=0mm,minimum size=2mm}}
+\tikzset{glab/.style={inner sep=1pt,font=\scriptsize}}
+
+\tikzset{every fit/.style={shape=rectangle,inner sep=5pt}}
+
+\tikzset{
+	mono/.style={>->},
+	%	gnode/.style={circle,fill=black,inner sep=0mm,minimum size=2mm,font=\scriptsize,text=white},
+	gedge/.style={->,>=latex},
+	arlab/.style={inner sep=1pt,font=\scriptsize},
+	%	glab/.style={inner sep=1pt,font=\scriptsize},
+	hyperedge/.style={shape=rectangle,draw,inner sep=0,minimum width=1cm,minimum height=.4cm},
+	point/.style={shape=circle,inner sep=0,fill=black,minimum height=1pt,minimum width=1pt}
+}
+
+\newcommand\graphboxthick[2][grbox]{
+	\begin{pgfonlayer}{background}
+		\node[fit=#2] (#1) {};
+		\fill[black!20,rounded corners=2mm,postaction={draw,black}] (#1.north west) -- (#1.north east) -- (#1.south east) -- (#1.south west) -- cycle;
+	\end{pgfonlayer}
+}
+
+\newcommand\substx[2]{
+	($ (0,0)!#1!(0,1) + (#2,0) $)
+}
+
+\newcommand\substy[2]{
+	($ (0,0)!#1!(1,0) + (0,#2) $)
+}
+
+\usepackage{mathtools}
+
+\usepackage[titletoc,title]{appendix}
 
 \usepackage{wasysym}
 \usepackage{amssymb}
