@@ -1,7 +1,7 @@
 \section{Introduction}
-\cite{Ehrenfeucht1979}\cite{ZWICK1996343}\cite{CONDON1992203}\cite{10.1007/978-3-540-85778-5_4}\cite{185392}There are practical applications (cite) which are able to be modeled by or reduced to various games. Considering the many ways there are to solve those games, the possibility to (repeatedly) reduce them to one another and various possibilities to implement any of those algorithms there are many potential means to solve problems on those games. We want to see how the different ways to solve problems, the reductions between those problems and the combination of the two play out and compare to one another in a real-world implementation.
+There are practical applications (cite) which are able to be modeled by or reduced to various games. Considering the many ways there are to solve those games, the possibility to (repeatedly) reduce them to one another and various ways to implement any of those algorithms there are many potential means to solve problems on those games. We want to see how the different ways to solve problems, the reductions between those problems and the combination of the two play out and compare to one another in a real-world implementation.
 \subsection{Task}
-The games we concern ourselves here are \textit{Parity Games} (PG), \textit{Mean Payoff Games} (MPG), \textit{Energy Games} (EG), \textit{Discounted Payoff Games} (DPG) and (stopping) \textit{Simple Stochastic Games} (SSG). For any of those games there are multiple problems, such as ``what is the value of vertex $v$ under optimal strategies from both players?'' or ``what are the optimal strategies?''. For any of those problems, there are multiple ways to solve them for any specific game directly, some of which are abstractable to multiple of the games, such as Kleene Iteration and Strategy Iteration. Additionally we can reduce the games to another as following:
+The games we concern ourselves here are \textit{Parity Games} (PG), \textit{Mean Payoff Games} (MPG), \textit{Energy Games} (EG), \textit{Discounted Payoff Games} (DPG) and (stopping) \textit{Simple Stochastic Games} (SSG). For any of those games there are multiple problems, but the ones we concern outselves here are ``what is the value of vertex $v$ under optimal strategies from both players?'' and ``what are the optimal strategies?''. For both of those problems, there may already be multiple algorithms to solve them for any specific game directly, some of which are generalizable to multiple of the games to some degree, such as Kleene Iteration and Strategy Iteration. Additionally we can reduce the games to another as following:
 \begin{center}
 	\begin{tikzpicture}
 		\node (A) at (0,0) {$PG$};
@@ -15,8 +15,8 @@ The games we concern ourselves here are \textit{Parity Games} (PG), \textit{Mean
 		\path [->] (B) edge (E);
 	\end{tikzpicture}
 \end{center}
-The reductions themselves are computationally relatively simple compared to the problems. Some of them however produce graphs that are bigger in some way ($PG\rightarrow MPG$, $DPG\rightarrow SSG$), which increases the complexity of subsequently applied algorithms, or reduce to multiple other game problems.
-Another part we have control over is how exactly the algorithms are implemented. The biggest factor here being that, due to their nature, the edge-weights can be seen as an incidence matrix and can therefore make use of matrix operations as a form of parallelization for parts of the algorithms.
+The reductions themselves are computationally relatively simple compared to the problems themselves. Some of them, however, produce graphs that are bigger in some way ($PG\rightarrow MPG$, $DPG\rightarrow SSG$), which increases the complexity of subsequently applied algorithms, or recursively reduces to multiple sub-problems ($MPG\rightarrow EG$).
+Another part we have control over is how exactly the algorithms are implemented. The biggest factor here being that, due to their nature, the edge-weights can be seen as an incidence matrix and can therefore make use of matrix operations, especially for simple operations such as addition and multiplication.
 \subsection{Structure}
 The paper is structured as follows:
 
@@ -26,7 +26,7 @@ In Chapter 4 we show the specifics as to how the theoretical algorithms were int
 In Chapter 5 we show how the implementations embeds to be used to solve specific problems or to demonstrate with the GUI.\\
 In Chaper 6 we show the kinds of graphs and problems we used to evaluate the solutions and the potential benefit of prior reduction as well as the results of the evaluation.\\
 In Chapter 7 we interpret the results of the evaluation and give suggestions and ideas for further improvement.
-\section{Definitions}
+\section{Preliminaries}
 Foundational to our task are the different kinds of \textit{Infinite Games} and how to determine the outcome of each such game. To do so, we also want a notion of \textit{strategies} on such Infinite Games. To later reduce the games to one another, we furthermore want a definition of a \textit{reduction} in the computational complexity sense.
 \subsection{Directed Graphs}
 Let $V$ be a finite set of Vertices, let $E\subseteq V \times V$ be a set of Edges, then $G = (V,E)$ is a \textit{Directed Graph}.
@@ -95,12 +95,12 @@ If $max(\#_\infty(\pi_{\sigma, \tau}(PG, v_0)))\coloneqq v_{\sigma,\tau}(v_0)$, 
 
 \begin{wrapfigure}[9]{l}{5.5cm}
 	\begin{tikzpicture}
-		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={$p(v_0)=5$}] (A) at (0,0) {\color{white}$v_0$};
-		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={$p(v_2)=4$}] (C) at (3.5,0) {\color{white}$v_2$};
-		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={below:$p(v_3)=2$}] (D) at (0,-1.75) {\color{white}$v_3$};
-		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={below:$p(v_5)=3$}] (F) at (3.5,-1.75) {\color{white}$v_5$};
-		\node[shape=circle, draw=black,label={$p(v_1)=2$}] (B) at (1.75,0) {\color{white}$v_1$};
-		\node[shape=circle, draw=black,label={below:$p(v_4)=0$}] (E) at (1.75,-1.75) {\color{white}$v_4$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={5}] (A) at (0,0) {$v_0$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={4}] (C) at (3.5,0) {$v_2$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={below:2}] (D) at (0,-1.75) {$v_3$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={below:3}] (F) at (3.5,-1.75) {$v_5$};
+		\node[shape=circle, draw=black,label={2}] (B) at (1.75,0) {$v_1$};
+		\node[shape=circle, draw=black,label={below:0}] (E) at (1.75,-1.75) {$v_4$};
 		\path [->] (A) edge[out=15, in=165] (B);
 		\path [->] (B) edge[out=195, in=345] (A);
 		\path [->] (B) edge[out=15, in=165] (C);
@@ -121,12 +121,12 @@ If $max(\#_\infty(\pi_{\sigma, \tau}(PG, v_0)))\coloneqq v_{\sigma,\tau}(v_0)$, 
 Playing $PG$ with $\sigma=\{(v_0,v_1),(v_2,v_5),(v_3,v_4),(v_5,v_2)\}$ and $\tau=\{(v_1,v_0),(v_4,v_1)\}$, the respective optimal strategies, results in play $\pi_{\sigma, \tau}(PG, v_0)=\langle v_0, v_1, v_0, ..\rangle$ for which $v_{\sigma,\tau}(v_0)=5$ is odd and the play is therefore winning for \textit{Odd}.
 \subsubsection{Mean Payoff Games}
 Mean Payoff Games are played by two players, \textit{Max} or player 0 ($\Square$) and \textit{Min} or player 1 ($\Circle$).
-A Mean Payoff Game, $MPG = (A,\nu,d,w)$, is played on an Arena $A$, with threshold $\nu \in \mathbb{Z}$ and an edge-weight function $w\colon E\rightarrow\{-d, \ldots, -1, 0, 1, \ldots, d\}$, $d\in \mathbb{N}_0$.\newline
-\textit{Max} wins play $\pi_{\sigma, \tau}(MPG, v_0)=\langle v_0, v_1, \ldots\rangle$ if
+A Mean Payoff Game, $MPG = (A,w)$, is played on an Arena $A$ and an edge-weight function $w\colon E\rightarrow\{-d, \ldots, -1, 0, 1, \ldots, d\}$, $d\in \mathbb{N}_0$.\newline
+\textit{Max} aims to chose their strategy for a given play $\pi_{\sigma, \tau}(MPG, v_0)=\langle v_0, v_1, \ldots\rangle$ such as to maximize the \textit{mean payoff} 
 \begin{align*}
-	\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}w((v_i,v_{i+1}))\right)\geq\nu.
+	\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}w((v_i,v_{i+1}))\right).
 \end{align*}
-Alternatively we can also ask what, for a given play, the maximum threshold $\nu$ is with which \textit{Max} can still win the play. We call this the \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. The goal for \textit{Max} is to maximize the mean payoff to guarantee a win under the highest possible $\nu$ and for \textit{Min} to minimize the mean payoff as to guarantee a win under the lowest possible $\nu$. Optimal strategies are those that maximize/minimize the mean payoff for a given MPG regardless of the initial vertex.
+We call this the \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. Given that those values are real numbers, we will round them from here on out. Optimal strategies are those that maximize/minimize the mean payoff for a given MPG regardless of the initial vertex.
 
 \begin{wrapfigure}[9]{l}{4.5cm}
 	\begin{tikzpicture}
@@ -150,18 +150,19 @@ Alternatively we can also ask what, for a given play, the maximum threshold $\nu
 \textbf{Example 3:}
 
 A Mean Payoff Game\\
-$MPG=(A,0,4,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\})$.\\
+$MPG=(A,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\})$.\\
 Playing $MPG$ with $\sigma=\{(v_0,v_0)\}$ and\newline
-$\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}=\{(v_0,2),(v_1,2),(v_2,-4),(v_3,2),(v_4,1)\}$\\\\\\
+$\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values\\
+$v_{\sigma,\tau}\colon v_0\mapsto 2, v_1\mapsto 2, v_2\mapsto -4, v_3\mapsto 2, v_4\mapsto 1$\\\\\\
 \subsubsection{Energy Games}
 Energy Games are played by two players, \textit{Charging} or player 0 ($\Square$) and \textit{Depleting} or player 1 ($\Circle$).
-An Energy Game, $EG = (A,c,d,w)$, is played on an Arena $A$, with initial credit $c\in\mathbb{N}_0$ and an edge-weight function $w\colon E\rightarrow\{-d, \ldots, -1, 0, 1, \ldots, d\}$, $d\in \mathbb{N}_0$.\newline
-\textit{Charging} wins play $\pi_{\sigma, \tau}(EG, v_0)=\langle v_0, v_1, \ldots\rangle$ if
+An Energy Game, $EG = (A,w)$, is played on an Arena $A$ and an edge-weight function $w\colon E\rightarrow\{-d, \ldots, -1, 0, 1, \ldots, d\}$, $d\in \mathbb{N}_0$.\newline
+\textit{Charging} aims to chose their strategy for a given play $\pi_{\sigma, \tau}(EG, v_0)=\langle v_0, v_1, \ldots\rangle$ such as to minimize the \textit{initial credit} $c\in \mathbb{N}_0$ needed to maintain the winning condition
 \begin{align*}
 	\forall k\in\mathbb{N}_0\colon\left(\sum_{i=0}^{k}w((v_i,v_{i+1}))\right)+c\geq0.
 \end{align*}
-For any given position $\langle v_0, v_1, \ldots, v_k\rangle$ in a play we call $\left(\sum_{i=0}^{k-1}w((v_i,v_{i+1}))\right) + c$ the \textit{energy level} at that position. Keep in mind that \textit{Charging} doesn't necessarily aim to maximise their energy level at \textit{any} specific position but rather to maintain a non-negative energy level at \textit{every} position.
-Alternatively we can also ask what, for a given play, the minimum initial credit $c$ is with which \textit{Charging} can maintain the winning condition. We call this the \textit{minimum initial credit} or \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. If no such value exists, e.g. when the vertex is of \textit{Depleting} and has a self-loop with negative edge-weight, we write $v_{\sigma,\tau}(v)=\infty$.
+We call the smallest inital credit that still maintains the winning condition for a given play the \textit{minimum initial credit} or \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. If no such value exists, e.g. when the vertex is of \textit{Depleting} and has a self-loop with negative edge-weight, we write $v_{\sigma,\tau}(v)=\infty$. For any given position $\langle v_0, v_1, \ldots, v_k\rangle$ in a play we call $\left(\sum_{i=0}^{k-1}w((v_i,v_{i+1}))\right) + c$ the \textit{energy level} at that position. Keep in mind that \textit{Charging} doesn't necessarily aim to maximise their energy level at \textit{any} specific position but rather to maintain a non-negative energy level at \textit{every} position.
+
 The goal for \textit{Charging} is to avoid getting trapped in cycles with overall negative edge-weight, as these can deplete any initial credit given, as well as to minimize the initial credit necessary to the compliant with the winning condition in all other cycles.
 Conversely, the goal for \textit{Depleting} is to trap \textit{Charging} in negative cycles or at least to maximize the initial credit necessary for \textit{Charging} to reach a non-negative cycle.
 Optimal strategies are those that minimize the initial credit necessary for \textit{Charging} and those that either deny the winning condition entirely or maximize the initial credit necessary for \textit{Depleting}.
@@ -169,28 +170,28 @@ Optimal strategies are those that minimize the initial credit necessary for \tex
 \textbf{Example 4:}
 
 Let us reappropriate Arena $A$ and edge-weight function $w$ of the previous MPG example and create an Energy Game $EG=(A,0,4,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\})$.\\
-Playing $EG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_3)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}=\{(v_0,0),(v_1,0),(v_2,\infty),(v_3,0),(v_4,1)\}$.
+Playing $EG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_3)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}\colon v_0\mapsto 0,v_1\mapsto 0,v_2\mapsto \infty,v_3\mapsto 0,v_4\mapsto 1$.
 \subsubsection{Discounted Payoff Games}
 Discounted Payoff Games are played by two players, \textit{Max} or player 0 ($\Square$) and \textit{Min} or player 1 ($\Circle$).
-A Discounted Payoff Game, $DPG = (A,\nu,d,w,\lambda)$, is played on an Arena $A$, with threshold $\nu \in \mathbb{Z}$, an edge-weight function $w\colon E\rightarrow\{-d, \ldots, -1, 0, 1, \ldots, d\}$, $d\in \mathbb{N}_0$ and a discount factor $0<\lambda<1$.\newline
-\textit{Max} wins play $\pi_{\sigma, \tau}(DPG, v_0)=\langle v_0, v_1, \ldots\rangle$ if
+A Discounted Payoff Game, $DPG = (A,w,\lambda)$, is played on an Arena $A$, an edge-weight function $w\colon E\rightarrow\{-d, \ldots, -1, 0, 1, \ldots, d\}$, $d\in \mathbb{N}_0$ and a discount factor $0<\lambda<1$.\newline
+\textit{Max} aims to chose their strategy for a given play $\pi_{\sigma, \tau}(DPG, v_0)=\langle v_0, v_1, \ldots\rangle$ such as to maximize the \textit{discounted payoff} 
 \begin{align*}
-	(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)\geq\nu.
+	(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right).
 \end{align*}
-Similar to MPGs we can also alternatively ask for a maximum winable threshold $v$ with which \textit{Max} can still win. Again we call this the \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. Optimal strategies are also defined analogously to MPGs.
+Again we call this the \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$, we will round them from here on out. Optimal strategies are those that maximize/minimize the discounted payoff for a given MPG regardless of the initial vertex.
 
 \textbf{Example 5:}
 
-Let us again reappropriate Arena $A$ and edge-weight function $w$ and create a Discounted Payoff Game $DPG=(A,0,4,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\}, 0.95)$.\\
-Playing $DPG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}=\{(v_0,2),(v_1,2.1),(v_2,-4),(v_3,1.95),(v_4,1)\}$.
+Let us again reappropriate Arena $A$ and edge-weight function $w$ and create a Discounted Payoff Game $DPG=(A,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\}, 0.95)$.\\
+Playing $DPG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}\colon v_0\mapsto 2,v_1\mapsto 2.1,v_2\mapsto -4,v_3\mapsto 1.95,v_4\mapsto 1$.
 \subsection{Simple Stochastic Games}
 Simple Stochastic Games are played by two players, \textit{Max} or player 0 ($\Square$) and \textit{Min} or player 1 ($\Circle$).
 A Simple Stochastic Game, $SSG = (G, (V_{0}, V_{1}, V_{2}), \mathfrak{0}, \mathfrak{1}, p)$, is played on a Directed Graph G, with a partition $(V_{0}, V_{1}, V_{2})$, two sink vertices $\mathfrak{0}, \mathfrak{1}$ and a probability function $p\colon V_2\rightarrow (V\rightarrow [0,1])$. We require that the probabilites of all outgoing edges of each $V_2$ vertex sum to 1: $\forall v\in V_2\colon\sum_{u \in V}p(v)(u)=1$ and that $\forall (u,v)\in(V_2\times V)\setminus E\colon p_u(v)=0$.
 On vertices $v\in V_2$, also called \textit{Average} or \textit{Random} ($\Diamond$) vertices, the next vertex gets chosen according to the probability function $p_v\colon V\rightarrow[0,1]$ rather than a player.
 We also require, like for Arenas, that the out-degree of every vertex is at least one, with the exception of $\mathfrak{0}, \mathfrak{1}$, for which it is zero.\newline
 \textit{Max} wins if the $\mathfrak{1}$ sink is reached, \textit{Min} wins if the $\mathfrak{0}$ sink is reached or the game doesn't terminate.
-Since the result of a play $\pi_{\sigma, \tau}(SSG, v_0)$ can be probablistic, it is assigned a probabilty to reach the $\mathfrak{1}$ sink rather than a fixed value.
-We say that a SSG is \textit{stopping} if for every possible position in a play, so given two fixed strategies $\sigma, \tau$, there is a path to one of the sink vertices. All SSGs we will consider from here on out will be stopping-SSGs.
+Since the result of a play $\pi_{\sigma, \tau}(SSG, v_0)$ can be probablistic, it is assigned a probabilty to reach the $\mathfrak{1}$ sink rather than a fixed value. We display this probability as a rounded real number.
+We say that a SSG is \textit{stopping} if for every possible position in a play, so given two fixed strategies $\sigma, \tau$, there is a path to one of the sink vertices. All SSGs we will consider will be stopping-SSGs.
 Since stopping-SSGs terminate, they are not Infinite Games. For simplicity, we will still include SSGs under the \textit{Infinite Games} label from here on out.
 The goal for \textit{Max} in a stopping-SSG is to maximize the chance to reach the $\mathfrak{1}$ vertex, the goal for \textit{Min} to reach the $\mathfrak{0}$ vertex. Optimal strategies are those that maximize the chance to reach the desired sink-vertex of the respective player regardless of the initial vertex.
 \begin{wrapfigure}[7]{l}{4.5cm}
@@ -223,7 +224,7 @@ A Simple Stochastic Game
 	\{(v_1,\{(\mathfrak{0},.53),(\mathfrak{1},.05),(v_3,.42)\}),\\
 	(v_3,\{(\mathfrak{0},.3),(v_0,.16),(v_2,.55)\})\}).\\
 \end{gather*}\\
-Playing $SSG$ with $\sigma=\{(v_0,v_1)\}$ and $\tau=\{(v_2,v_0)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}=\{(v_0,.07),(v_1,.07),(v_2,.07),(v_3,.05),(\mathfrak{0},0),(\mathfrak{1},1)\}$
+Playing $SSG$ with $\sigma=\{(v_0,v_1)\}$ and $\tau=\{(v_2,v_0)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}\colon v_0\mapsto .07,v_1\mapsto .07,v_2\mapsto .07,v_3\mapsto .05,\mathfrak{0}\mapsto 0,\mathfrak{1}\mapsto 1$.
 \subsection{Reductions}
 A \textit{reduction} describes an algorithm with which we can transform (reduce) one class of problems to another. For our purposes, we choose target problem classes that are already solved. Aside from reducing to an already solved problem class and therefore, per definition, also solving the original problem class, reducing and subsequent solving of instances of the original problem may be faster than any attempt to directly solve the original problem without reducing to another intermediary infinite game problem.\newline
 Formally, we express our problem classes as formal languages $A$ and $B$ over the alphabets $\Sigma^*$ and $\Gamma^*$. If $f$ is totally computable and
@@ -234,11 +235,12 @@ Formally, we express our problem classes as formal languages $A$ and $B$ over th
 then $f$ is a reduction from $\Sigma^*$ to $\Gamma^*$.\newline
 In practise our formal languages $A$ and $B$ will be some instances of types of infinite games together with statements about such games, such as the values under perfect play or perfect strategies. The reduction will then draw an equivalence to the other infinite game, e.g. if $w=``v(v_u)=5$ in $G$'' is a word in $A$ then $f(w) = ``v(v_v)=16$ in $H$'' is a word in $B$.
 \section{Solutions and Reductions in Theory}
-Before we go into the specifics of the implementation of the algorithms used to solve the problems and the reductions we first want to comprehensively explain the theory and reasoning behind each of them.
+Before we go into the specifics of the implementation of the algorithms used to solve the problems and the reductions we first want to comprehensively explain the theory behind each of them.
 \subsection{Solutions in Theory}
 One of the key parts of our work is the solving of problems on our games, be it in conjunction with a reduction or not.
-First we shall explain the general idea of Value Iteration and Strategy Iteration, as they can be generalized and used to solve multiple of the problems posed. Then we will explain the specific implementations of those as well as unique algorithms used to solve each of the games we are interested in.
-\subsubsection{Value Iteration}
+First we shall explain the general idea of Kleene Iteration and Strategy Iteration, as they can be generalized and used to solve multiple of the problems posed. Then we will explain the specifics of each implementation of those as well as unique algorithms used to solve each of the games we are interested in.
+\subsubsection{Kleene Iteration}
+Kleene
 \subsubsection{Strategy Iteration}
 \subsubsection{PGs}
 \subsubsection{MPGs}
@@ -247,7 +249,105 @@ First we shall explain the general idea of Value Iteration and Strategy Iteratio
 \subsubsection{SSGs}
 \subsection{Reductions in Theory}
 \subsubsection{PGs to MPGs}
+The reduction from PGs to MPGs is based on the idea of \cite{DBLP:journals/ipl/Jurdzinski98}.
+For a given $PG = (A,p)$ we  transform into a $MPG = (A,w)$, with the underlying arena $A$ being the same and the weights $w$ of $MPG$ based directly on the priority function $p$ of $PG$. Optimal strategies in $PG$ translate one to one to $MPG$ and the vertex $v$ being winning for \textit{Even} in $PG$ translates to $v$ having a value $>=0$ in $MPG$. Recall that for both $PGs$ and $MPGs$ winning strategies are memoryless.
+
+Consider any play $\pi$ in $A$ with $n=|V|$ in accordance to strategy $\sigma$ of \textit{Even/Max}. Given that $A$ is finite and $\pi$ can continue infinitely, any such play, regardless of starting vertex $v_0$ will necessarily have a repeat vertex after a path of length $k\leq n$ and will then, by virtue of the strategies being memoryless, indefinitely continue in a cycle of length $l\leq n-k$.
+
+From the definition of the value of a $PG$ it follows directly that only the priorities of the nodes in the cycle matter for the outcome to the game, specifically the highest priority. For MPGs we have:
+\begin{align*}
+	&\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}w((v_i,v_{i+1}))\right)=\\
+	&\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=k}^{n-1}w((v_i,v_{i+1}))\right)+
+	\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{k-1}w((v_i,v_{i+1}))\right)=\\
+	&\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}w((v_{i+k},v_{i+1+k}))\right)=\\
+	&\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}\dfrac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)=\\
+	&\dfrac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))
+\end{align*}
+So again, the only edge-weights that matter for the value of a play are those that are part of the terminal cycle.
+
+To equate the values of the games we want to set the edge-weights in such a way that the outgoing edge of any vertex of a given cycle alone can set the parity of the value of the game if and only if the priority of the vertex is the highest in the cycle.\\
+\cite{DBLP:journals/ipl/Jurdzinski98} does this by setting $w((u,v)) = (-n)^{p(u)}$. This way, the absolute weight of the outgoing edge of the vertex with highest priority is always higher than any possible make-up of the rest of the cycle, i.e. $|(-n)^{p(u)}|>(n-1)|(-n)^{p(u)-1}|$.\\
+This, however, is unsatisfying since the complexity of solving MPGs with the algorithms we use is dependent on $d$, the maximum absolute weight in the MPG. We therefore want to be conservative with the edge-weights and try to minimize them.\\
+To that end, we set our weights as follows:
+\begin{align}\label{ref1}
+	w((u,v)) = (-1)^{p(u)}\cdot (sum\langle z\in \{|w((x,y))|\mid (x,y)\in E\}\mid x\in V_u\footnotemark\rangle +1)
+\end{align}
+\footnotetext{$V_u = \{ v\in V\mid p(x)<p(u)\land (p(x)\neq p(u)~\mathrm{mod}~2)\}$ and therefore $V_u = \emptyset$ for $u = min\{p(v)\mid v\in V\}$}
+This way the vertex with highest priority has an outgoing edge which, per definition, dominates the value of the MPG since it has a higher absolute weight than all vertices of lower priority of the opponent, regardless of their counterstrategy $\tau$. Thus any play on PG whose value is \textit{Even/Odd} will have a value of $\geq 1/\leq -1$ when translated to an MPG in such a way and any winning strategy in \textit{PG} will accordingly be a winning strategy in \textit{MPG}.\\
+Conversely, any MPG that will be reduced-to in such a way will have an edge in it's terminal cycle whose absolute weight will be greater than the sum of all the edges of the opponent in said cycle. The vertex said greatest edge emanates from being exactly equivalent to the vertex with highest priority in the original PG due to \eqref{ref1}. Thus any play on such MPG whose value, or equivalently whose greatest edge, is $\geq 1/\leq -1$ will have \textit{Even/Odd} value in the original MPG and any winning strategy in MPG will be a winning strategy in PG.
+\begin{wrapfigure}[7]{l}{4.5cm}
+	\begin{tikzpicture}
+		\node[style=circle, draw=black, label={1}] (A) at (0,0) {$v_0$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={5}] (B) at (1.75,0) {$v_1$};
+		\node[shape=circle, draw=black,label={4}] (C) at (3.5,0) {$v_2$};
+		\node[shape=circle, draw=black,label={below:4}] (D) at (0,-1.75) {$v_3$};
+		\node[style=circle, draw=black,label={below:0}] (E) at (1.75,-1.75) {$v_4$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black,label={below:3}] (F) at (3.5,-1.75) {$v_5$};
+		\path [->] (A) edge (B);
+		\path [->] (B) edge[out=15, in=165] (C);
+		\path [->] (C) edge[out=195, in=345] (B);
+		\path [->] (B) edge (E);
+		\path [->] (F) edge (C);
+		\path [->] (E) edge[out=60, in=210] (C);
+		\path [->] (C) edge[out=240, in=30] (E);
+		\path [->] (D) edge (A);
+		\path [->] (D) edge (E);
+		\path [->] (E) edge[out=345, in=285, looseness=4] (E);
+	\end{tikzpicture}
+	\caption{PG}
+	\begin{tikzpicture}
+		\node[style=circle, draw=black] (A) at (0,0) {$v_0$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black] (B) at (1.75,0) {$v_1$};
+		\node[shape=circle, draw=black] (C) at (3.5,0) {$v_2$};
+		\node[shape=circle, draw=black] (D) at (0,-1.75) {$v_3$};
+		\node[style=circle, draw=black] (E) at (1.75,-1.75) {$v_4$};
+		\node[style={regular polygon,regular polygon sides=4}, draw=black] (F) at (3.5,-1.75) {$v_5$};
+		\path [->] (A) edge node[above]{-2} (B);
+		\path [->] (B) edge[out=25, in=155] node[above]{-12} (C);
+		\path [->] (C) edge[out=195, in=345] node[above]{5} (B);
+		\path [->] (B) edge node[left]{-12} (E);
+		\path [->] (F) edge node[right]{-2} (C);
+		\path [->] (E) edge[out=60, in=210] node[left]{1} (C);
+		\path [->] (C) edge[out=240, in=30] node[right]{5} (E);
+		\path [->] (D) edge node[left]{5} (A);
+		\path [->] (D) edge node[below]{5} (E);
+		\path [->] (E) edge[out=345, in=285, looseness=4] node[right]{1} (E);
+	\end{tikzpicture}
+	\caption{MPG}
+\end{wrapfigure}
+\textbf{Example 7:} We translate $PG$ to $MPG$.\\
+The edge-weights are successively built as follows:\\\\
+\begin{tabular}{c|c|c|c|c}
+	$u\in V$ & $p(u)$ & $V_u$ & \footnotemark & $w((u,\_))$\\\hline
+	$v_4$ & $0$ & $\emptyset$ & $\emptyset$ & 1 \\\hline
+	$v_0$ & $1$ & $\{v_4\}$ & $\langle 1\rangle$ & -2 \\\hline
+	$v_5$ & $3$ & $\{v_4\}$ & $\langle 1\rangle$ & -2 \\\hline
+	$v_2, v_3$ & $4$ & $\{v_0, v_5\}$ & $\langle 2, 2\rangle$ & 5 \\\hline
+	$v_1$ & $5$ & $\{v_2, v_3, v_4\}$ & $\langle 5, 5, 1\rangle$ & -12 \\\hline
+\end{tabular}\\\\\\
+\footnotetext{$\langle z\in \{|w((x,y))|\mid (x,y)\in E\}\mid x\in V_u\rangle$}
+Here we can limit $d$ to $12$ instead of $|(-6)^5|=7776$\newpage
 \subsubsection{MPGs to DPGs}
+The reduction from MPGs to DPGs is the one described in \cite{ZWICK1996343}. The underlying Arena $A$ and edge-weights $w$ stay the same.
+Recall from 3.2.1 that a play in an Arena eventually results in a repeat vertex after a path of length $k\leq n$ and then indefinitely continues in a cycle of length $l\leq n-k$. The value of such play being:
+\begin{align*}
+	\dfrac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))
+\end{align*}
+For DPGs we have the value being:
+\begin{align*}
+	&(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)=\\
+	&(1-\lambda)\left(\sum_{i=k}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
+	&(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^{i+k}\cdot w((v_{i+k},v_{i+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
+	&(1-\lambda)\lambda^k\left(\sum_{i=0}^{\infty}\lambda^{il}\cdot \sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
+	&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
+\end{align*}
+Now if we let $\lambda\to 1^-$ we get:
+\begin{align*}
+	&\lim_{\lambda\to 1^-}\left(\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\right)=\\
+	&\lim_{\lambda\to 1^-}\left(\frac{1-\lambda}{1-\lambda^l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)=\\
+	&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))
+\end{align*}
+Since we can't actually let $\lambda$ be 1, we have to use a $\lambda$ that is sufficiently large enough as to enable us to truncate to the nearest rational number as was done in 3.1.4.1.
 \subsubsection{MPGs to EGs}
 \subsubsection{DPGs to SSGs}
 \section{Solutions and Reductions in Practise}
