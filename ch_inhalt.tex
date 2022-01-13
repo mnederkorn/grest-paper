@@ -326,7 +326,7 @@ The edge-weights are successively built as follows:\\\\
 	$v_1$ & $5$ & $\{v_2, v_3, v_4\}$ & $\langle 5, 5, 1\rangle$ & -12 \\\hline
 \end{tabular}\\\\\\
 \footnotetext{$\langle z\in \{|w((x,y))|\mid (x,y)\in E\}\mid x\in V_u\rangle$}
-Here we can limit $d$ to $12$ instead of $|(-6)^5|=7776$\newpage
+Here we can limit $d$ to $12$ instead of $|(-6)^5|=7776$.\newpage
 \subsubsection{MPGs to DPGs}
 The reduction from MPGs to DPGs is the one described in \cite{ZWICK1996343}. The underlying Arena $A$ and edge-weights $w$ stay the same.
 Recall from 3.2.1 that a play in an Arena eventually results in a repeat vertex after a path of length $k\leq n$ and then indefinitely continues in a cycle of length $l\leq n-k$. The value of such play being:
@@ -334,20 +334,47 @@ Recall from 3.2.1 that a play in an Arena eventually results in a repeat vertex 
 	\dfrac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))
 \end{align*}
 For DPGs we have the value being:
-\begin{align*}
-	&(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)=\\
-	&(1-\lambda)\left(\sum_{i=k}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
-	&(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^{i+k}\cdot w((v_{i+k},v_{i+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
-	&(1-\lambda)\lambda^k\left(\sum_{i=0}^{\infty}\lambda^{il}\cdot \sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
-	&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\\
-\end{align*}
+\begin{align}
+	v(v_0)=~&(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)=\nonumber\\
+	&(1-\lambda)\left(\sum_{i=k}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
+	&(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^{i+k}\cdot w((v_{i+k},v_{i+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
+	&(1-\lambda)\lambda^k\left(\sum_{i=0}^{\infty}\lambda^{il}\cdot \sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
+	&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\left(\sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)
+\end{align}
 Now if we let $\lambda\to 1^-$ we get:
 \begin{align*}
-	&\lim_{\lambda\to 1^-}\left(\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\right)=\\
+	&\lim_{\lambda\to 1^-}\left(\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\left(\sum_{j=0}^{l-1}\lambda^{j}\cdot w((v_{j+k},v_{j+1+k}))\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot w((v_i,v_{i+1}))\right)\right)=\\
 	&\lim_{\lambda\to 1^-}\left(\frac{1-\lambda}{1-\lambda^l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)=\\
 	&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))
 \end{align*}
 Since we can't actually let $\lambda$ be 1, we have to use a $\lambda$ that is sufficiently large enough as to enable us to truncate to the nearest rational number as was done in 3.1.4.1.
+We can take (2) and rescale all the weights by W, such that all weights are $>=0$:
+\begin{align*}
+	&v(v_0)+W=\\
+	&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\left(\sum_{j=0}^{l-1}\lambda^{j}\cdot \left(w((v_{j+k},v_{j+1+k}))+W\right)\right)+(1-\lambda)\left(\sum_{i=0}^{k-1}\lambda^i\cdot \left(w((v_i,v_{i+1}))+W\right)\right)\geq\\
+	&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\left(\sum_{j=0}^{l-1}\lambda^{j}\cdot \left(w((v_{j+k},v_{j+1+k}))+W\right)\right)\geq\\
+	&\frac{(1-\lambda)\lambda^{k+l-1}}{1-\lambda^l}\left(\sum_{j=0}^{l-1}\left(w((v_{j+k},v_{j+1+k}))+W\right)\right)\geq\\
+	&(1-n(1-\lambda))\left(\sum_{j=0}^{l-1}\left(w((v_{j+k},v_{j+1+k}))+W\right)\right)\geq\\
+	&(1-n(1-\lambda))\left(W+\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)
+\end{align*}
+Now if we revert the scaling we arrive at:
+\begin{align*}
+	&v(v_0)+W\geq(1-n(1-\lambda))\left(W+\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)\Leftrightarrow\\
+	&v(v_0)+W\geq W+\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\left(W+\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)\Leftrightarrow\\
+	&v(v_0)\geq\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\left(W+\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)\geq\\
+	&\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\cdot 2W
+\end{align*}
+Similarly, we can rescale by -W, such that all weights are $<=0$ and in total we arrive at:
+\begin{align*}
+	\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))+n(1-\lambda)\cdot 2W\geq v(v_0)\geq\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\cdot 2W
+\end{align*}
+From 3.1.4 we know that the minimum distance between two valid values of a MPG is $\frac{1}{n(n-1)}$, therefore we want to set $\lambda$ in such a way as to constrict the size of the just derived interval to:
+\begin{align*}
+	|2n(1-\lambda)\cdot 2W|\leq\frac{1}{n(n-1)}
+\end{align*}
+We get this precision with $\lambda = 1-\frac{1}{4n^3W}$.
+If we reduce a MPG to a DPG with such $\lambda$, we can deduce the value for a given vertex of the original MPG by taking the corresponding value $v$ in the DPG and rounding to the unique rational number, with denominator at most $n$, in the closed interval $v\pm \frac{1}{2n(n-1)}$.
+
 \subsubsection{MPGs to EGs}
 \subsubsection{DPGs to SSGs}
 \section{Solutions and Reductions in Practise}

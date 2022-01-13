@@ -26,14 +26,14 @@
 \contentsline {subsection}{\numberline {3.2}Reductions in Theory}{10}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}PGs to MPGs}{10}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}MPGs to DPGs}{12}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}MPGs to EGs}{13}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.4}DPGs to SSGs}{13}{subsubsection.3.2.4}%
-\contentsline {section}{\numberline {4}Solutions and Reductions in Practise}{13}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Solutions in Practise}{13}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Reductions in Practise}{13}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Implementation}{13}{section.5}%
-\contentsline {section}{\numberline {6}Evaluation}{13}{section.6}%
-\contentsline {section}{\numberline {7}Conclusion and further approaches}{13}{section.7}%
-\contentsline {section}{\numberline {A}Versicherung an Eides Statt}{14}{appendix.A}%
-\contentsline {section}{\nonumberline References}{15}{section*.3}%
+\contentsline {subsubsection}{\numberline {3.2.3}MPGs to EGs}{14}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}DPGs to SSGs}{14}{subsubsection.3.2.4}%
+\contentsline {section}{\numberline {4}Solutions and Reductions in Practise}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Solutions in Practise}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Reductions in Practise}{14}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Implementation}{14}{section.5}%
+\contentsline {section}{\numberline {6}Evaluation}{14}{section.6}%
+\contentsline {section}{\numberline {7}Conclusion and further approaches}{14}{section.7}%
+\contentsline {section}{\numberline {A}Versicherung an Eides Statt}{15}{appendix.A}%
+\contentsline {section}{\nonumberline References}{16}{section*.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
