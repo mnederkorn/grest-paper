@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.12.3)  13 JAN 2022 02:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.12.3)  25 JAN 2022 22:56
 entering extended mode
 **./main.tex
 (main.tex
@@ -1058,6 +1058,126 @@ File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 kz/libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/pgfplots\pgfplots.sty
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.re
+vision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.co
+de.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscor
+e.code.tex
+\t@pgfplots@toka=\toks52
+\t@pgfplots@tokb=\toks53
+\t@pgfplots@tokc=\toks54
+\pgfplots@tmpa=\dimen302
+\c@pgfplots@coordindex=\count346
+\c@pgfplots@scanlineindex=\count347
+
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgfplot
+ssysgeneric.code.tex))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgfplo
+tslibrary.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldpgfcompa
+tib\pgfplotsoldpgfsupp_loader.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflib
+raryfpu.code.tex))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplo
+tsutil.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructu
+re\pgfplotsliststructure.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructu
+re\pgfplotsliststructureext.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructu
+re\pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count348
+)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructu
+re\pgfplotsmatrix.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/numtable\pg
+fplotstableshared.code.tex
+\c@pgfplotstable@counta=\count349
+\t@pgfplotstable@a=\toks55
+)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructu
+re\pgfplotsdeque.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplo
+tsbinary.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplo
+tsbinary.data.code.tex))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplo
+tsutil.verb.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgflib
+rarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count350
+
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgflibr
+arypgfplots.surfshading.pgfsys-pdftex.def)))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplo
+tscolormap.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplo
+tscolor.code.tex))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotssta
+ckedplots.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsplo
+thandlers.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsmes
+hplothandler.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsmes
+hplotimage.code.tex)))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.sc
+aling.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscoo
+rdprocessing.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.er
+rorbars.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.ma
+rkers.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotstic
+ks.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.pa
+ths.code.tex)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
+kz/libraries\tikzlibrarydecorations.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodul
+edecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen303
+\pgfdecoratedremainingdistance=\dimen304
+\pgfdecoratedinputsegmentcompleteddistance=\dimen305
+\pgfdecoratedinputsegmentremainingdistance=\dimen306
+\pgf@decorate@distancetomove=\dimen307
+\pgf@decorate@repeatstate=\count351
+\pgfdecorationsegmentamplitude=\dimen308
+\pgfdecorationsegmentlength=\dimen309
+)
+\tikz@lib@dec@box=\box78
+)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
+kz/libraries\tikzlibrarydecorations.pathmorphing.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decora
+tions\pgflibrarydecorations.pathmorphing.code.tex))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
+kz/libraries\tikzlibrarydecorations.pathreplacing.code.tex
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decora
+tions\pgflibrarydecorations.pathreplacing.code.tex))
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzli
+brarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count352
+\pgfplots@xmin@reg=\dimen310
+\pgfplots@xmax@reg=\dimen311
+\pgfplots@ymin@reg=\dimen312
+\pgfplots@ymax@reg=\dimen313
+\pgfplots@zmin@reg=\dimen314
+\pgfplots@zmax@reg=\dimen315
+)
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
+kz/libraries\tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflib
+raryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
 kz/libraries\tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
@@ -1077,8 +1197,8 @@ File: tikzlibraryfit.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
 kz/libraries\tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@layerbox@background=\box78
-\pgf@layerboxsaved@background=\box79
+\pgf@layerbox@background=\box79
+\pgf@layerboxsaved@background=\box80
 )
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
 kz/libraries\tikzlibrarypositioning.code.tex
@@ -1091,27 +1211,8 @@ File: tikzlibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflib
 raryarrows.code.tex
 File: pgflibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\arrowsize=\dimen302
+\arrowsize=\dimen316
 ))
-(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
-kz/libraries\tikzlibrarydecorations.pathreplacing.code.tex
-(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
-kz/libraries\tikzlibrarydecorations.code.tex
-(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodul
-edecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen303
-\pgfdecoratedremainingdistance=\dimen304
-\pgfdecoratedinputsegmentcompleteddistance=\dimen305
-\pgfdecoratedinputsegmentremainingdistance=\dimen306
-\pgf@decorate@distancetomove=\dimen307
-\pgf@decorate@repeatstate=\count346
-\pgfdecorationsegmentamplitude=\dimen308
-\pgfdecorationsegmentlength=\dimen309
-)
-\tikz@lib@dec@box=\box80
-)
-(C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decora
-tions\pgflibrarydecorations.pathreplacing.code.tex))
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/ti
 kz/libraries\tikzlibraryshapes.misc.code.tex
 File: tikzlibraryshapes.misc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
@@ -1125,15 +1226,15 @@ y
 Package: mathtools 2021/04/12 v1.27 mathematical typesetting tools
  (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count347
-\calc@Bcount=\count348
-\calc@Adimen=\dimen310
-\calc@Bdimen=\dimen311
+\calc@Acount=\count353
+\calc@Bcount=\count354
+\calc@Adimen=\dimen317
+\calc@Bdimen=\dimen318
 \calc@Askip=\skip91
 \calc@Bskip=\skip92
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count349
+\calc@Ccount=\count355
 \calc@Cskip=\skip93
 )
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
@@ -1143,23 +1244,23 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
-\g_MT_multlinerow_int=\count350
-\l_MT_multwidth_dim=\dimen312
+\g_MT_multlinerow_int=\count356
+\l_MT_multwidth_dim=\dimen319
 \origjot=\skip94
-\l_MT_shortvdotswithinadjustabove_dim=\dimen313
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen314
-\l_MT_above_intertext_sep=\dimen315
-\l_MT_below_intertext_sep=\dimen316
-\l_MT_above_shortintertext_sep=\dimen317
-\l_MT_below_shortintertext_sep=\dimen318
+\l_MT_shortvdotswithinadjustabove_dim=\dimen320
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen321
+\l_MT_above_intertext_sep=\dimen322
+\l_MT_below_intertext_sep=\dimen323
+\l_MT_above_shortintertext_sep=\dimen324
+\l_MT_below_shortintertext_sep=\dimen325
 \xmathstrut@box=\box81
-\xmathstrut@dim=\dimen319
+\xmathstrut@dim=\dimen326
 )
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/appendix\appendix.sty
 Package: appendix 2020/02/08 v1.2c extra appendix facilities
-\c@@pps=\count351
-\c@@ppsavesec=\count352
-\c@@ppsaveapp=\count353
+\c@@pps=\count357
+\c@@ppsavesec=\count358
+\c@@ppsaveapp=\count359
 ) (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/wasysym\wasysym.sty
 Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
 \symwasy=\mathgroup4
@@ -1180,7 +1281,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pd
 ftex.def
 File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count354
+\l__color_backend_stack_int=\count360
 \l__pdf_internal_box=\box82
 )
 
@@ -1190,28 +1291,28 @@ LaTeX Warning: Unused global option(s):
 (main.aux (ch_inhalt.aux) (appendix.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 228.
-LaTeX Font Info:    ... okay on input line 228.
-Package scrbase Info: activating english \contentsname on input line 228.
-Package scrbase Info: activating english \listfigurename on input line 228.
-Package scrbase Info: activating english \listtablename on input line 228.
-Package hyperref Info: Link coloring ON on input line 228.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+Package scrbase Info: activating english \contentsname on input line 229.
+Package scrbase Info: activating english \listfigurename on input line 229.
+Package scrbase Info: activating english \listtablename on input line 229.
+Package hyperref Info: Link coloring ON on input line 229.
 
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1223,11 +1324,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 tlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count355
+\c@section@level=\count361
 )
-LaTeX Info: Redefining \ref on input line 228.
-LaTeX Info: Redefining \pageref on input line 228.
-LaTeX Info: Redefining \nameref on input line 228.
+LaTeX Info: Redefining \ref on input line 229.
+LaTeX Info: Redefining \pageref on input line 229.
+LaTeX Info: Redefining \nameref on input line 229.
  (main.out) (main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
@@ -1239,7 +1340,7 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
-(scrartcl)           before \begin{document} on input line 228.
+(scrartcl)           before \begin{document} on input line 229.
 
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
@@ -1247,22 +1348,22 @@ Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.de
 f
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
-\BKM@id=\count356
+\BKM@id=\count362
 ))
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.m
 kii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count357
-\scratchdimen=\dimen320
+\scratchcounter=\count363
+\scratchdimen=\dimen327
 \scratchbox=\box83
-\nofMPsegments=\count358
-\nofMParguments=\count359
-\everyMPshowfont=\toks52
-\MPscratchCnt=\count360
-\MPscratchDim=\dimen321
-\MPnumerator=\count361
-\makeMPintoPDFobject=\count362
-\everyMPtoPDFconversion=\toks53
+\nofMPsegments=\count364
+\nofMParguments=\count365
+\everyMPshowfont=\toks56
+\MPscratchCnt=\count366
+\MPscratchDim=\dimen328
+\MPnumerator=\count367
+\makeMPintoPDFobject=\count368
+\everyMPtoPDFconversion=\toks57
 )
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-
 base.sty
@@ -1274,8 +1375,15 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count363
- (titelseite.tex
+\c@lstlisting=\count369
+
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
+ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
+your preamble.
+ on input line 229.
+
+(titelseite.tex
 \links=\skip95
 
 TextBlockOrigin set to 0pt x 0pt
@@ -1448,7 +1556,7 @@ m/m/it/10.95 ; v[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 7!
  []
 
 [4] [5]
-Overfull \hbox (11.08124pt too wide) in paragraph at lines 121--122
+Overfull \hbox (11.08124pt too wide) in paragraph at lines 122--123
 []\OT1/cmr/m/n/10.95 Playing $\OML/cmm/m/it/10.95 PG$ \OT1/cmr/m/n/10.95 with $
 \OML/cmm/m/it/10.95  \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10
 .95 (\OML/cmm/m/it/10.95 v[]; v[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; \OT1
@@ -1459,7 +1567,7 @@ Overfull \hbox (11.08124pt too wide) in paragraph at lines 121--122
  []
 
 
-Underfull \hbox (badness 1629) in paragraph at lines 121--122
+Underfull \hbox (badness 1629) in paragraph at lines 122--123
 \OT1/cmr/m/n/10.95 and $\OML/cmm/m/it/10.95  \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/
 n/10.95 f\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 v[]; v[]\OT1/cmr/m/n/10.95 )\O
 ML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 v[]; v[]\OT1/cmr/m/
@@ -1467,79 +1575,131 @@ n/10.95 )\OMS/cmsy/m/n/10.95 g$\OT1/cmr/m/n/10.95 , the re-spec-tive op-
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 121--122
+Underfull \hbox (badness 1221) in paragraph at lines 122--123
 \OT1/cmr/m/n/10.95 ti-mal strate-gies, re-sults in play $\OML/cmm/m/it/10.95 [
 ]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 PG; v[]\OT1/cmr/m/n/10.95 ) =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--157
+Underfull \hbox (badness 10000) in paragraph at lines 153--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--157
+Underfull \hbox (badness 10000) in paragraph at lines 153--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--157
+Underfull \hbox (badness 10000) in paragraph at lines 153--158
 
  []
 
 [6] [7]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 189
+LaTeX Font Info:    Trying to load font information for U+euf on input line 190
 .
 
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
 [8] [9] [10]
-Overfull \hbox (1.14622pt too wide) in paragraph at lines 315--316
+Overfull \hbox (1.14622pt too wide) in paragraph at lines 316--317
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--317
-\OT1/cmr/m/n/10.95 PG.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--329
+Underfull \hbox (badness 10000) in paragraph at lines 318--330
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 317--329
+Underfull \hbox (badness 10000) in paragraph at lines 318--330
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 317--329
+Underfull \hbox (badness 10000) in paragraph at lines 318--330
 
  []
 
 [11]
-Overfull \hbox (7.84717pt too wide) detected at line 343
+Overfull \hbox (7.84717pt too wide) detected at line 344
 []
  []
 
 
-Overfull \hbox (10.95003pt too wide) in paragraph at lines 343--343
+Overfull \hbox (10.95003pt too wide) in paragraph at lines 344--344
 [] 
  []
 
 
-Overfull \hbox (8.84212pt too wide) detected at line 359
+Overfull \hbox (8.84212pt too wide) detected at line 360
 []
  []
 
 
-Overfull \hbox (10.95003pt too wide) in paragraph at lines 359--359
+Overfull \hbox (10.95003pt too wide) in paragraph at lines 360--360
 [] 
  []
 
-[12]) [13] [14]
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 380--384
+
+ []
+
+[13] (pg_value.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 385--388
+\OT1/cmr/m/n/10.95 a
+ []
+
+
+Package wrapfig Warning: Collision between wrapping environments on input line 
+390.
+
+(pg_strat.tex)
+Overfull \hbox (34.70605pt too wide) in paragraph at lines 193--392
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--392
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--392
+\OT1/cmr/m/n/10.95 b
+ []
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+2.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+4.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+5.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+6.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+7.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+8.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
+9.
+
+) [14] [15]
 
 Class scrartcl Warning: You are using `\begin{appendix}...\end{appendix}'.
 (scrartcl)              You should note, that `\appendix' is a mostly globally
@@ -1552,7 +1712,7 @@ Class scrartcl Warning: You are using `\begin{appendix}...\end{appendix}'.
 (scrartcl)              inconsistent.
 (scrartcl)              Because of this, you should remove `\end{appendix}'
 (scrartcl)              and replace `\begin{appendix}' by command
-(scrartcl)              `\appendix' on input line 254.
+(scrartcl)              `\appendix' on input line 258.
 
 \openout2 = `appendix.aux'.
 
@@ -1563,45 +1723,45 @@ und Gewis-sen vorgenom-
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 14--255
+Underfull \hbox (badness 10000) in paragraph at lines 14--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 14--255
+Underfull \hbox (badness 10000) in paragraph at lines 14--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 14--255
+Underfull \hbox (badness 10000) in paragraph at lines 14--259
 
  []
 
 
-Overfull \hbox (5.14748pt too wide) in paragraph at lines 14--255
+Overfull \hbox (5.14748pt too wide) in paragraph at lines 14--259
 [] 
  []
 
-[15
+[16
 
 
 
 ] (main.bbl
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
-2.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
+3.
 
 (C:\Users\Maxime\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 12.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
 )
 
 Package glossaries Warning: No \printglossary or \printglossaries found. 
 (Remove \makeglossaries if you don't want any glossaries.) 
 This document will not have a glossary.
 
-[16
+[17
 
 
 ] (main.aux (ch_inhalt.aux) (appendix.aux))
@@ -1609,13 +1769,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33128 strings out of 478927
- 627688 string characters out of 2852061
- 1092360 words of memory out of 3000000
- 50280 multiletter control sequences out of 15000+600000
+ 43152 strings out of 478927
+ 967349 string characters out of 2852061
+ 1623565 words of memory out of 3000000
+ 60176 multiletter control sequences out of 15000+600000
  417917 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,12n,108p,10601b,826s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,15n,108p,10601b,1936s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\Maxime\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
 m1095.pk> <C:\Users\Maxime\AppData\Local\MiKTeX\fonts/pk/ljfour/public/wasy/dpi
 657\wasy10.pk><C:/Users/Maxime/AppData/Local/Programs/MiKTeX/fonts/type1/public
@@ -1647,9 +1807,9 @@ ime/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm10.pfb>
 <C:/Users/Maxime/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symb
 ols/msam10.pfb><C:/Users/Maxime/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 439601 bytes).
+Output written on main.pdf (17 pages, 460301 bytes).
 PDF statistics:
- 450 PDF objects out of 1000 (max. 8388607)
- 69 named destinations out of 1000 (max. 500000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 70 named destinations out of 1000 (max. 500000)
  322 words of extra memory for PDF output out of 10000 (max. 10000000)
 

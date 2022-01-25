@@ -10,10 +10,10 @@
 \contentsline {subsection}{\numberline {2.6}Infinite Games}{5}{subsection.2.6}%
 \contentsline {subsubsection}{\numberline {2.6.1}Parity Games}{5}{subsubsection.2.6.1}%
 \contentsline {subsubsection}{\numberline {2.6.2}Mean Payoff Games}{6}{subsubsection.2.6.2}%
-\contentsline {subsubsection}{\numberline {2.6.3}Energy Games}{6}{subsubsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.3}Energy Games}{7}{subsubsection.2.6.3}%
 \contentsline {subsubsection}{\numberline {2.6.4}Discounted Payoff Games}{7}{subsubsection.2.6.4}%
 \contentsline {subsection}{\numberline {2.7}Simple Stochastic Games}{8}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}Reductions}{8}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.8}Reductions}{9}{subsection.2.8}%
 \contentsline {section}{\numberline {3}Solutions and Reductions in Theory}{9}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Solutions in Theory}{9}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Kleene Iteration}{9}{subsubsection.3.1.1}%
@@ -28,12 +28,12 @@
 \contentsline {subsubsection}{\numberline {3.2.2}MPGs to DPGs}{12}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}MPGs to EGs}{14}{subsubsection.3.2.3}%
 \contentsline {subsubsection}{\numberline {3.2.4}DPGs to SSGs}{14}{subsubsection.3.2.4}%
-\contentsline {section}{\numberline {4}Solutions and Reductions in Practise}{14}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Solutions in Practise}{14}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Reductions in Practise}{14}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Implementation}{14}{section.5}%
-\contentsline {section}{\numberline {6}Evaluation}{14}{section.6}%
-\contentsline {section}{\numberline {7}Conclusion and further approaches}{14}{section.7}%
-\contentsline {section}{\numberline {A}Versicherung an Eides Statt}{15}{appendix.A}%
-\contentsline {section}{\nonumberline References}{16}{section*.3}%
+\contentsline {section}{\numberline {4}Solutions and Reductions in Practice}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Solutions in Practice}{15}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Reductions in Practice}{15}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Implementation}{15}{section.5}%
+\contentsline {section}{\numberline {6}Evaluation}{15}{section.6}%
+\contentsline {section}{\numberline {7}Conclusion and further approaches}{15}{section.7}%
+\contentsline {section}{\numberline {A}Versicherung an Eides Statt}{16}{appendix.A}%
+\contentsline {section}{\nonumberline References}{17}{section*.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

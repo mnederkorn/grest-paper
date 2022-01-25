@@ -1,0 +1,193 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		name=border,
+		title style={align=center}, 
+		title={Solving the strategy problem of PGs},
+		xlabel={$n=|V|$},
+		ylabel={runtime in s},
+		log basis x={2},
+		xmode=log,
+		log basis y={10},
+		ymode=log,
+		%		legend columns = 3,
+		%		legend style = {at={(0.5, -0.23)}, anchor=north, inner sep=3pt, style={column sep=0.15cm}},       %vorher: at={(1.3, 1)}
+		%		legend cell align=left,
+		ymajorgrids=true,
+		grid style=dashed,
+		]
+		
+		\addplot[
+color=red2,
+mark=*,
+mark options={solid,fill=white},
+solid,
+]
+coordinates {
+	(8, 0.0008776617050170898) (16, 0.0013446140289306641) (32, 0.0022423291206359864) (64, 0.004380221366882324) (128, 0.006927146911621094) (256, 0.022660841941833498) (512, 0.0512455153465271)
+};
+\addplot[
+color=red2,
+mark=*,
+mark options={solid,fill=white},
+dashed,
+]
+coordinates {
+	(8, 0.0023433542251586914) (16, 0.004880523681640625) (32, 0.00838782787322998) (64, 0.009173357486724853) (128, 0.015308449268341065) (256, 0.05767612457275391) (512, 0.13407018423080444)
+};
+\addplot[
+color=red2,
+mark=*,
+mark options={solid,fill=white},
+dotted,
+]
+coordinates {
+	(8, 0.002204103469848633) (16, 0.007087736129760742) (32, 0.020904498100280763) (64, 0.040476531982421876) (128, 0.12064622402191162) (256, 0.5929883766174316) (512, 2.505496563911438)
+};
+\addplot[
+color=red2,
+mark=square,
+mark options={solid,fill=white},
+solid,
+]
+coordinates {
+	(8, 0.000857698917388916) (16, 0.0012734889984130859) (32, 0.002360053062438965) (64, 0.004033305644989014) (128, 0.007701075077056885) (256, 0.022050771713256836) (512, 0.0511625599861145)
+};
+\addplot[
+color=red2,
+mark=square,
+mark options={solid,fill=white},
+dashed,
+]
+coordinates {
+	(8, 0.0022744488716125487) (16, 0.004682116508483887) (32, 0.004330248832702637) (64, 0.007769784927368164) (128, 0.015050153732299804) (256, 0.05710400581359863) (512, 0.13257697582244873)
+};
+\addplot[
+color=red2,
+mark=square,
+mark options={solid,fill=white},
+dotted,
+]
+coordinates {
+	(8, 0.0022140812873840334) (16, 0.0067735624313354495) (32, 0.00996096134185791) (64, 0.0273287296295166) (128, 0.10013931035995484) (256, 0.5759071445465088) (512, 2.3255527663230895)
+};
+\addplot[
+color=red2,
+mark=triangle,
+mark options={solid,fill=white},
+solid,
+]
+coordinates {
+	(8, 0.0008876299858093261) (16, 0.0012999963760375976) (32, 0.0023799848556518553) (64, 0.004329545497894287) (128, 0.007433316707611084) (256, 0.022740437984466552) (512, 0.05237581491470337)
+};
+\addplot[
+color=red2,
+mark=triangle,
+mark options={solid,fill=white},
+dashed,
+]
+coordinates {
+	(8, 0.0020293784141540527) (16, 0.004086441993713379) (32, 0.004398300647735596) (64, 0.009569721221923828) (128, 0.016139731407165528) (256, 0.057782270908355714) (512, 0.1628047728538513)
+};
+\addplot[
+color=red2,
+mark=triangle,
+mark options={solid,fill=white},
+dotted,
+]
+coordinates {
+	(8, 0.002314181327819824) (16, 0.006021811962127686) (32, 0.010422949790954589) (64, 0.02857781171798706) (128, 0.11155902624130248) (256, 0.640999059677124) (512, 2.433153896331787)
+};
+\addplot[
+color=green2,
+mark=*,
+mark options={solid,fill=white},
+solid,
+]
+coordinates {
+	(8, 0.0010826444625854491) (16, 0.002984943389892578) (32, 0.008642408847808838) (64, 0.031362679004669186)
+};
+\addplot[
+color=green2,
+mark=*,
+mark options={solid,fill=white},
+dashed,
+]
+coordinates {
+	(8, 0.002232775688171387) (16, 0.008655858039855958) (32, 0.031531543731689454) (64, 0.1018387246131897)
+};
+\addplot[
+color=green2,
+mark=*,
+mark options={solid,fill=white},
+dotted,
+]
+coordinates {
+	(8, 0.002880396842956543) (16, 0.013809981346130372) (32, 0.050735652446746826) (64, 0.19387351036071776)
+};
+\addplot[
+color=green2,
+mark=square,
+mark options={solid,fill=white},
+solid,
+]
+coordinates {
+	(8, 0.0014883828163146972) (16, 0.004525969028472901) (32, 0.018749008178710936) (64, 0.08585822343826294)
+};
+\addplot[
+color=green2,
+mark=square,
+mark options={solid,fill=white},
+dashed,
+]
+coordinates {
+	(8, 0.0027592110633850096) (16, 0.012500708103179931) (32, 0.0704820728302002) (64, 0.20478032112121583)
+};
+\addplot[
+color=green2,
+mark=square,
+mark options={solid,fill=white},
+dotted,
+]
+coordinates {
+	(8, 0.003854410648345947) (16, 0.02188976287841797) (32, 0.10663949251174927) (64, 0.6648324394226074)
+};
+\addplot[
+color=green2,
+mark=triangle,
+mark options={solid,fill=white},
+solid,
+]
+coordinates {
+	(8, 0.001677553653717041) (16, 0.005850553512573242) (32, 0.020735154151916502) (64, 0.1049031400680542)
+};
+\addplot[
+color=green2,
+mark=triangle,
+mark options={solid,fill=white},
+dashed,
+]
+coordinates {
+	(8, 0.0030318546295166017) (16, 0.013857133388519287) (32, 0.059607245922088624) (64, 0.2552910876274109)
+};
+\addplot[
+color=green2,
+mark=triangle,
+mark options={solid,fill=white},
+dotted,
+]
+coordinates {
+	(8, 0.004327690601348877) (16, 0.02302934169769287) (32, 0.12722636699676515) (64, 0.7177431654930114)
+};
+
+		
+	\end{axis}
+	\node[draw,below=35pt] at (border.south) {
+		\begin{tabular}{rcccccc}
+			$p\colon$ & \tikz{\draw[-,black,solid,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{1}{n}$ &		            \tikz{\draw[-,black,dashed,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{log_2(n)}{n}$ &
+			\tikz{\draw[-,black,dotted,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{1}{2}$ \\
+			$w\colon$ & \tikz{\draw[mark=*,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $log_2(n)$ &
+			\tikz{\draw[mark=square,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $n$ &
+			\tikz{\draw[mark=triangle,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $n\cdot log_2(n)$ \\
+			\multicolumn{3}{c}{\textcolor{red2}{Strategy iter. via MPG, DPG}} & \multicolumn{4}{c}{\textcolor{green2}{Zielonka's alg.}}
+	\end{tabular}};
+\end{tikzpicture}
