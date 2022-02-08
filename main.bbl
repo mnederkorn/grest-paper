@@ -8,6 +8,13 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[75419]{754}
+IEEE Standard for Floating-Point Arithmetic.
+\newblock {In: }\emph{IEEE Std 754-2019 (Revision of IEEE 754-2008)}  (2019),
+  S. 1--84.
+\newblock \url{http://dx.doi.org/10.1109/IEEESTD.2019.8766229}. --
+\newblock DOI 10.1109/IEEESTD.2019.8766229
+
 \bibitem[BCD{\etalchar{+}}11]{Brim2011}
 \textsc{Brim}, L. ; \textsc{Chaloupka}, J. ; \textsc{Doyen}, L. ;
   \textsc{Gentilini}, R.  ; \textsc{Raskin}, J.~F.:

@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		name=border,
+		title style={align=center}, 
+		xlabel={$n=|V|$},
+		ylabel={runtime in s},
+		log basis x={2},
+		xmode=log,
+		log basis y={10},
+		ymode=log,
+		%		legend columns = 3,
+		%		legend style = {at={(0.5, -0.23)}, anchor=north, inner sep=3pt, style={column sep=0.15cm}},       %vorher: at={(1.3, 1)}
+		%		legend cell align=left,
+		ymajorgrids=true,
+		grid style=dashed,
+		]
+		
+\addplot[color=c9,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0007679510116577148) (8, 0.0012366914749145509) (16, 0.002057526111602783) (32, 0.0036362910270690916) (64, 0.006760773658752442) (128, 0.012982907295227051) (256, 0.026592857837677) (512, 0.05587682485580445) (1024, 0.1265137791633606) (2048, 0.2969201612472534)};
+\addplot[color=c9,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.0008280491828918457) (8, 0.001216754913330078) (16, 0.001984679698944092) (32, 0.0036556649208068846) (64, 0.00675278902053833) (128, 0.013102731704711913) (256, 0.0266192364692688) (512, 0.08384904384613037) (1024, 0.17371509790420533) (2048, 0.30869134902954104)};
+\addplot[color=c9,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.000959787368774414) (8, 0.0012430953979492188) (16, 0.0020068907737731934) (32, 0.003637969493865967) (64, 0.006766095161437989) (128, 0.01420950174331665) (256, 0.027615578174591066) (512, 0.0595660400390625) (1024, 0.12671746969223022) (2048, 0.3072792148590088)};
+\addplot[color=c9,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.0016057038307189942) (8, 0.00553133487701416) (16, 0.013995144367218017) (32, 0.039523983001708986) (64, 0.10671192646026612) (128, 0.2992102646827698) (256, 0.8593656945228577)};
+\addplot[color=c9,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.004077622890472412) (8, 0.0059802627563476565) (16, 0.013138663768768311) (32, 0.039167492389678954) (64, 0.10382399559020997) (128, 0.28863308668136595) (256, 0.8311679553985596)};
+\addplot[color=c9,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.0015380573272705078) (8, 0.0044588899612426755) (16, 0.013816921710968018) (32, 0.04232203722000122) (64, 0.10363877773284912) (128, 0.2761769199371338) (256, 0.8096676826477051)};
+\addplot[color=c9,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.0014701032638549806) (8, 0.006163880825042724) (16, 0.028135476112365724) (32, 0.13656820297241212) (64, 0.8785220289230347) (4, 0.0014461350440979003) (8, 0.006112184524536133) (16, 0.028711333274841308) (32, 0.14269367456436158)};
+\addplot[color=c9,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.0016136622428894042) (8, 0.006632251739501953) (16, 0.03434447288513184) (32, 0.139067542552948) (64, 0.8049350810050965)};
+\addplot[color=c9,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.0015863633155822753) (8, 0.0063221478462219234) (16, 0.029398305416107176) (32, 0.1410420608520508) (64, 0.7782936525344849)};
+
+\addplot[color=c10,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0005684709548950196) (8, 0.0008577132225036622) (16, 0.0013763141632080079) (32, 0.003341064453125) (64, 0.010686421394348144) (128, 0.0425951647758484) (256, 0.281359589099884)};
+\addplot[color=c10,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.0009727644920349121) (8, 0.0009028100967407226) (16, 0.001795210838317871) (32, 0.003999474048614502) (64, 0.01190366506576538) (128, 0.046273174285888674) (256, 0.2703040957450867) (512, 0.8837071681022644)};
+\addplot[color=c10,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.0005485367774963379) (8, 0.0006732606887817383) (16, 0.0010622286796569825) (32, 0.003590400218963623) (64, 0.009262113571166993) (128, 0.03500069379806518) (256, 0.2236538815498352) (512, 0.8565425562858582)};
+\addplot[color=c10,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.0005186128616333007) (8, 0.001796748638153076) (16, 0.004373791217803955) (32, 0.021129906177520752) (64, 0.1948083782196045)};
+\addplot[color=c10,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.000498666763305664) (8, 0.0011034369468688964) (16, 0.004438135623931885) (32, 0.02127028226852417) (64, 0.19119256258010864)};
+\addplot[color=c10,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.001476585865020752) (8, 0.0024097323417663573) (16, 0.007897634506225586) (32, 0.037606360912323) (64, 0.2427090263366699)};
+\addplot[color=c10,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.0005285978317260742) (8, 0.001561424732208252) (16, 0.013627057075500488) (32, 0.3560009527206421)};
+\addplot[color=c10,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.0005086421966552735) (8, 0.0013696765899658203) (16, 0.01254655122756958) (32, 0.2956423759460449)};
+\addplot[color=c10,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.0005086517333984375) (8, 0.0014990568161010742) (16, 0.012585146427154541) (32, 0.2919934344291687)};
+
+	\end{axis}
+	\node[draw,below=35pt] at (border.south) {
+		\begin{tabular}{rcccccc}
+			$p\colon$ & \tikz{\draw[-,black,solid,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{1}{n}$ &		            \tikz{\draw[-,black,dashed,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{log_2(n)}{n}$ &
+			\tikz{\draw[-,black,dotted,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{1}{2}$ \\
+			$w\colon$ & \tikz{\draw[mark=*,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $\lfloor log_2(n)\rfloor$ &
+			\tikz{\draw[mark=square,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $n$ &
+			\tikz{\draw[mark=triangle,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $\lfloor n\cdot log_2(n)\rfloor$ \\
+			\multicolumn{7}{c}{\textcolor{c9}{Strategy Iteration}} \\
+			\multicolumn{7}{c}{\textcolor{c10}{Kleene Iteration}}
+	\end{tabular}};
+\end{tikzpicture}

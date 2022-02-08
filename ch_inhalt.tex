@@ -1,7 +1,7 @@
 \section{Introduction}
 There are practical applications (cite) which are able to be modeled by or reduced to various games. Considering the many ways there are to solve those games, the possibility to (repeatedly) reduce them to one another and various ways to implement any of those algorithms there are many potential means to solve problems on those games. We want to see how the different ways to solve problems, the reductions between those problems and the combination of the two play out and compare to one another in a real-world implementation.
 \subsection{Task}
-The games we concern ourselves here are \textit{Parity Games} (PG), \textit{Mean Payoff Games} (MPG), \textit{Energy Games} (EG), \textit{Discounted Payoff Games} (DPG) and (stopping) \textit{Simple Stochastic Games} (SSG). For any of those games there are multiple problems, but the ones we concern outselves here are ``what is the value of vertex $v$ under optimal strategies from both players?'' and ``what are the optimal strategies?''. For both of those problems, there may already be multiple algorithms to solve them for any specific game directly, some of which are generalizable to multiple of the games to some degree, such as Kleene Iteration and Strategy Iteration. Additionally we can reduce the games to another as following:
+The games we concern ourselves here are \textit{Parity Games} (PG), \textit{Mean Payoff Games} (MPG), \textit{Energy Games} (EG), \textit{Discounted Payoff Games} (DPG) and (stopping) \textit{Simple Stochastic Games} (SSG). For any of those games there are multiple problems, but the ones we concern outselves here are ``what is the value of vertex $v$ under optimal strategies from both players?'' and ``what are the optimal strategies?''. For both of those problems, there may already be multiple algorithms to solve them for any specific game directly, some of which are generalizable to multiple of the games to some degree, such as Kleene Iteration and Strategy Iteration. Additionally we can reduce the games to another as follows:
 \begin{center}
 	\begin{tikzpicture}
 		\node (A) at (0,0) {$PG$};
@@ -382,18 +382,71 @@ If we play an EG on $A, w$ of a MPG, any vertex for which the value is $v_{\sigm
 For a given set of strategies $\sigma, \tau$, any move will land on a vertex with the same value as the previous since the play ultimately always lands in the same terminal cycle with the same mean weight. This means that, for a fixed set of strategies, vertices with different values will necessarily be disconnected if one removes the edges that aren't in play under $\sigma, \tau$ and the values of all vertices stay the same if those edges are removed.\\
 What this allows us to do is that after every dichotomy wrt. the values, where we split the set of vertices into three sets, one with value $>\nu$, one with value $<\nu$ and one with known value $\nu$. We can restrict subsequent dichotomies to disjoint subsets of the graph, since we know that vertices with different value, as shown to be the case by the dichotomy, have to be disconnected if unused edges are removed.
 \subsubsection{DPGs to SSGs}
-a
-\begin{wrapfigure}[9]{l}{10cm}
-\input{pg_value}
-\end{wrapfigure}\\
-b
-\begin{wrapfigure}[9]{l}{10cm}
-\input{pg_strat}
-\end{wrapfigure}\\
-c
 \section{Solutions and Reductions in Practice}
 \subsection{Solutions in Practice}
 \subsection{Reductions in Practice}
-\section{Implementation}
+\section{Implementation}\newpage
 \section{Evaluation}
+Our goal was to compare the different algorithms used to solve problems, especially under reduction to other games, and to see how they compare. To that end we generated random games with multiple parameters and benchmarked all methods we had to solve the respective problems. For any combination of problem, parameters for generation and algorithm used to solve the problem we have $N = 100$ and the times shown repesent the average time of those 100 runs. For their generation, all games have a parameter $n =|V|$ that measures the size of the graph by means of the number of vertices and a parameter $p$ which describes the probability that any possible edge $e\in (V\times V)$ is part of the generated game, meaning the expected out-degree of every vertex is $|V|\cdot p$. Since we require for all games that each vertex has outdegree $\geq 1$, we consequently require that $\frac{1}{|V|} \leq p \leq 1$. We then assign each vertex one random edge and all other potential outgoing edges of that vertex have probability $\frac{(p\cdot |V|)-1}{|V|-1}$ of existing. $p$ can be understood as a measure of how connected a graph is. In fact, towards the extreme ends, for $p=\frac{1}{|V|}$ and sufficiently large $|V|$ one would expect a disconnected graph on one end and for $p=1$ a complete graph on the other end. Each vertex is randomly assigned to a player with equal probability, including the ``Random'' player in SSGs. Games may have additional parameters that are described seperately for each game. The parameters were chosen in a way that they intuitively represent extremes towards each end and then some reasonable middle ground. For all cases, the runtimes are either weakly dependent on $p$ other parameters or they scale monotonously wrt. to those parameters. One can therefore think of intermediate parameterizations as some interpolation between the shown values. For readability we only show some algorithms here. Those that work without reduction to another game and any other that are of interest. The full results are in the appendix.
+\subsection{PGs}
+For Parity games, the additional parameter is $w$, which describes the range over which the priorities are handed out. Similar to the ownership of the vertices, the priority of vertices is randomly chosen from the possible range with equal chance for each. In theory as well as in this implementation, for the purpose of solving the problems one can rescale the range of the priorities to $\{0, 1, ... |V|\}$ or smaller without affecting the values or perfect strategies of the game. A higher $w$ however decreases the overlap of priorities between vertices on generation, which has a minor impact on the runtime of Zielonka's algorithm.
+
+In theory, Strategy Iteration via DPGs ought to be a contender for large enough $n$ for both the value and stratey problem. The reason for why it isn't depends on the reduction from MPGs to DPGs and is laid out in the subsection for MPGs.
+
+Strategy Iteration from above via EGs can outperform Zielonka's algorithm for large $|V|$ and reasonably dense graphs. However, the break-even point is only reached for such large $|V|$ and consequently such long runtimes that gathering statistically significant runtime data is impractical, it can however be confirmed for individual instances. The exact inflection points for the parameterization when the Strategy Iteration starts outperforming Zielonka's algorithm are therefore not known.
+\subsubsection{Value Problem of PGs}
+For solving the Value Problem of PGs the result are very clear. For all cases tested, Zielonka's Algorithm is straight up the fastest. It's simplicity demands very little overhead and as such small graphs are solved near instantaneously. It's recursive nature allows it to scale very well to big graphs as well. Less connectivity, as shown by smaller $p$, mean the attractors as laid out in the algorithm tend to not reach as far -- meaning more levels of recursion are needed to cover the entire graph. Similargly, bigger $w$ means that the winning regions that act as a crystallisation point for the attracters tend to start out smaller and thus form smaller attractors.
+\begin{figure}[H]
+	\centering
+	\input{pg_value}
+	\caption{Solving the value problem of PGs}
+\end{figure}\newpage
+\subsubsection{Strategy Problem of PGs}
+Unfortunately our naive approach to finding optimal strategies via Zielonka's algorithm is $|V|\cdot log_2(\frac{|E|}{|V|})$ times slower than finding the values alone, meaning the big lead it had in finding the values of games is diminished significantly, bringing it more in line with other algorithms. Depending on the exact $p$ and $w$, the BCDGR algorithm via EGs, which has similarly low overhead to Zielonka's algorithm, but doesn't require repeated invokation to deliver optimal stragies, has better runtimes for reasonably small graphs. However, since it scales worse, such advantage is quickly lost with growing $|V|$. After that, Zielonka's algorithm, even with the malus it suffer for finding optimal strategies, is the fastest available method until Strategy Iteration from above via EGs takes over.
+\begin{figure}[H]
+	\centering
+\input{pg_strat}
+\caption{Solving the strategy problem of PGs}
+\end{figure}\newpage
+\subsection{MPGs}
+As with Parity games, the additional parameter is $w$ describing the range over which the priorities are handed out and for our random generation they are once again randomly uniformly distributed over their range.
+Unlike with PGs, in this case the meaning of $w$ cannot be scaled down to make subsequently applied algorithms faster. As a result we see some algorithms scale strongly in response to changing $w$ across it's range and even beyond.
+
+In theory, Strategy Iteration via DPGs is faster than other algorithms for large enough $n$. In practise however this isn't easily achieved. The method by which MPGs are reduced to DPGs results in discount factors very close to $1$. So close in fact, that for big enough MPGs the difference $1-\lambda$ approaches the limit of the precision standard floating point implementations can represent \cite{754}. As a result, standard linear program solvers are unable to solve the linear programs that are part of the strategy iteration with adequate precision. One could conceive a linear program solver that works with larger floats that enable higher precision. However this only raises the ceiling of what is solveable marginally. It also eventually forces the floats to exceed standard register sizes, meaning the floating point arithmetic fundamental to the linear program solver would have to resort to emulating floating point arithmetic for larger floats, which would take more clock cycles per operation and ultimately longer runtimes, undermining the usefullness of the approach in the first place. Effectively this mean that, even if this approach is possible, it is never pratically viable for MPGs reduced to DPGs.\newpage
+\subsubsection{Value Problem of MPGs}
+Unlike for PGs the native approach used here, Zwick and Paterson's algorithm isn't a clear winner. Intuitively the $k = 4\cdot |V|^3\cdot d$ iterations the algorithm goes through to guarantee correcteness are way in excess of what's practically needed. This means it's only competetive for graphs with very small $|V|^3\cdot d$. As with PGs, solving with BCDGR via EG offers low overhead and thus reasonably fast runtimes for smaller graphs, but again as with PGs the approach scales mediocrely wrt. $|V|$.\\
+As with PGs, Strategy Iteration from above via EGs eventually outperforms BCDGR via EG for some parameterizations. \textit{Unlike} with PGs, we don't suffer from an as large $d$ any more, meaning the approach becomes competitive much sooner. The exact inflection point depend on the specific MPG in question, with a relatively large overlap where either may be superior.
+\begin{figure}[H]
+	\centering
+	\input{mpg_value}
+	\caption{Solving the value problem of MPGs}
+\end{figure}\newpage
+\subsubsection{Strategy Problem of MPGs}
+As with Zielonka's algorithm on PGs, Zwick and Paterson's algorithm for optimal strategies has an additional cost of $|V|\cdot log_2(\frac{|E|}{|V|})$ over finding the values of the game. Unlike with Zielonka's algorithm on PGs this makes Zwick and Paterson's algorithm unviable for all conditions for finding strategies. Since BCDGR and Strategy Iteration from above via EG both don't have any malus when finding optimal strategies over values, their relative performance stays the same is was for finding values.
+\begin{figure}[H]
+	\centering
+	\input{mpg_strat}
+	\caption{Solving the strategy problem of MPGs}
+\end{figure}
+\subsection{EGs}
+\begin{figure}[H]
+	\centering
+	\input{eg_both}
+	\caption{Solving both EG problems}
+\end{figure}
+\subsection{DPGs}
+\begin{figure}[H]
+	\centering
+	\input{dpg_both}
+	\caption{Solving both DPG problems}
+\end{figure}
+\footnotetext{$S(x)=\frac{1}{1+e^{-x}}$}
+\subsection{SSGs}
+sinks not included in p
+no w
+\begin{figure}[H]
+	\centering
+	\input{ssg_both}
+	\caption{Solving both stopping-SSG problems}
+\end{figure}
 \section{Conclusion and further approaches}
