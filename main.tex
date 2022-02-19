@@ -95,7 +95,7 @@
 \usepackage[absolute]{textpos}
 
 % allows to enumerate different figures with a) b) in the same figure-environment.
-\usepackage{subfigure}
+%\usepackage{subfigure}
 
 % introduces new commands for more beautiful tables
 \usepackage{booktabs}
@@ -117,9 +117,11 @@
 % allows \Checkmark and more
 \usepackage{bbding}
 
+\usepackage{subcaption}
+
 % finetune the gaps between figure and text in the subfigure environment (basically close the gap as much as possible)
-\renewcommand{\subfigtopskip}{0pt}
-\renewcommand{\subfigbottomskip}{0pt}
+%\renewcommand{\subfigtopskip}{0pt}
+%\renewcommand{\subfigbottomskip}{0pt}
 
 % some color definitions for the pdf statements below
 \definecolor{mygrey}{rgb}{0.45,0.45,0.45}
@@ -265,11 +267,11 @@
 % the included files. \input will not begin on a new page.
 \include{ch_inhalt}
 
-
 % Appendix chapters to be put here. They will be enumerated with capital letters 
 % if you  did not change the \documentclass options.
 \begin{appendix}
-\include{appendix}
+	\include{eid}
+%	\include{appendix}
 \end{appendix}
 %Ende Anhang
 

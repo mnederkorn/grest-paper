@@ -1,0 +1,111 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		name=border,
+		title style={align=center},
+		xlabel={$n=|V|$},
+		ylabel={runtime in s},
+		log basis x={2},
+		xmode=log,
+		log basis y={10},
+		ymode=log,
+		%		legend columns = 3,
+		%		legend style = {at={(0.5, -0.23)}, anchor=north, inner sep=3pt, style={column sep=0.15cm}},       %vorher: at={(1.3, 1)}
+		%		legend cell align=left,
+		ymajorgrids=true,
+		grid style=dashed,
+		]
+		
+		\addplot[line width=.2pt,color=c2,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0008973336219787598) (6, 0.004458088874816895) (8, 0.04045567512512207) (11, 0.22635796785354614)};
+		\addplot[line width=.2pt,color=c2,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.0012758421897888185) (6, 0.012420425415039063) (8, 0.10679255485534668)};
+		\addplot[line width=.2pt,color=c2,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.0014073395729064942) (6, 0.015906877517700195) (8, 0.12019179821014404)};
+		\addplot[line width=.2pt,color=c2,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.0011982011795043945) (6, 0.007298610210418701) (8, 0.07219530344009399) (11, 0.4853608775138855)};
+		\addplot[line width=.2pt,color=c2,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.0015658187866210939) (6, 0.021625852584838866) (8, 0.16757524251937866)};
+		\addplot[line width=.2pt,color=c2,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.0018152713775634766) (6, 0.024933207035064697) (8, 0.27176610231399534)};
+		\addplot[line width=.2pt,color=c2,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.0012000012397766113) (6, 0.00865302562713623) (8, 0.09165848970413208) (11, 0.6884985065460205)};
+		\addplot[line width=.2pt,color=c2,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.0016893887519836427) (6, 0.02651708126068115) (8, 0.22411369323730468)};
+		\addplot[line width=.2pt,color=c2,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.0015958452224731445) (6, 0.02651991128921509) (8, 0.27286490678787234)};
+		
+		\addplot[line width=.2pt,color=c5,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0032030868530273436) (8, 0.021449203491210937)};
+		\addplot[line width=.2pt,color=c5,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.004049246311187744) (8, 0.04619148254394531)};
+		\addplot[line width=.2pt,color=c5,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.004543149471282959) (8, 0.046726815700531006)};
+		\addplot[line width=.2pt,color=c5,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.0025113272666931153) (8, 0.01595381498336792) (16, 0.27958359479904177)};
+		\addplot[line width=.2pt,color=c5,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.004918787479400635) (8, 0.05291994571685791)};
+		\addplot[line width=.2pt,color=c5,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.004577765464782715) (8, 0.0528005051612854)};
+		\addplot[line width=.2pt,color=c5,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.004330136775970459) (8, 0.013800342082977295) (16, 0.10816818714141846)};
+		\addplot[line width=.2pt,color=c5,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.004276804924011231) (8, 0.03634891271591187)};
+		\addplot[line width=.2pt,color=c5,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.004043750762939453) (8, 0.04067724943161011)};
+		
+		\addplot[line width=.2pt,color=c6,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0044381308555603025) (8, 0.03407516002655029)};
+		\addplot[line width=.2pt,color=c6,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.005704696178436279) (8, 0.07305908679962159)};
+		\addplot[line width=.2pt,color=c6,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.007575664520263672) (8, 0.08285156726837158)};
+		\addplot[line width=.2pt,color=c6,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.006342413425445556) (8, 0.06475734233856201)};
+		\addplot[line width=.2pt,color=c6,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.00969538688659668) (8, 0.11434895277023316)};
+		\addplot[line width=.2pt,color=c6,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.009692494869232177) (8, 0.13297072887420655)};
+		\addplot[line width=.2pt,color=c6,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.00703967809677124) (8, 0.0702218770980835)};
+		\addplot[line width=.2pt,color=c6,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.009400153160095214) (8, 0.16585803985595704)};
+		\addplot[line width=.2pt,color=c6,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.009279646873474122) (8, 0.16839123249053956)};
+		
+		\addplot[line width=.2pt,color=c8,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.004852104187011719) (8, 0.24813521385192872)};
+		\addplot[line width=.2pt,color=c8,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.009704179763793945) (8, 0.6588680005073547)};
+		\addplot[line width=.2pt,color=c8,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.009903509616851807) (8, 0.7480621719360352)};
+		\addplot[line width=.2pt,color=c8,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.005139117240905762) (8, 0.32392876386642455)};
+		\addplot[line width=.2pt,color=c8,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.008819804191589356) (8, 0.7982752299308777)};
+		
+		\addplot[line width=.2pt,color=c10,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.02340465784072876) (6, 0.18258235216140747)};
+		\addplot[line width=.2pt,color=c10,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.0794754958152771) (6, 0.689674084186554)};
+		\addplot[line width=.2pt,color=c10,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.08172725677490235) (6, 0.8436912322044372)};
+		\addplot[line width=.2pt,color=c10,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.04042262077331543) (6, 0.24599757432937622)};
+		\addplot[line width=.2pt,color=c10,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.05747949600219727) (6, 0.7296424269676208)};
+		\addplot[line width=.2pt,color=c10,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.07325516700744629)};
+		\addplot[line width=.2pt,color=c10,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.04969822645187378) (6, 0.2506649732589722)};
+		\addplot[line width=.2pt,color=c10,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.07168172597885132)};
+		\addplot[line width=.2pt,color=c10,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.06776215553283692)};
+		
+		\addplot[line width=.2pt,color=c1,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0005784392356872559) (8, 0.0012366938591003417) (16, 0.0035455870628356935) (32, 0.009084289073944091) (64, 0.03380220890045166) (128, 0.12757176876068116)};
+		\addplot[line width=.2pt,color=c1,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.0006280755996704102) (8, 0.0016174006462097168) (16, 0.0054799985885620114) (32, 0.020191414356231688) (64, 0.09808440685272217) (128, 0.48869733572006224)};
+		\addplot[line width=.2pt,color=c1,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.0006012535095214844) (8, 0.0017565512657165528) (16, 0.00600947380065918) (32, 0.019084296226501464) (64, 0.08966631650924682) (128, 0.5593468260765075)};
+		\addplot[line width=.2pt,color=c1,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.0006766724586486817) (8, 0.00223400354385376) (16, 0.009156408309936524) (32, 0.030592424869537352) (64, 0.09430317878723145) (128, 0.3952624821662903)};
+		\addplot[line width=.2pt,color=c1,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.0011983847618103028) (8, 0.0033093523979187012) (16, 0.013199453353881835) (32, 0.05350710868835449) (64, 0.2556190824508667)};
+		\addplot[line width=.2pt,color=c1,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.0008857488632202148) (8, 0.0038025474548339846) (16, 0.01651378154754639) (32, 0.06787213802337647) (64, 0.3040137577056885)};
+		\addplot[line width=.2pt,color=c1,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.0007132983207702637) (8, 0.0034358859062194823) (16, 0.01728680610656738) (32, 0.05320242166519165) (64, 0.1864938473701477) (128, 0.7529966020584107)};
+		\addplot[line width=.2pt,color=c1,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.0007635211944580078) (8, 0.0037399816513061525) (16, 0.01829184055328369) (32, 0.089824697971344) (64, 0.6044111347198486)};
+		\addplot[line width=.2pt,color=c1,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.0007803654670715332) (8, 0.0039618778228759765) (16, 0.022043616771698) (32, 0.11612437009811401) (64, 0.6853787589073181)};
+		
+		\addplot[line width=.2pt,color=c3,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.0003490662574768066) (8, 0.0006781840324401856) (16, 0.005465378761291504) (32, 0.4014171695709228)};
+		\addplot[line width=.2pt,color=c3,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.0003490662574768066) (8, 0.0010970687866210937) (16, 0.03279685497283936)};
+		\addplot[line width=.2pt,color=c3,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.0003490638732910156) (8, 0.0009973287582397462) (16, 0.03639267444610596)};
+		\addplot[line width=.2pt,color=c3,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.00039893627166748047) (8, 0.0007679605484008789) (16, 0.0061535477638244625) (32, 0.21685853481292724)};
+		\addplot[line width=.2pt,color=c3,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.0004025125503540039) (8, 0.0013000130653381347) (16, 0.02594172477722168)};
+		\addplot[line width=.2pt,color=c3,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.0004587721824645996) (8, 0.0011794018745422364) (16, 0.030063228607177736)};
+		\addplot[line width=.2pt,color=c3,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.0003091931343078613) (8, 0.0006995081901550293) (16, 0.004276366233825684) (32, 0.26050525426864624)};
+		\addplot[line width=.2pt,color=c3,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.0004188799858093262) (8, 0.0010970711708068847) (16, 0.02578571081161499)};
+		\addplot[line width=.2pt,color=c3,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.0005288958549499512) (8, 0.0011673617362976075) (16, 0.03896848201751709)};
+		
+		\addplot[line width=.2pt,color=c4,mark=*,mark options={solid,fill=white},solid] coordinates {(4, 0.007691407203674316) (8, 0.02587754487991333) (16, 0.06119916200637818) (32, 0.22358301162719726) (64, 0.6193985247611999)};
+		\addplot[line width=.2pt,color=c4,mark=square,mark options={solid,fill=white},solid] coordinates {(4, 0.00845531463623047) (8, 0.030900938510894774) (16, 0.08705209732055665) (32, 0.34352812051773074)};
+		\addplot[line width=.2pt,color=c4,mark=triangle,mark options={solid,fill=white},solid] coordinates {(4, 0.009880573749542236) (8, 0.027384095191955567) (16, 0.09229785203933716) (32, 0.32973589897155764)};
+		\addplot[line width=.2pt,color=c4,mark=*,mark options={solid,fill=white},dashed] coordinates {(4, 0.014341049194335938) (8, 0.023255670070648195) (16, 0.06265599727630615) (32, 0.2160000729560852) (64, 0.5536609029769898)};
+		\addplot[line width=.2pt,color=c4,mark=square,mark options={solid,fill=white},dashed] coordinates {(4, 0.023100566864013673) (8, 0.04340705871582031) (16, 0.10769278049468994) (32, 0.3435399079322815)};
+		\addplot[line width=.2pt,color=c4,mark=triangle,mark options={solid,fill=white},dashed] coordinates {(4, 0.00999713659286499) (8, 0.028455560207366944) (16, 0.10855320453643799) (32, 0.3477972674369812)};
+		\addplot[line width=.2pt,color=c4,mark=*,mark options={solid,fill=white},dotted] coordinates {(4, 0.009679739475250243) (8, 0.023264675140380858) (16, 0.05884159326553345) (32, 0.16665361166000367) (64, 0.4600633144378662)};
+		\addplot[line width=.2pt,color=c4,mark=square,mark options={solid,fill=white},dotted] coordinates {(4, 0.009535064697265625) (8, 0.029723474979400633) (16, 0.08172286748886108) (32, 0.2553786563873291)};
+		\addplot[line width=.2pt,color=c4,mark=triangle,mark options={solid,fill=white},dotted] coordinates {(4, 0.011018850803375245) (8, 0.03224167823791504) (16, 0.11299458980560302) (32, 0.23177831411361693)};
+		
+	\end{axis}
+	\node[draw,below=35pt] at (border.south) {
+		\begin{tabular}{rcccccc}
+			$p\colon$ & \tikz{\draw[-,black,solid,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{1}{n}$ &		            \tikz{\draw[-,black,dashed,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{log_2(n)}{n}$ &
+			\tikz{\draw[-,black,dotted,line width = 1pt](0,.9mm) -- (5mm,.9mm);\draw[-,white,solid,line width = 1pt](0,0) -- (5mm,0)} & $\frac{1}{2}$ \\
+			$w\colon$ & \tikz{\draw[mark=*,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $\lfloor log_2(n)\rfloor$ &
+			\tikz{\draw[mark=square,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $n$ &
+			\tikz{\draw[mark=triangle,mark options={solid,fill=white}] plot coordinates {(0,0)}} & $\lfloor n\cdot log_2(n)\rfloor$ \\
+			\multicolumn{7}{c}{\textcolor{c1}{Zielonka's}} \\
+			\multicolumn{7}{c}{\textcolor{c2}{Zwick \& Paterson's via MPG}} \\
+			\multicolumn{7}{c}{\textcolor{c3}{BCDGR via EG}} \\
+			\multicolumn{7}{c}{\textcolor{c4}{Strategy Iteration from above via EG}} \\
+			\multicolumn{7}{c}{\textcolor{c5}{Strategy Iteration from below via EG}} \\
+			\multicolumn{7}{c}{\textcolor{c6}{Kleene Iteration via EG}} \\
+			\multicolumn{7}{c}{\textcolor{c8}{Kleene Iteration via DPG}} \\
+			\multicolumn{7}{c}{\textcolor{c10}{Kleene Iteration via SSG}}
+	\end{tabular}};
+\end{tikzpicture}

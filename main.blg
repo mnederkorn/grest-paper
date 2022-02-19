@@ -5,8 +5,8 @@ Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: alphadin.bst
 Reallocating 'name_of_file' (item size: 1) to 14 items.
 A level-1 auxiliary file: ch_inhalt.aux
-Reallocating 'name_of_file' (item size: 1) to 13 items.
-A level-1 auxiliary file: appendix.aux
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+A level-1 auxiliary file: eid.aux
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
@@ -16,45 +16,45 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: references.bib
 Warning--to sort, need author or key in 754
 Warning--empty author in 754
-You've used 4 entries,
+You've used 6 entries,
             4793 wiz_defined-function locations,
-            930 strings with 7171 characters,
-and the built_in function-call counts, 3697 in all, are:
-= -- 398
-> -- 63
-< -- 50
-+ -- 56
-- -- 22
-* -- 330
-:= -- 543
-add.period$ -- 8
-call.type$ -- 4
-change.case$ -- 20
-chr.to.int$ -- 4
-cite$ -- 7
-duplicate$ -- 84
-empty$ -- 322
-format.name$ -- 40
-if$ -- 797
+            948 strings with 7698 characters,
+and the built_in function-call counts, 5893 in all, are:
+= -- 640
+> -- 126
+< -- 127
++ -- 144
+- -- 45
+* -- 498
+:= -- 917
+add.period$ -- 12
+call.type$ -- 6
+change.case$ -- 33
+chr.to.int$ -- 6
+cite$ -- 9
+duplicate$ -- 126
+empty$ -- 453
+format.name$ -- 83
+if$ -- 1215
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 24
-newline$ -- 40
-num.names$ -- 9
-pop$ -- 29
+missing$ -- 30
+newline$ -- 54
+num.names$ -- 16
+pop$ -- 42
 preamble$ -- 1
-purify$ -- 28
+purify$ -- 45
 quote$ -- 0
-skip$ -- 101
+skip$ -- 207
 stack$ -- 0
-substring$ -- 530
-swap$ -- 23
-text.length$ -- 16
+substring$ -- 770
+swap$ -- 38
+text.length$ -- 28
 text.prefix$ -- 1
 top$ -- 0
-type$ -- 40
+type$ -- 60
 warning$ -- 2
-while$ -- 23
-width$ -- 7
-write$ -- 74
+while$ -- 43
+width$ -- 9
+write$ -- 106
 (There were 2 warnings)

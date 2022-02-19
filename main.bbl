@@ -25,6 +25,15 @@ IEEE Standard for Floating-Point Arithmetic.
 \newblock DOI 10.1007/s10703--010--0105--x. --
 \newblock ISSN 1572--8102
 
+\bibitem[BDM16]{10.1007/978-3-319-41540-6_15}
+\textsc{Benerecetti}, Massimo ; \textsc{Dell'Erba}, Daniele  ;
+  \textsc{Mogavero}, Fabio:
+\newblock Solving Parity Games via Priority Promotion.
+\newblock {In: }\textsc{Chaudhuri}, Swarat (Hrsg.) ; \textsc{Farzan}, Azadeh
+  (Hrsg.): \emph{Computer Aided Verification}.
+\newblock Cham : Springer International Publishing, 2016. --
+\newblock ISBN 978--3--319--41540--6, S. 270--290
+
 \bibitem[Jur98]{DBLP:journals/ipl/Jurdzinski98}
 \textsc{Jurdzinski}, Marcin:
 \newblock Deciding the Winner in Parity Games is in {UP} {\textbackslash}cap
@@ -32,6 +41,16 @@ IEEE Standard for Floating-Point Arithmetic.
 \newblock {In: }\emph{Inf. Process. Lett.} 68 (1998), Nr. 3, 119--124.
 \newblock \url{http://dx.doi.org/10.1016/S0020-0190(98)00150-1}. --
 \newblock DOI 10.1016/S0020--0190(98)00150--1
+
+\bibitem[LPSW22]{lmcs:8953}
+\textsc{Lehtinen}, Karoliina ; \textsc{Parys}, Pawel ; \textsc{Schewe}, Sven  ;
+  \textsc{Wojtczak}, Dominik:
+\newblock {A Recursive Approach to Solving Parity Games in Quasipolynomial
+  Time}.
+\newblock {In: }\emph{{Logical Methods in Computer Science}} {Volume 18, Issue
+  1} (2022), Januar.
+\newblock \url{http://dx.doi.org/10.46298/lmcs-18(1:8)2022}. --
+\newblock DOI 10.46298/lmcs--18(1:8)2022
 
 \bibitem[ZP96]{ZWICK1996343}
 \textsc{Zwick}, Uri ; \textsc{Paterson}, Mike:
