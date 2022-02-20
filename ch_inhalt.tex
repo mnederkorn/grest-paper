@@ -506,8 +506,8 @@ We shall simply call such matrices representing edges $E$. Similarly, the owners
 	0 & 1 & 1 & 1 & 1
 \end{bmatrix}
 \]
-And we call such ownership matrices $O$.\\
-We will be dissecting a lot of matrices and the notation we will use for that is as follows: Given a matrix A, for which we only want to keep the edges for which the source and target vertex are in $su = [0,1,4]$, we write $A[su,su]$.
+And we call such ownership matrices $O$. $0$ or $False$ denotes ownership to player 0 or similar, $1$ or $True$ to player 1 and for SSGs we also have $2$ for \textit{Random} nodes.\\
+For dissecting matrices we will use the following notation: Given a matrix A, for which we only want to keep the edges for which the source and target vertex are in $su = [0,1,4]$, we write $A[su,su]$.
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{.33\textwidth}
@@ -777,13 +777,212 @@ def solve_both_bcdgr(O, E):
 \textbf{L.2:} l is the list of vertices that potentially have an outdated progress measure.\\
 \textbf{L.3-8:} We initialize l with the vertices that can't have a progress measure of 0.\\
 \textbf{L.9-14:} f is the current progress measure and cnt is count as laid out in the formal description fo the algorithm and it's initialization.\\
-\textbf{L.15-18:} We go through the list of vertices that we have to update, keeping a copy of f[v]\\
+\textbf{L.15-18:} We go through the list of vertices that we have to update, keeping a copy of f[v].\\
 \textbf{L.19-22:} We update the current progress measure of the vertex depending on whose vertex it is with the minimum/maximum progress measure possible, depending on the successor nodes.\\
 \textbf{L.23-27:} We update the count of nodes that depend on the current node $v$.\\
 \textbf{L.28:} For reach vertex in pre(v) that is now outdated:\\
 \textbf{L.29-33:} If vertex if of \textit{Charging} decrement count and add vertex to l\\
 \textbf{L.34-35:} If vertex if of \textit{Depleting} add vertex to l\\
 \textbf{L.36-40:} Read out optimal strategy for \textit{Charging} based off of the lowest cost successor.
+
+\textbf{Strategy Iteration from below:}
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_strat_iter_below(self):
+    p1 = self.O == True
+    nW = len(self.O) * max(abs(self.E))
+    E_p1 = self.E[p1, p1]
+    cycle_nodes, neg_strat = find_all_negative_cycle_nodes(E_p1)
+    O = self.O + [False]
+    E = self.E
+    E[len(O)+1] = |$\times$|
+    E[:len(O)+1] = |$\times$|
+    E[len(O)+1, len(O)+1] = 0
+    E[self.O, len(O)+1] = -2 * nW
+    restriction = p1[cycle_nodes]|$^{-1}$|
+    O = O[restriction]
+    E = E[restriction, restriction]
+    strat = [-1]*len(O)
+    strat[O] = apply_along_axis(lambda v: random.choice(v), 1, E[O])
+    while True:
+        strat_hist = strat.copy()
+        f = [0]*len(O)
+        while True:
+            old = f.copy()
+            E_weight = maximum(minimum(f - E, 3 * nW), 0)
+            f[O] = E_weight[O, strat]
+            f[|$\neg$|O] = min(E_weight[|$\neg$|O], axis=1)
+            if f == old:
+                break
+        g = E_weight[:, strat] < E_weight[:, argmax(E_weight, axis=1)]
+        strat[O&g] = argmax(E_weight, 1)[O&g]
+        if strat_hist==strat:
+            break
+    final_f = [-1]*len(self.O)
+    f[|$\neg$|(f < nW)] = -1
+    final_f[p1[cycle_nodes]|$^{-1}$|] = f
+    return_strat = [-1]*len(self.E)
+    return_strat[p1[cycle_nodes]] = p1[neg_strat]
+    return_strat[p1[cycle_nodes]|$^{-1}$|][strat!=-1] = restriction[strat][strat!=-1] 
+    return final_f, return_strat
+\end{lstlisting}
+
+\textbf{L.2-14:} First we add the $s\in V_0$ vertex and restrict the game to a version without negative cycles that are in total control of \textit{Depleting}.\\
+\textbf{L.15-16:} We start of with a random strategy. For every vertex of \textit{Depleting} we choose a random successor.\\
+\textbf{L.17-18,29-30:} We iterate until our strategy doesn't change anymore, i.e. we have found an optimal stratey for \textit{Depleting}.\\
+\textbf{L.19-26:} We solve a game based on the fixed strategy of \textit{Depleting} via Kleene Iteration.\\
+\textbf{L.27-28:} We check for which vertices we have an actual improvement and change the strategy accordingly.\\
+\textbf{L.31-37:} Return the values and strategy after some scaling back wrt the negative cycles removed previously. Set values in excess of nW to infinite.
+
+\textbf{Strategy Iteration from above:}
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_strat_iter_above(self):
+    p1 = self.O == True
+    nW = len(self.O) * max(abs(self.E))
+    E_p1 = self.E[p1, p1]
+    cycle_nodes, neg_strat = find_all_negative_cycle_nodes(E_p1)
+    O = self.O + [False]
+    E = self.E
+    E[len(O)+1] = |$\times$|
+    E[:len(O)+1] = |$\times$|
+    E[len(O)+1, len(O)+1] = 0
+    E[self.O, len(O)+1] = -2 * nW
+    restriction = p1[cycle_nodes]|$^{-1}$|
+    O = O[restriction]
+    E = E[restriction, restriction]
+    strat = [-1]*len(O)
+    strat[|$\neg$|O] = [len(O)-1]*len(O)
+    while True:
+        strat_hist = strat.copy()
+        solver = pywraplp.Solver.CreateSolver("GLOP")
+        v = [solver.NumVar(float(0), float(3 * nW), str(x)) for x in range(len(O))]
+        for s, p in enumerate(O[:-1]):
+            if not p:
+                solver.Add(v[s] >= (v[strat[s]] - float(E[s, strat[s]])))
+            else:
+                for t in where(E[s] != mini)[0]:
+                    solver.Add(v[s] >= (v[t] - float(E[s, t])))
+        solver.Add(v[-1] == float(0))
+        obj_func = v[0]
+        for v_n in v[1:]:
+            obj_func += v_n
+        solver.Minimize(obj_func)
+        status = solver.Solve()
+        v = array([int32(rint(v_n.solution_value())) for v_n in v])
+        while True:
+            strat[|$\neg$|O] = argmin(clip(v - E, 0, None), 1)
+            if any(strat != strat_hist):
+                break
+            v_ = [True]*len(v)
+            while True:
+                v_h = v_.copy()
+                c1 = v != 0
+                c2 = v.transpose() == clip(v - E, 0, 3 * nW)
+                c3 = 0 < v
+                c4 = 0 < clip(v - E, 0, None)
+                c5 = clip(v - E, 0, None) <= (3 * nW)
+                c6 = v_
+                V_p0 = c1 & any(c2 & c3 & c4 & c5 & c6, 1)
+                V_p1 = c1 & all((|$\neg$|c2 or (c3 & c4 & c5 & c6)), 1)
+                v_[O] = V_p1
+                v_[|$\neg$|O] = V_p0
+                if all(v_ == v_h):
+                    break
+            if not any(v_):
+                final_f = [-1]*len(self.O)
+                v[v < nW] =  v[v < nW]
+                final_f[p1[cycle_nodes]|$^{-1}$|] = v
+                return_strat = [-1] * len(self.E)
+                return_strat[p1[cycle_nodes]] = p1[neg_strat]
+                return_strat[p1[cycle_nodes]|$^{-1}$|][strat != -1] restriction[strat]
+                return_strat[return_strat == len(self.O)] = apply_along_axis(lambda v: random.choice(v),1,self.E)
+                return final_f, return_strat
+            else:
+                v[v_] -= 1
+\end{lstlisting}
+
+\textbf{L.2-14:} We again add the $s\in V_0$ vertex and restrict the game to a version without negative cycles that are in total control of \textit{Depleting}.\\
+\textbf{L.15-16:} The starting strategy for \textit{Charging} is for every vertex to go to the special sink vertex.\\
+\textbf{L.18-33:} We solve a linear program based on the current strategy for \textit{Charging}.\\
+\textbf{L.35-37:} The find an optimal counter strategy for \textit{Depleting}. If the strategy changed we iterate to the next linear program, if it didn't we check if our fix-point is the least.\\
+\textbf{L.38-52:} We determine $\bar{V}$.\\=
+\textbf{L.53-61:} If $\bar{V}$ is empty we have our least fix-point. We return the values and strategy minus reverting the preprocessing as we did for the Strategy Iteration from below.\\
+\textbf{L.62-63:} If $\bar{V}$ isn't empty we decrement it's contents and try to find a another counter-strategy.
+\newpage
+\textbf{The algorithm used to find all negative cycles:}
+
+Since Bellman-Ford only gives at least some negative cycles but not all, we need to iterate to find all such cycles. 
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def find_all_negative_cycle_nodes(E):
+    neg_strat = [-1]*len(E)
+    cycle_nodes = [False]*len(E)
+    while True:
+        restriction = |$\neg$|cycle_nodes
+        ret, ret_strat = find_negative_cycle_nodes(E[restriction, restriction])
+        if len(ret) == 0:
+            break
+        else:
+            neg_strat[restriction[ret]] = restriction[ret_strat]
+            cycle_nodes[restriction[ret]] = True
+    if any(cycle_nodes):
+        while True:
+            old = cycle_nodes.copy()
+            adds = any(E[:, cycle_nodes], axis=1)
+            adds[cycle_nodes] = False
+            neg_strat[adds] = cycle_nodes[argmax(E[adds, cycle_nodes],axis=1)]
+            cycle_nodes = (cycle_nodes or adds)
+            if all(cycle_nodes == old):
+                break
+    return cycle_nodes, neg_strat[cycle_nodes]
+\end{lstlisting}
+
+\textbf{L.2-11:} We start with no knowledge of any vertices being part of any negative cycle and then progressively add those that we find.
+\textbf{L.6:} Any search may give us cycles and the strategy that would be deployed to stay in such circle, which is what \textit{Depleting} wants to do.
+\textbf{L.12-21:} Once we have found all negative cycles, we also need to include all all vertices that inevitably lead into those cycles.
+\newpage
+\textbf{The Bellman-Ford algorithm derivate used to find negative cycles:}
+
+We add a special vertex that connects to every other vertex. If after $|V|$ steps, i.e. after we necessarily have entered a loop somewhere, we can still lower the cost to reach a certain vertex, we must have discovered a negative cycle.
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def find_negative_cycle_nodes(E):
+    edges_src = E
+    edges_src[:len(E)] = 0
+    edges_src[len(E)] = |$\times$|
+    dist = [|$\infty$|]*len(edges_src)
+    dist[len(E)] = 0
+    pred = [-1]*len(edges_src)
+    for i in range(1, len(edges_src) + 1):
+        src_is_pred = (dist != |$\infty$|)*len(edges_src).transpose()
+        new_dist = dist.transpose() + edges_src
+        shorter = new_dist < dist
+        valids = edges_src & src_is_pred
+        exists_shorter = any(valids & shorter, axis=0)
+        shorter_idx = argmin(new_dist |$\textit{if}$| valids |$\textit{else}$| |$\infty$|, axis=0)
+        pred = shorter_idx |$\textit{if}$| exists_shorter |$\textit{else}$| pred
+        dist[exists_shorter] = new_dist[shorter_idx]
+    cycle_nodes_t = [False]*len(E)
+    for n in (exists_shorter == True):
+        cycle_nodes = [False]*len(E)
+        s = [n]
+        for x in range(len(edges_src) - 1):
+            if pred[n] == s[0]:
+                cycle_nodes[s] = True
+                break
+            else:
+                s += pred[n]
+                n = pred[n]
+        cycle_nodes_t = (cycle_nodes_t or cycle_nodes)
+    return pred[ret], cycle_nodes_t
+\end{lstlisting}
+
+\textbf{L.2-4:} We start by adding a special vertex that has an edge to every other vertex.\\
+\textbf{L.5-7:} We start of by knowing no path towards any other vertex.\\
+\textbf{L.8-16:} We iterate until we surpass the size of the vertex, so that every other vertex will have been able to be reached. For every iteration we check if we can discover a new, shorter path to any of the vertices and note the distance and predecessor.\\
+\textbf{L.17-29:} The previous step only shows us vertices that are part of a negative cycle. To find \textit{all} the vertices that are part of such cycle we need to unwind them.
+
 \subsection{Reductions in Practice}
 \section{Implementation}\newpage
 \section{Evaluation}
