@@ -1,4 +1,4 @@
-\section{Introduction}
+-\section{Introduction}
 There are practical applications (cite) which are able to be modeled by or reduced to various games. Considering the many ways there are to solve those games, the possibility to (repeatedly) reduce them to one another and various ways to implement any of those algorithms there are many potential means to solve problems on those games. We want to see how the different ways to solve problems, the reductions between those problems and the combination of the two play out and compare to one another in a real-world implementation.
 \subsection{Task}
 The games we concern ourselves here are \textit{Parity Games} (PG), \textit{Mean Payoff Games} (MPG), \textit{Energy Games} (EG), \textit{Discounted Payoff Games} (DPG) and (stopping) \textit{Simple Stochastic Games} (SSG). For any of those games there are multiple problems, but the ones we concern outselves here are ``what is the value of vertex $v$ under optimal strategies from both players?'' and ``what are the optimal strategies?''. For both of those problems, there may already be multiple algorithms to solve them for any specific game directly, some of which are generalizable to multiple of the games to some degree, such as Kleene Iteration and Strategy Iteration. Additionally we can reduce the games to another as follows:
@@ -711,8 +711,8 @@ def trunc(d, v):
         for denominator in range(1, d + 1):
             f = floor(lower[v_n] * denominator)
             c = ceil(upper[v_n] * denominator)
-            num = np.arange(f, c + 1) / denominator
-            if np.any((lower[v_n] < num) & (upper[v_n] > num)):
+            num = range(f, c + 1) / denominator
+            if any((lower[v_n] < num) & (upper[v_n] > num)):
                 v[v_n] = num[((lower[v_n] < num) & (upper[v_n] > num))][0]
                 break	
     return v
@@ -869,7 +869,7 @@ def solve_both_strat_iter_above(self):
             obj_func += v_n
         solver.Minimize(obj_func)
         status = solver.Solve()
-        v = array([int32(rint(v_n.solution_value())) for v_n in v])
+        v = [v_n.solution_value() for v_n in v]
         while True:
             strat[|$\neg$|O] = argmin(clip(v - E, 0, None), 1)
             if any(strat != strat_hist):
@@ -982,6 +982,162 @@ def find_negative_cycle_nodes(E):
 \textbf{L.5-7:} We start of by knowing no path towards any other vertex.\\
 \textbf{L.8-16:} We iterate until we surpass the size of the vertex, so that every other vertex will have been able to be reached. For every iteration we check if we can discover a new, shorter path to any of the vertices and note the distance and predecessor.\\
 \textbf{L.17-29:} The previous step only shows us vertices that are part of a negative cycle. To find \textit{all} the vertices that are part of such cycle we need to unwind them.
+\newpage
+\subsubsection{DPGs}
+DPGs get the additional field $D$ for their discount. \textit{player} describes from whose perspective we want to find the values and strategy, with \textit{False} meaning \textit{Max}.
+
+\textbf{Strategy Iteration:}
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_strat_iter(self, player):
+    strat = [-1]*len(self.O)
+    strat[player==self.O] = apply_along_axis(lambda x: random.choice(x), 1, self.E)
+    while True:
+        strat_hist = strat.copy()
+        W = max(abs(self.E))
+        solver = pywraplp.Solver.CreateSolver("GLOP")
+        v = [solver.NumVar(float(-W), float(W), str(x)) for x in range(len(self.O))]
+        if not player:
+            for s, p in enumerate(self.O):
+                if not p:
+                    solver.Add(v[s] == (1 - float(self.D)) * float(self.E[s, strat[s]]) + float(self.D) * v[strat[s]])
+                else:
+                    for t in self.E[s]:
+                        solver.Add(v[s] <= (1 - float(self.D)) * float(self.E[s, t]) + float(self.D) * v[t])
+        else:
+            for s, p in enumerate(self.O):
+                if p:
+                    solver.Add(v[s] == (1 - float(self.D)) * float(self.E[s, strat[s]]) + float(self.D) * v[strat[s]])
+                else:
+                    for t in self.E[s]:
+                        solver.Add(v[s] >= (1 - float(self.D)) * float(self.E[s, t]) + float(self.D) * v[t])
+        obj_func = v[0]
+        for v_n in v[1:]:
+            obj_func += v_n
+        if not player:
+            solver.Maximize(obj_func)
+        else:
+            solver.Minimize(obj_func)
+        status = solver.Solve()
+        if not player:
+            strat[|$\neg$|self.O] = argmax(((1 - self.D) * self.E) + (self.D * ([v_n.solution_value() for v_n in v])),axis=1)
+        else:
+            strat[self.O] = argmin(((1 - self.D) * self.E) + (self.D * ([v_n.solution_value() for v_n in v])),axis=1)
+        if all(strat_hist==strat):
+            break
+    return [v_n.solution_value() for v_n in v], strat
+\end{lstlisting}
+
+\textbf{L.2-3:} We start of with a random strategy. For every vertex of \textit{player} we choose a random successor.\\
+\textbf{L.4-5,35-37:} We iterate until the strategy doesn't change any more and return the current strategy and values.\\
+\textbf{L.6-30:} We solve the Linear Program for the given strategy to find the values of the game under optimal play from the opponent.\\
+\textbf{L.9-15,16-22:} We in particular distinguish whether we are minimizing or maximizing (the inequality on L15 \& 22) for the vertices of the opponent depending on whose perspective we are searching from.\\
+\textbf{L.31-34:} Depending on the perspective we change strategy to one that maximizes or minimized the value based on the current values.
+
+\textbf{Kleene Iteration:}
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_kleene(O, E, D):
+    W = max(abs(E, 0))
+    cur = [-W]*len(O)
+    while True:
+        old = cur.copy()
+        E_weight = ((1 - D) * E) + D * cur
+        cur = [0]*len(O)
+        cur[|$\neg$|O] = max(edges_weight, axis=1)
+        cur[O] = min(edges_weight, axis=1)
+        if max(abs(cur - old)) < 1e-14:
+            break
+    strat = [-1]*len(O)
+    strat[|$\neg$|O] = argmax(((1 - D) * E) + D * cur, axis=1)
+    strat[O] = argmin(((1 - D) * E) + D * cur, axis=1)
+    return cur, strat
+\end{lstlisting}
+
+\textbf{L.2-3:} We start our iteration with the bottom element.\\
+\textbf{L.4-5,10-11:} We iteration until the the maximum change in any value falls below a certain threshold. The threshold can in theory be 0 which would be equal to iterating until the (theoretical) change in values is smaller than the precision floats numerically can handle.\\
+\textbf{L.6:} For every iteration we generate the entire matrix of possibilites of outgoing edges for every vertex and the accompanying value.\\
+\textbf{L.7-9:} We continue with the maximum/minimum value for the respective player's vertices.\\
+\textbf{L.12-14:} Given the values of the game we can also read out optimal strategies based off of the successor vertices needed to reach the already calculated values.
+\subsubsection{SSGs}
+For SSGs we have an additional matrix, \textit{AVG}, that gives us the transition probability from any \textit{Average} vertex to it's successor vertices.
+
+\textbf{Strategy Iteration:}
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_strat_iter(self, player):
+    strat = [-1]*len(self.O)
+    strat[self.O == player] = apply_along_axis(lambda x: random.choice(x), 1, self.E)
+    while True:
+        strat_hist = strat.copy()
+        solver = pywraplp.Solver.CreateSolver("GLOP")
+        v = ([solver.NumVar(float(0), float(1), str(x)) for x in range(len(self.O))] +
+            [solver.NumVar(float(0), float(0), str(str(len(self.O) + 1)))] +
+            [solver.NumVar(float(1), float(1), str(str(len(self.O) + 2)))])
+        for s, p in enumerate(self.O):
+            if p == player:
+                solver.Add(v[s] == v[strat[s]])
+            else:
+                if p == 0:
+                    for t in self.E[s]:
+                        solver.Add(v[s] >= v[t])
+                elif p == 1:
+                    for t in self.E[s]:
+                        solver.Add(v[s] <= v[t])
+                else:
+                    val = 0
+                    for t in self.E[s]:
+                        val += v[t] * self.AVG[s, t]
+                    solver.Add(v[s] == val)
+        obj_func = v[0]
+        for v_n in v[1:]:
+            obj_func += v_n
+        if not player:
+            solver.Maximize(obj_func)
+        else:
+            solver.Minimize(obj_func)
+        status = solver.Solve()
+        if not player:
+            strat[|$\neg$|self.O] = argmax(self.E * [v_n.solution_value() for v_n in v]), axis=1)
+        else:
+            strat[self.O] = argmin(self.E * [v_n.solution_value() for v_n in v]), axis=1)
+        if all(strat_hist == strat):
+            break
+    return [v_n.solution_value() for v_n in v], strat
+\end{lstlisting}
+
+\textbf{L.2-3:} We start of with a random strategy. For every vertex of \textit{player} we choose a random successor.\\
+\textbf{L.4-5,37-39:} We iterate until the strategy doesn't change any more and return the current strategy and values.\\
+\textbf{L.6-32:} We solve the Linear Program for the given strategy to find the values of the
+game under optimal play from the opponent.\\
+\textbf{L.21-24:} Unlike the degrees of freedom the opponent has in choosing a successor vertex which results in a half-space in the Linear Program, \textit{Average} just has an equality relationship in dependance of it's successors and transition probabilities.\\
+\textbf{L.33-36:} Depending on the perspective we change strategy to one that maximizes or minimized the value based on the current values.
+
+\textbf{Kleene Iteration:}
+
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_kleene(O, E, AVG):
+    cur = [0]*len(O) + [0] + [1]
+    while True:
+        old = cur.copy()
+        edges_weight = E*cur
+        cur[O == 2] = sum(AVG * cur, 1)
+        cur[O == 1] = min(edges_weight, axis=1)
+        cur[O == 0] = max(edges_weight, axis=1)
+        max_err = max(abs(cur - old))
+        if max_err < 1e-14:
+            break
+    strat = [-1]*len(O)
+    strat[O==0] = argmax(cur, axis=1)
+    strat[O==1] = argmin(cur, axis=1)
+    return cur, strat
+\end{lstlisting}
+
+\textbf{L.2:} We start our iteration with the bottom element.\\
+\textbf{L.3-4,10-11:} We iteration until the the maximum change in any value falls below a certain threshold. The threshold can in theory be 0 which would be equal to iterating until the (theoretical) change in values is smaller than the precision floats numerically can handle.\\
+\textbf{L.6:} For every iteration we generate the entire matrix of possibilites of outgoing edges for every vertex and the accompanying value.\\
+\textbf{L.7-9:} We continue with the maximum/minimum value for the respective player's vertices.\\
+\textbf{L.12-14:} Given the values of the game we can also read out optimal strategies based off of the successor vertices needed to reach the already calculated values. For \textit{Average} we simply leave these as -1 as to not disturb the indexing.
 
 \subsection{Reductions in Practice}
 \section{Implementation}\newpage
