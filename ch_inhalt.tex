@@ -297,7 +297,7 @@ So again, the only edge-weights that matter for the value of a play are those th
 
 To equate the values of the games we want to set the edge-weights in such a way that the outgoing edge of any vertex of a given cycle alone can set the parity of the value of the game if and only if the priority of the vertex is the highest in the cycle.\\
 \cite{DBLP:journals/ipl/Jurdzinski98} does this by setting $w((u,v)) = (-n)^{p(u)}$. This way, the absolute weight of the outgoing edge of the vertex with highest priority is always higher than any possible make-up of the rest of the cycle, i.e. $|(-n)^{p(u)}|>(n-1)|(-n)^{p(u)-1}|$.\\
-This, however, is unsatisfying since the complexity of solving MPGs with the algorithms we use is dependent on $d$, the maximum absolute weight in the MPG. We therefore want to be conservative with the edge-weights and try to minimize them.\\
+\label{pg_2_mpg}This, however, is unsatisfying since the complexity of solving MPGs with the algorithms we use is dependent on $d$, the maximum absolute weight in the MPG. We therefore want to be conservative with the edge-weights and try to minimize them.\\
 To that end, we set our weights as follows:
 \begin{align*}
 	w((u,v)) = (-1)^{p(u)}\cdot (sum\langle z\in \{|w((x,y))|\mid (x,y)\in E\}\mid x\in V_u\footnotemark\rangle +1^{p(u)~mod~2})
@@ -464,7 +464,7 @@ Two or more parallel lists of length $|E|$ representing the edges of the game wi
 An incidence matrix of size $n\times n$, The values of the matrix being the value that is associated with that edge, with a special value signaling that the edge doesn't exist and a simple boolean signaling doesn't/does exist for PGs and SSGs.\\
 The first method has the advantage of using less memory, since we only use memory for edges that actually exist. The second method has the advantage that edges that have the same source or target vertex are memory-aligned, thus easy and fast to work with, as they are the same row or column in the matrix.\\
 Given that a lot of operations include the semantic of ``all edges from/to a certain vertex'' and that even bigger graphs are manageable in memory size ($|V|=16384$ with $int32$ means about 1GB) to the point where the runtime of algorithms applied will become a problem before memory size does we opt for the second variant.
-The \textit{special value} that signals that the edge the matrix entry represents doesn't exist will generally, depending on context, be the minimum/maximum value the datatype can represent if it's an integer and NAN if it's a float. If we represent matrices here, we will use $\times$ to represent the special values. For operations on those matrices we will pretend here that those values are effectively invisible.\\
+The \textit{special value} that signals that the edge the matrix entry represents doesn't exist will generally, depending on context, be the minimum/maximum value the datatype can represent or NAN. If we represent matrices here, we will use $\times$ to represent the special values. For operations on those matrices we will pretend here that those values are effectively invisible.\\
 For example, the edges of a  graph may be represented by a matrix as follows:
 
 \begin{figure}[H]
@@ -570,6 +570,8 @@ We may do similar disections on vectors or on only some of the dimensions of a m
 		\]
 	\end{minipage}%
 \end{figure}
+
+The code as represented here is a simplifications of the actual code. Mostly in regards to the handling of the matrix entries that correspond to non-existing edges or particularities of python or numpy.
 \subsection{Solutions in Practice}
 \subsubsection{PGs}
 Parity games additionally have priorities associated with it's vertices. We shall represent them similarly to how we represent the ownership of the vertices except their range is over $\mathbb{N}_0$ instead of a boolean and called $P$.
@@ -1138,8 +1140,127 @@ def solve_both_kleene(O, E, AVG):
 \textbf{L.6:} For every iteration we generate the entire matrix of possibilites of outgoing edges for every vertex and the accompanying value.\\
 \textbf{L.7-9:} We continue with the maximum/minimum value for the respective player's vertices.\\
 \textbf{L.12-14:} Given the values of the game we can also read out optimal strategies based off of the successor vertices needed to reach the already calculated values. For \textit{Average} we simply leave these as -1 as to not disturb the indexing.
-
+\newpage
 \subsection{Reductions in Practice}
+\subsubsection{PGs to MPGs}
+
+As already shown in \hyperref[pg_2_mpg]{3.2.1}, the original algorithm in \cite{DBLP:journals/ipl/Jurdzinski98} stipulates the weights to be rewritten as $w((u,v)) = (-n)^{p(u)}$ which is wasteful wrt. the size of the range of weights in the resulting MPG.
+
+\textbf{Reducing a PG to a MPG:}
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def to_mpg(self):
+    prios_k = argsort(self.P)
+    prios = self.P[prios_k]
+    prios_even = prios % 2 == 0
+    weight = [1]*len(self.O)
+    for i, pr in enumerate(prios):
+        if pr % 2 == 0:
+            weight[i] = sum(weight[:i][|$\neg$|prios_even[:i]])
+        else:
+            weight[i] = sum(weight[:i][prios_even[:i]]) + 1
+    weight[|$\neg$|prios_even] = -weight[|$\neg$|prios_even]
+    y = [0]*len(self.O)
+    y[prios_k] = weight
+    E = [[|$\times$|]*len(self.O)]*len(self.O)
+    E = y*len(self.O)
+    return MeanPayoffGame(self.O, E)
+\end{lstlisting}
+
+\textbf{L.2-3:} We produce a sorted copy, \textit{prios} of the priority list along with a list of indices that sort the original priority list.\\
+\textbf{L.4:} We make a boolean list can masks \textit{prios} wrt parity.\\
+\textbf{L.5:} We intialize the list specifically with one, since if we start with an odd number, the following even number would not actually be greater.\\
+\textbf{L.6-10:} We go through the list one by one. It the priority is even, it's value is the sum of all prior odd numbers. Since a value of $\geq0$ is winning for \textit{Max} in the MPG, reaching equality is sufficient. For odd priorities, at sum all the prior even numbers plus one, to ensure win in a MPG that would otherwise have a value of zero.\\
+\textbf{L.11:} The calculated weights so far are absolutes. We negate the priorities associated with \textit{Odd} to get the desired effect of the reduction.\\
+\textbf{L.13:} We undo the prior reindexing to sort the list.\\
+\textbf{L.14-15:} We scale the resulting list to a matrix to correspond with the edges in the MPG in a way that is congruent with the incidence matrix of the PG, i.e. we translate over the $\times$.
+\newpage
+\subsubsection{MPGs to EGs}
+
+There's two significant differences to \cite{Brim2011} compared to how we implemented the idea here.\\
+Firstly, in the original the algorithm solves four energy games at every ``level of recursion''. This means that two possible values can be ``detected'' for vertices at every level but also means that the runtime is significantly larger for every level. To depress the runtime we only run two energy games per level. This means every level is faster but also only detects for one value and we might have to iterate deeper but since deeper iteration runs on subgames it is faster.\\
+Secondly, we also extract the strategies from the subgames. Out of the original proof of the algorithm one can relatively straight forward reason that strategies on subgames are strategies in the total game.
+
+\textbf{Reducing the value \& strategy problem in a MPG to a EG:}
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def solve_both_eg_alg(O, E, lower, upper):
+    r = range(1, len(O) + 1)
+    l = r * (lower + upper) / 2
+    l1 = floor(l)
+    l2 = ceil(l)
+    ar1 = argmax(l1 / r)
+    ar2 = argmin(l2 / r)
+    a1 = [l1[ar1], r[ar1]]
+    a2 = [l2[ar2], r[ar2]]
+    e1 = (a1[1] * E) - a1[0]
+    e2 = (-a1[1] * E) + a1[0]
+    f1, s1 = EnergyGame(O, e1).solve_both()
+    f2, s2 = EnergyGame(|$\neg$|O, e2).solve_both()
+    v = [-1]*len(O)
+    s = [-1]*len(O)
+    v[(f1 != -1) & (f2 != -1)] = a1[0] / a1[1]
+    s[(f1 != -1) & (f2 != -1)] = s1 if s1 != -1 else s2
+    v1 = (f1 == -1)
+    v2 = (f2 == -1)
+    if len(v1) != 0:
+        v[v1], st = solve_both_eg_alg(O[v1], E[v1, v2)], lower, a1[0] / a1[1])
+        s[v1] = v1[st]
+    if len(v2) != 0:
+        v[v2], st = solve_both_eg_alg(O[v2], E[v2, v2)], a2[0] / a2[1], upper)
+        s[v2] = v2[st]
+    return v, s
+\end{lstlisting}
+
+\textbf{L.2-9:} First we calculate the two rational numbers closest to middle of our interval. Since actually need the numerator and denominator, we save each rational number as a tuple of those two.\\
+\textbf{L.10-13:} We calculate the two reweighted edge-matrices based on the rational number next lowest to the middle of the interval and solve them via some EG algorithm that solves for both value and optimal strategy.\\
+\textbf{L.16:} If the value of a vertex if finite for both games then the rational number we rescaled for must be the value of the corresponding vertex in the original MPG.\\
+\textbf{L.17:} The strategy of that vertex can be read from one of the games, depending on whose vertex it is.\\
+\textbf{L.20-25:} The remaining vertices get split into two recursive searches based on if their values was higher or lower than the rational number we used as a division for this level. Critically, for the ``higher'' search we use rational number that was \textit{higher} than the middle of our current interval.
+\newpage
+\subsubsection{MPGs to DPGs}
+
+The reduction from MPGs to DPGs is trivial but for completeness sake we include it:
+
+\textbf{Reducing a PG to a MPG:}
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def to_dpg(self):
+    W = max(abs(self.edges))
+    discount = 1 - (1 / (4 * (len(self.O) ** 3) * W))
+    return DiscountedPayoffGame(self.owner, self.edges, discount)
+\end{lstlisting}
+
+The owner vector and edge matrix stay exactly the same, the discount gets calculated off of the size of the graph and range of the edge-weights as described in the theory.
+\newpage
+\subsubsection{DPGs to SSGs}
+During the process of translating a DPG into an SSG edges get rewired. To be able to correctly align the vertices for the purpose of finding strategies for the DPG and for the purpose of scaling back the values to what they were previous to the translate this function also gives back \textit{strat\_map} and \textit{W} with which the strategies and values and trivially be corrected wrt the translation.
+
+\textbf{Reducing a DPG to a SSG:}
+\begin{lstlisting}[numbers=left,breaklines=true,breakatwhitespace=true,escapechar=|]
+def to_ssg(self):
+    W = max(abs(self.E, 0))
+    E = (self.E + W) / (2 * W)
+    f3 = count_nonzero(self.E)|\footnote{As in count the number of non-$\times$ edges}|
+    vertices = len(self.O) + f3
+    ssg_E = ([False]*vertices)*(vertices + 2)
+    O = self.O + [2]*f3
+    AVG = ([0]*f3)*(vertices + 2)
+    strat_map = [0]*f3
+    for i, edge in enumerate(self.E):
+        ssg_E[edge[0], i + len(self.O)] = True
+        ssg_E[i + len(self.O), edge[1]] = True
+        strat_map[i] = edge[1]
+        ssg_E[i + len(self.O), -1] = True
+        ssg_E[i + len(self.O), -2] = True
+        AVG[i, edge[1]] = self.D
+        AVG[i, -2] = (1 - self.D) * (1 - (E[edge]))
+        AVG[i, -1] = (1 - self.D) * E[edge]
+    return SimpleStochasticGame(O, ssg_E, AVG, True), strat_map, W
+\end{lstlisting}
+
+\textbf{L.2-3:} We rescale the weights to fit in the [0,1] interval appropriate for the SSG.\\
+\textbf{L.4:} We count the number of edges in the DPG. This the amount by which we need to increase the ownership vector, edge matrix and probability matrix.\\
+\textbf{L.5-9:} We prepare the aforementioned vector and matrices as well as a vector for translating back the strategies formulated in the SSG.\\
+\textbf{L.10-18:} For every edge in the DPG we add the equivalent construct in the SSG as well as it's implications in the \textit{strat\_map}.
+\newpage
 \section{Implementation}\newpage
 \section{Evaluation}
 Our goal was to compare the different algorithms used to solve problems, especially under reduction to other games, and to see how they compare. To that end we generated random games with multiple parameters and benchmarked all methods we had to solve the respective problems. For any combination of problem, parameters for generation and algorithm used to solve the problem we have $N = 100$ and the times shown repesent the average time of those 100 runs. For their generation, all games have a parameter $n =|V|$ that measures the size of the graph by means of the number of vertices and a parameter $p$ which describes the probability that any possible edge $e\in (V\times V)$ is part of the generated game, meaning the expected out-degree of every vertex is $|V|\cdot p$. Since we require for all games that each vertex has outdegree $\geq 1$, we consequently require that $\frac{1}{|V|} \leq p \leq 1$. We then assign each vertex one random edge and all other potential outgoing edges of that vertex have probability $\frac{(p\cdot |V|)-1}{|V|-1}$ of existing. $p$ can be understood as a measure of how connected a graph is. In fact, towards the extreme ends, for $p=\frac{1}{|V|}$ and sufficiently large $|V|$ one would expect a disconnected graph on one end and for $p=1$ a complete graph on the other end. Each vertex is randomly assigned to a player with equal probability, including the ``Random'' player in SSGs. Games may have additional parameters that are described seperately for each game. The parameters were chosen in a way that they intuitively represent extremes towards each end and then some reasonable middle ground. For all cases, the runtimes are either weakly dependent on $p$ other parameters or they scale monotonously wrt. to those parameters. One can therefore think of intermediate parameterizations as some interpolation between the shown values. For readability we only show some algorithms here. Those that work without reduction to another game and any other that are of interest. The full results are in the appendix.
