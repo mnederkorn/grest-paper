@@ -403,7 +403,7 @@ Now if we revert the scaling we arrive at:
 	v(v_0)\geq~&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\left(W+\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)\\
 	\geq~&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\cdot 2W
 \end{align*}
-Similarly, we can rescale by -W, such that all weights are $\leq0$ and in total we arrive at:
+Similarly, we can rescale by $-W$, such that all weights are $\leq0$ and in total we arrive at:
 \begin{gather*}
 	\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))+n(1-\lambda)\cdot 2W\\
 	\geq v(v_0)\geq\\
@@ -418,15 +418,19 @@ If we reduce a MPG to a DPG with such $\lambda$, we can deduce the value for a g
 
 \subsubsection{MPGs to EGs}\label{rescale}
 The reduction from MPGs to EGs is the one described in \cite{Brim2011}.\\
-If we play an EG on $A, w$ of a MPG, any vertex for which the value is $v_{\sigma, \tau}(v)\neq\infty$ is equal to a vertex in the MPG whose value is $v_{\sigma, \tau}(v)\geq0$, since the player can force a terminal cycle whose edge-weights sum up to $\geq0$. This effectively splits the vertices of the graph into two regions for which we know that the value is $\geq0$ for one region and $<0$ for the other.
-We can use this dichotomy of spliting the MPG into two areas together with the fact that we can rescale the edge-weights of MPGs.
-By solving these rescaled games as EGs we can further and further restrict the possible values of any given vertex in the MPG, until only one possible solution remains.
-As laid out in \hyperref[mpg_frac]{3.1.4}, the value of the vertices of a MPG are all in the set
+Any vertex in $A, w$ from which \textit{Charging}/\textit{Max} can force to reach a terminal cycle with net-weight $\geq0$ is necessarily exactly equal to a vertex with value $v(v)\geq0$ if played as a MPG and a vertex with value $v(v)\neq\infty$ if played as a EG.
+We can use this to solve for the values of $A, w$ as an EG and subsequently make inferences about which vertices have a value $\geq0$ or $<0$ if played as a MPG.
+Furthermore $w$ can be rescaled into $w' = (w\cdot q)-p$ so that the $v(v)\neq\infty$ for solving as an EG corresponds to $v(v)\geq\frac{p}{q}$ for solving as a MPG.
+This allows us to split the vertices into sets with arbitrary values $\geq\frac{p}{q}$ or $<\frac{p}{q}$.
+Given that we know, as laid out in \hyperref[mpg_frac]{3.1.4}, that the value of the vertices of a MPG are all in the set
 \begin{align*}
-	& S=\left\{\frac{p}{q}\in\mathbb{Q}\mid q\in\left[1, |V|\right]\subset\mathbb{N}\land p\in\left[-q\cdot W, q\cdot W\right]\subset\mathbb{Z} \right\}.
+	& S=\left\{\frac{p}{q}\in\mathbb{Q}\mid  -q\cdot W\leq p\leq q\cdot W\land 1\leq q\leq |V|,~p\in \mathbb{Z},~q\in\mathbb{N}\right\}.
 \end{align*}
-In particular, it is finite and after at most $log_2(|V|\cdot W)$ dichotomies, only one rational number, the value of the vertex, remains.\\
-The way we rescale the MPG is by taking the interval of the range of possible values  that are left, starting at S, and then split interval in about half by taking next lowest rational number $\frac{p}{q}\in S$ to the middle of the interval. We then rescale the edge-weights of the MPG, $w$, for the next dichotomy by $(w\cdot q)-p$ and solve it as an EG to split the vertices of the MPG into two regions with value $\geq\frac{p}{q}$ and $<\frac{p}{q}$.
+we can split the set of vertices a maximum of $\lceil log_2(|V|\cdot W)\rceil$ to be able to determine the exact rational value to each vertex if played as a MPG.
+
+The problem this leaves us with is that this still requires solving the entire Game for the values of an EG multiple times.
+
+TODO
 
 To avoid having to solve the resulting EGs for the entire graph for any subdivision of $S$, we can subdivide the graph alongside the possible interval of values. In the MPG, for a given set of strategies $\sigma, \tau$, any move will land on a vertex with the same value as the previous since the play ultimately always lands in the same terminal cycle with the same mean weight. This means that, for a fixed set of strategies, vertices with different values will necessarily be disconnected if one removes the edges that aren't in play under $\sigma, \tau$ and the values of all vertices stay the same if those edges are removed.\\
 What this allows us to do is that after every dichotomy wrt. the values, where we split the set of vertices into three sets, one with value $>\nu$, one with value $<\nu$ and one with known value $\nu$, we can restrict subsequent dichotomies to disjoint subsets of the graph in addition to halving the interval of possible values, since we know that vertices with different value, as shown to be the case by the dichotomy, have to be disconnected if unused edges are removed. This means subsequent solving via EGs happens on smaller graphs, making it faster.\newpage

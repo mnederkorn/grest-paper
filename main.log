@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.12.3)  25 MAY 2022 01:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.12.3)  26 MAY 2022 23:49
 entering extended mode
 **./main.tex
 (main.tex
@@ -1693,7 +1693,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 356--367
 [15] [16] [17] [18]
 Missing character: There is no v in font nullfont!
  [19]
-Underfull \hbox (badness 10000) in paragraph at lines 475--481
+Underfull \hbox (badness 10000) in paragraph at lines 477--483
 
  []
 
@@ -1773,7 +1773,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  46301 strings out of 478927
  1037329 string characters out of 2852061
- 1884572 words of memory out of 3000000
+ 1884566 words of memory out of 3000000
  62751 multiletter control sequences out of 15000+600000
  421235 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1821,7 +1821,7 @@ Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/Maxime
 /Users/Maxime/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols
 /msam10.pfb><C:/Users/Maxime/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/symbols/msbm10.pfb>
-Output written on main.pdf (55 pages, 824964 bytes).
+Output written on main.pdf (55 pages, 824896 bytes).
 PDF statistics:
  1372 PDF objects out of 1440 (max. 8388607)
  608 named destinations out of 1000 (max. 500000)
