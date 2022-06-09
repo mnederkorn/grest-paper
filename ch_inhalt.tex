@@ -418,22 +418,99 @@ If we reduce a MPG to a DPG with such $\lambda$, we can deduce the value for a g
 
 \subsubsection{MPGs to EGs}\label{rescale}
 The reduction from MPGs to EGs is the one described in \cite{Brim2011}.\\
+Unlike all other reductions in this paper, this particular reduction doesn't reduce a MPG to a singular EG which is equivalent to the original MPG in some sense.
+Rather it relies on repeatedly solving a rescaled EG, derived from the original MPG. Each of those solved EGs restricts the possible range of values any given vertex can assume and we repeat the process until only a single possible value remains for each vertex.
+
 Any vertex in $A, w$ from which \textit{Charging}/\textit{Max} can force to reach a terminal cycle with net-weight $\geq0$ is necessarily exactly equal to a vertex with value $v(v)\geq0$ if played as a MPG and a vertex with value $v(v)\neq\infty$ if played as a EG.
 We can use this to solve for the values of $A, w$ as an EG and subsequently make inferences about which vertices have a value $\geq0$ or $<0$ if played as a MPG.
-Furthermore $w$ can be rescaled into $w' = (w\cdot q)-p$ so that the $v(v)\neq\infty$ for solving as an EG corresponds to $v(v)\geq\frac{p}{q}$ for solving as a MPG.
-This allows us to split the vertices into sets with arbitrary values $\geq\frac{p}{q}$ or $<\frac{p}{q}$.
+Furthermore $w$ can be rescaled into $w' = (w\cdot q)-p$ such that the $v(v)\neq\infty$ of the game solving as an EG corresponds to $\geq\frac{p}{q}, <\frac{p}{q}$ of solving as a MPG.
+This allows us to determine the value of vertices as $\geq\frac{p}{q}$ or $<\frac{p}{q}$ for any arbitrary $\frac{p}{q}$.
 Given that we know, as laid out in \hyperref[mpg_frac]{3.1.4}, that the value of the vertices of a MPG are all in the set
 \begin{align*}
-	& S=\left\{\frac{p}{q}\in\mathbb{Q}\mid  -q\cdot W\leq p\leq q\cdot W\land 1\leq q\leq |V|,~p\in \mathbb{Z},~q\in\mathbb{N}\right\}.
+	& S=\left\{\frac{p}{q}\in\mathbb{Q}\mid  -q\cdot W\leq p\leq q\cdot W\land 1\leq q\leq |V|,~p\in \mathbb{Z},~q\in\mathbb{N}\right\}
 \end{align*}
-we can split the set of vertices a maximum of $\lceil log_2(|V|\cdot W)\rceil$ to be able to determine the exact rational value to each vertex if played as a MPG.
+we can repeatedly split the set of possible values a vertex can have, by solving as an EG using an adequate $\frac{p}{q}$ up to a maximum of $\lceil log_2(|V|\cdot W)\rceil$ times, to be able to determine the exact value of a vertex. The $\frac{p}{q}$ chosen is the one that splits the current $S$ in half, i.e. the mean of $S$ or if that is not an element of $S$ itself the next highest element of $S$.
 
-The problem this leaves us with is that this still requires solving the entire Game for the values of an EG multiple times.
+The problem this leaves us with is that this still requires solving EGs on the whole game graph $\lceil log_2(|V|\cdot W)\rceil$ times to get the value of a single vertex of the MPG.
 
-TODO
+To alleviate this problem we make use of an observation.\\
+While every single vertex \textit{can} have a distinct value this is rarely the case. In MPGs all vertices in the same terminal cycle and those vertices leading to that cycle have, per definition, the same value. Furthermore, as shown in \cite{Brim2011}, if subsets of vertices are shown to have a different value they may be considered as entirely disconnected games for the purpose of solving for their value and optimal strategy without affecting such strategies or values. This is particularly of interest because any $\geq\frac{p}{q}, <\frac{p}{q}$ split that results in two {non-empty subsets of vertices means we can continue our search for values and strategies on two smaller subgraphs with differently restricted possible values $S$. The \textit{smaller} being significant because it means the algorithm that solves EGs will, in sum, run faster on the two subgraphs than it would on the whole game graph once.\newpage
 
-To avoid having to solve the resulting EGs for the entire graph for any subdivision of $S$, we can subdivide the graph alongside the possible interval of values. In the MPG, for a given set of strategies $\sigma, \tau$, any move will land on a vertex with the same value as the previous since the play ultimately always lands in the same terminal cycle with the same mean weight. This means that, for a fixed set of strategies, vertices with different values will necessarily be disconnected if one removes the edges that aren't in play under $\sigma, \tau$ and the values of all vertices stay the same if those edges are removed.\\
-What this allows us to do is that after every dichotomy wrt. the values, where we split the set of vertices into three sets, one with value $>\nu$, one with value $<\nu$ and one with known value $\nu$, we can restrict subsequent dichotomies to disjoint subsets of the graph in addition to halving the interval of possible values, since we know that vertices with different value, as shown to be the case by the dichotomy, have to be disconnected if unused edges are removed. This means subsequent solving via EGs happens on smaller graphs, making it faster.\newpage
+\textbf{Example 8:} We reduce solving $MPG$ to solving via EGs.
+
+We have the given MPG. $|V|$ is 6 and $W$ is 3. The initial set of possible values of the vertices is $S=\{\frac{-18}{6}, \frac{-17}{6}, \ldots \frac{-17}{6}, \frac{18}{6}\}$. If we solve for the values of $A, w$ as an EG we get $v_0, v_1, v_3, v_4 = \infty$ and  $v_2, v_5 \neq \infty$.
+\begin{center}
+	\begin{tikzpicture}
+		\begin{scope}
+				\node[style=circle, draw=black] (A) at (0,0) {$v_0$};
+				\node[style=circle, draw=black] (B) at (1.75,1.75) {$v_1$};
+				\node[style={regular polygon,regular polygon sides=4}, draw=black] (C) at (3.5,0) {$v_2$};
+				\node[style={regular polygon,regular polygon sides=4}, draw=black] (D) at (0,-1.75) {$v_3$};
+				\node[style=circle, draw=black] (E) at (1.75,-1.75) {$v_4$};
+				\node[shape=circle, draw=black] (F) at (3.5,-1.75) {$v_5$};
+				\path [->] (A) edge node[above]{-2} (C);
+				\path [->] (A) edge[out=285, in=75] node[right]{1} (D);
+				\path [->] (B) edge node[right]{2} (A);
+				\path [->] (B) edge[out=330, in=120] node[above]{1} (C);
+				\path [->] (C) edge[out=150, in=300] node[left]{0} (B);
+				\path [->] (C) edge[out=285, in=75] node[right]{1} (F);
+				\path [->] (D) edge[out=105, in=255] node[left]{-2} (A);
+				\path [->] (D) edge node[above]{1} (E);
+				\path [->] (E) edge[out=345, in=285, looseness=4] node[right]{-2} (E);
+				\path [->] (E) edge node[above]{-3} (F);
+				\path [->] (F) edge[out=105, in=255] node[left]{2} (C);
+		\end{scope}
+		\begin{scope}[xshift=6cm]
+				\node[style=circle, draw=black] (A) at (0,0) {$v_0$};
+				\node[style=circle, draw=black] (B) at (1.75,1.75) {$v_1$};
+				\node[style={regular polygon,regular polygon sides=4}, draw=black] (C) at (3.5,0) {$v_2$};
+				\node[style={regular polygon,regular polygon sides=4}, draw=black] (D) at (0,-1.75) {$v_3$};
+				\node[style=circle, draw=black] (E) at (1.75,-1.75) {$v_4$};
+				\node[shape=circle, draw=black] (F) at (3.5,-1.75) {$v_5$};
+				\path [->] (A) edge[out=285, in=75] node[right]{1} (D);
+				\path [->] (B) edge node[right]{2} (A);
+				\path [->] (C) edge[out=285, in=75] node[right]{1} (F);
+				\path [->] (D) edge[out=105, in=255] node[left]{-2} (A);
+				\path [->] (D) edge node[above]{1} (E);
+				\path [->] (E) edge[out=345, in=285, looseness=4] node[right]{-2} (E);
+				\path [->] (F) edge[out=105, in=255] node[left]{2} (C);
+		\end{scope}
+	\end{tikzpicture}
+\end{center}
+From that we learn that in $MPG$ $v_0, v_1, v_3, v_4$ all have a value $<0$ and $v_2, v_5$ have a value $\geq0$. We also know that we can now solve for the values and optimal strategies of the two sets of vertices seperately without affecting the outcome.
+
+We continue with only $v_0, v_1, v_3, v_4$ for which we can reduce the possible values to\\
+$S=\{\frac{-18}{6}, \frac{-17}{6}, \ldots \frac{-1}{6}\}$ given that we excluded everything $\geq 0$ in the previous iteration. We set $\frac{p}{q}=\frac{-9}{6}$ and $w' = (w\cdot 6)-(-9)$, and solve as an EG again which results in $v_4 = \infty$ and $v_0, v_1, v_3 \neq \infty$.
+\begin{center}
+	\begin{tikzpicture}
+		\begin{scope}
+				\node[style=circle, draw=black] (A) at (0,0) {$v_0$};
+				\node[style=circle, draw=black] (B) at (1.75,1.75) {$v_1$};
+				\node[style={regular polygon,regular polygon sides=4}, draw=black] (D) at (0,-1.75) {$v_3$};
+				\node[style=circle, draw=black] (E) at (1.75,-1.75) {$v_4$};
+				\path [->] (A) edge[out=285, in=75] node[right]{15} (D);
+				\path [->] (B) edge node[right]{21} (A);
+				\path [->] (D) edge[out=105, in=255] node[left]{-3} (A);
+				\path [->] (D) edge node[above]{15} (E);
+				\path [->] (E) edge[out=345, in=285, looseness=4] node[right]{-3} (E);
+		\end{scope}
+		\begin{scope}[xshift=6cm]
+				\node[style=circle, draw=black] (A) at (0,0) {$v_0$};
+				\node[style=circle, draw=black] (B) at (1.75,1.75) {$v_1$};
+				\node[style={regular polygon,regular polygon sides=4}, draw=black] (D) at (0,-1.75) {$v_3$};
+				\node[style=circle, draw=black] (E) at (1.75,-1.75) {$v_4$};
+				\path [->] (A) edge[out=285, in=75] node[right]{15} (D);
+				\path [->] (B) edge node[right]{21} (A);
+				\path [->] (D) edge[out=105, in=255] node[left]{-3} (A);
+				\path [->] (E) edge[out=345, in=285, looseness=4] node[right]{-3} (E);
+		\end{scope}
+	\end{tikzpicture}
+\end{center}
+$v_0, v_1, v_3$ must have value $\geq \frac{-9}{6}$ (and $<0$ given the previous step) and $v_4$ must have value $<\frac{-9}{6}$.
+
+We repeat for $v_0, v_1, v_3$ with $S=\{\frac{-9}{6}, \frac{-8}{6}, \ldots \frac{-1}{6}\}$ and $\frac{p}{q}=\frac{-5}{6}$ then $S=\{\frac{-5}{6}, \frac{-4}{6}, \ldots \frac{-1}{6}\}$ and $\frac{p}{q}=\frac{-3}{6}$ then finally $S=\{\frac{-3}{6}, \frac{-2}{6}, \frac{-1}{6}\}$ and $\frac{p}{q}=\frac{-2}{6}$ which only leaves $S=\{\frac{-3}{6}\}$ which gives of the value of $v_0, v_1, v_3$ as $-0.5$ under the original MPG.\\
+Similarly we chase the branches of the binary tree for $v_2, v_5$ from the first step and $v_4$ from the second step until we ultemately find their value to be $1.5$ and $-2$ respectively.\newpage
+
 \subsubsection{DPGs to SSGs}
 The reduction from DPGs to SSGs is the one described in \cite{ZWICK1996343}.\\
 The values of DPGs range from $-W$ to $W$ whereas in SSGs they range from $0$ to $1$.
@@ -448,7 +525,7 @@ The equivalent aspect of the weight of the edge in the DPG, $w(e)$, also needs t
 			\node[style={regular polygon,regular polygon sides=4}, draw=black,minimum size=34pt] (u) at (0,0) {$u$};
 			\node[style={regular polygon,regular polygon sides=4},  draw=black,minimum size=34pt] (v) at (1.75,0) {$v$};
 			\path[->] (u) edge node[above] (3) {$w$} (v);
-			v			\graphboxthick[boxeins]{(u) (v) (3)}
+			\graphboxthick[boxeins]{(u) (v) (3)}
 		\end{scope}
 		\begin{scope}[shift={($(boxeins.east)+(1.5,0)$)}]
 			\node[style={regular polygon,regular polygon sides=4}, draw=black,minimum size=34pt] (u) at (0,0) {$u$};
