@@ -42,7 +42,7 @@ An arena is an extension a Directed Graph, where the set of Vertices, $V$, is pa
 Formally, let $(V,E)$ be a non-trivial Directed Graph, $V_0\cup V_1 = V,~V_0\cap V_1 = \emptyset$ be a partition of V and for all $v\in V\colon post(v)\ne \emptyset$,
 then $A=(V,(V_0,V_1),E)$ is an Arena.
 
-\begin{wrapfigure}[5]{l}{4.5cm}
+\begin{wrapfigure}[6]{l}{4.5cm}
 	\begin{tikzpicture}
 		\node[style={regular polygon,regular polygon sides=4}, draw=black] (A) at (0,0) {$v_0$};
 		\node[style={regular polygon,regular polygon sides=4}, draw=black] (B) at (1.75,0) {$v_1$};
@@ -68,7 +68,7 @@ An Arena
 	A=(\{v_0,v_1,v_2,v_3,v_4\},(\{v_0,v_1\},\{v_2,v_3,v_4\}),\\
 	\{(v_0,v_1),(v_0,v_3),(v_1,v_2),(v_2,v_1),\\
 	(v_2,v_4),(v_4,v_4),(v_1,v_3),(v_3,v_3)\})
-\end{gather*}
+\end{gather*}\\
 \subsection{Positions, Moves}
 Starting at $v_0\in V$, a \textit{position} $\pi_i=(v_0, v_1, \ldots, v_i)$ in a Game describes a finite path on the underlying graph, for which $\forall n\in\left\{0, ..., i-1\right\}\colon (v_n,v_{n+1})\in E$. E.g. in Fig.~1 starting at $v_0$, $(v_0,v_1,v_2,v_4)$ could be a play.\\
 A \textit{move} is an extension of a position in the graph by one more step. E.g. in Fig.~1 $(v_0,v_1,v_2)\mapsto (v_0,v_1,v_2,v_4)$ could be a move. Player i chooses the n-th move $(\ldots, v_{n-1})\mapsto (\ldots, v_{n-1}, v_n)$ for $v_{n-1}\in V_i\in (V_0,V_1)$.
@@ -93,7 +93,7 @@ Let $\pi_{\sigma, \tau}(PG, v_0)=\langle v_0, v_1, \ldots\rangle$ be the \textit
 	\{i\in \{0, 1, \ldots, \left|V\right|\}\mid\forall j \in \mathbb{N}_0\colon \exists n\in \mathbb{N}_0\colon j<\left|\langle v\in \langle v_0, \ldots, v_n\rangle\colon p(v)=i \rangle\right|\}
 \end{gather*}
 be the set of priorities that appear arbitrarily often in the play.\\
-If $max(\#_\infty(\pi_{\sigma, \tau}(PG, v_0)))\coloneqq v_{\sigma,\tau}(v_0)$, the value of vertex $v_0$ is even, then \textit{Even} wins and vice versa. Optimal strategies for \textit{Even}/\textit{Odd} are those that result in the most starting vertices resulting in an even/odd value.
+If $\Upsilon_{\sigma,\tau}(v_0)\coloneqq max(\#_\infty(\pi_{\sigma, \tau}(PG, v_0)))$, the value of vertex $v_0$ under $\sigma, \tau$ is even, then \textit{Even} wins and vice versa. Optimal strategies for \textit{Even}/\textit{Odd} maximize the amount of starting vertices resulting in an even/odd value respectively.
 
 \begin{wrapfigure}[9]{l}{5.5cm}
 	\begin{tikzpicture}
@@ -120,7 +120,7 @@ If $max(\#_\infty(\pi_{\sigma, \tau}(PG, v_0)))\coloneqq v_{\sigma,\tau}(v_0)$, 
 
 \textbf{Example 2:}
 
-Playing $PG$ with $\sigma=\{(v_0,v_1),(v_2,v_5),(v_3,v_4),(v_5,v_2)\}$ and $\tau=\{(v_1,v_0),(v_4,v_1)\}$, the respective optimal strategies, results in play $\pi_{\sigma, \tau}(PG, v_0)=\langle v_0, v_1, v_0, ..\rangle$ for which $v_{\sigma,\tau}(v_0)=5$ is odd and the play is therefore winning for \textit{Odd}.
+Playing $PG$ with $\sigma=\{(v_0,v_1),(v_2,v_5),(v_3,v_4),(v_5,v_2)\}$ and $\tau=\{(v_1,v_0),(v_4,v_1)\}$, the respective optimal strategies, results in play $\pi_{\sigma, \tau}(PG, v_0)=\langle v_0, v_1, v_0, ..\rangle$ for which $\Upsilon_{\sigma,\tau}(v_0)=5$ is odd and the play is therefore winning for \textit{Odd}.
 \subsubsection{Mean Payoff Games}
 Mean Payoff Games are played by two players, \textit{Max} or Player 0 ($\Square$) and \textit{Min} or Player 1 ($\Circle$).
 A Mean Payoff Game, $MPG = (A,w)$, is played on an Arena $A$ and an edge-weight function $w\colon E\rightarrow\{-W, \ldots, -1, 0, 1, \ldots, W\}$, $W\in \mathbb{N}_0$.\newline
@@ -128,7 +128,7 @@ A Mean Payoff Game, $MPG = (A,w)$, is played on an Arena $A$ and an edge-weight 
 \begin{align*}
 	\liminf\limits_{n\rightarrow \infty} \left(\dfrac{1}{n}\sum_{i=0}^{n-1}w((v_i,v_{i+1}))\right).
 \end{align*}
-We call this the \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. Given that those values are real numbers, we will round them from here on out. Optimal strategies are those that maximize/minimize the mean payoff for a given MPG regardless of the initial vertex.
+We call this the \textit{value} $\Upsilon_{\sigma,\tau}(v_0)$ of a vertex $v_0$. Optimal strategies are those that maximize/minimize the value of the vertices.
 
 \begin{wrapfigure}[9]{l}{4.5cm}
 	\begin{tikzpicture}
@@ -155,7 +155,7 @@ A Mean Payoff Game\\
 $MPG=(A,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\})$.\\
 Playing $MPG$ with $\sigma=\{(v_0,v_0)\}$ and\newline
 $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values\\
-$v_{\sigma,\tau}\colon v_0\mapsto 2, v_1\mapsto 2, v_2\mapsto -4, v_3\mapsto 2, v_4\mapsto 1$\\\\\\
+$\Upsilon_{\sigma,\tau}\colon v_0\mapsto 2, v_1\mapsto 2, v_2\mapsto -4, v_3\mapsto 2, v_4\mapsto 1$\\\\\\
 \subsubsection{Energy Games}
 Energy Games are played by two players, \textit{Charging} or Player 0 ($\Square$) and \textit{Depleting} or Player 1 ($\Circle$).
 An Energy Game, $EG = (A,w)$, is played on an Arena $A$ and an edge-weight function $w\colon E\rightarrow\{-W, \ldots, -1, 0, 1, \ldots, W\}$, $d\in \mathbb{N}_0$.\newline
@@ -163,9 +163,9 @@ An Energy Game, $EG = (A,w)$, is played on an Arena $A$ and an edge-weight funct
 \begin{align*}
 	\forall k\in\mathbb{N}_0\colon\left(\sum_{i=0}^{k}w((v_i,v_{i+1}))\right)+c\geq0.
 \end{align*}
-We call the smallest inital credit that still maintains the winning condition for a given play the \textit{minimum initial credit} or \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$. If no such value exists, e.g. when the vertex is of \textit{Depleting} and has a reflexive edge with negative weight, we write $v_{\sigma,\tau}(v)=\infty$. For any given position $\langle v_0, v_1, \ldots, v_k\rangle$ in a play we call $\left(\sum_{i=0}^{k-1}w((v_i,v_{i+1}))\right) + c$ the \textit{energy level} at that position. Keep in mind that \textit{Charging} doesn't necessarily aim to maximise their energy level at \textit{any} specific position but rather to maintain a non-negative energy level at \textit{every} position.
+We call the smallest inital credit that can sustain the winning condition for a given play the \textit{minimum initial credit} or \textit{value} $\Upsilon_{\sigma,\tau}(v)$ of a vertex $v$. If no such value exists, e.g. when the vertex is of \textit{Depleting} and has a reflexive edge with negative weight, we write $\Upsilon_{\sigma,\tau}(v)=\infty$. For any given position $\langle v_0, v_1, \ldots, v_k\rangle$ in a play we call $\left(\sum_{i=0}^{k-1}w((v_i,v_{i+1}))\right) + c$ the \textit{energy level} at that position. Keep in mind that \textit{Charging} doesn't necessarily aim to maximise their energy level at any specific position but rather to maintain a non-negative energy level at \textit{every} position.
 
-The goal for \textit{Charging} is to avoid getting trapped in cycles with overall negative edge-weight, as these can deplete any initial credit given, as well as to minimize the initial credit necessary to the compliant with the winning condition in all other cycles.
+The goal for \textit{Charging} is to avoid getting trapped in cycles with net negative edge-weight, as these can deplete any initial credit given, as well as to minimize the initial credit necessary to be compliant with the winning condition in all other cycles.
 Conversely, the goal for \textit{Depleting} is to trap \textit{Charging} in negative cycles or at least to maximize the initial credit necessary for \textit{Charging} to reach a non-negative cycle.
 Optimal strategies are those that minimize the initial credit necessary for \textit{Charging} and those that either deny the winning condition entirely or maximize the initial credit necessary for \textit{Depleting}.
 
@@ -173,7 +173,7 @@ Optimal strategies are those that minimize the initial credit necessary for \tex
 
 We reuse $A$ and $w$ of Example 3 and create an Energy Game\\
 $EG=(A,0,4,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\})$.
-Playing $EG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_3)\}$, respective optimal strategies, results in the values $v_{\sigma,\tau}\colon v_0\mapsto 0,v_1\mapsto 0,v_2\mapsto \infty,v_3\mapsto 0,v_4\mapsto 1$.
+Playing $EG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_3)\}$, respective optimal strategies, results in the values $\Upsilon_{\sigma,\tau}\colon v_0\mapsto 0,v_1\mapsto 0,v_2\mapsto \infty,v_3\mapsto 0,v_4\mapsto 1$.
 \subsubsection{Discounted Payoff Games}
 Discounted Payoff Games are played by two players, \textit{Max} or Player 0 ($\Square$) and \textit{Min} or Player 1 ($\Circle$).
 A Discounted Payoff Game, $DPG = (A,w,\lambda)$, is played on an Arena $A$, an edge-weight function $w\colon E\rightarrow\{-W, \ldots, -1, 0, 1, \ldots, W\}$, $d\in \mathbb{N}_0$ and a discount factor $0<\lambda<1$.\newline
@@ -181,21 +181,23 @@ A Discounted Payoff Game, $DPG = (A,w,\lambda)$, is played on an Arena $A$, an e
 \begin{align*}
 	(1-\lambda)\left(\sum_{i=0}^{\infty}\lambda^i\cdot w((v_i,v_{i+1}))\right).
 \end{align*}
-Again we call this the \textit{value} $v_{\sigma,\tau}(v)$ of a vertex $v$, we will round them from here on out. Optimal strategies are those that maximize/minimize the discounted payoff for a given MPG regardless of the initial vertex.
+Again we call this the \textit{value} $\Upsilon_{\sigma,\tau}(v)$ of a vertex $v$, we will round them from here on out. Optimal strategies are those that maximize/minimize the discounted payoff for a given MPG regardless of the initial vertex.
 
 \textbf{Example 5:}
 
 Let us again reappropriate Arena $A$ and edge-weight function $w$ and create a Discounted Payoff Game $DPG=(A,\{((v_0,v_0), 2),((v_1,v_0), 4), \ldots\}, 0.95)$.\\
-Playing $DPG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}\colon v_0\mapsto 2,v_1\mapsto 2.1,v_2\mapsto -4,v_3\mapsto 1.95,v_4\mapsto 1$.
+Playing $DPG$ with $\sigma=\{(v_0,v_0)\}$ and $\tau=\{(v_1,v_0),(v_2,v_2),(v_3,v_0),(v_4,v_4)\}$, the respective optimal strategies, results in the values $\Upsilon_{\sigma,\tau}\colon v_0\mapsto 2,v_1\mapsto 2.1,v_2\mapsto -4,v_3\mapsto 1.95,v_4\mapsto 1$.
 \subsubsection{Simple Stochastic Games}
 Simple Stochastic Games are played by two players, \textit{Max} or Player 0 ($\Square$) and \textit{Min} or Player 1 ($\Circle$).
 A Simple Stochastic Game, $SSG = (G, (V_{0}, V_{1}, V_{2}), \mathfrak{0}, \mathfrak{1}, p)$, is played on a Directed Graph G, with a partition $(V_{0}, V_{1}, V_{2})$, two sink vertices $\mathfrak{0}, \mathfrak{1}$ and a probability function $p\colon V_2\rightarrow (V\rightarrow [0,1])$. We require that the probabilites of all outgoing edges of each $V_2$ vertex sum to 1: $\forall v\in V_2\colon\sum_{u \in V}p(v)(u)=1$ and that $\forall (u,v)\in(V_2\times V)\setminus E\colon p_u(v)=0$.
 On vertices $v\in V_2$, called \textit{Random} ($\Diamond$) vertices, the next vertex gets chosen according to the probability function $p_v\colon V\rightarrow[0,1]$ rather than a player.
 We also require, like for Arenas, that the out-degree of every vertex is at least one. For $\mathfrak{0}, \mathfrak{1}$ it is exactly one with each only having a reflexive edge.\newline
 \textit{Max} wins if the $\mathfrak{1}$ sink is reached, \textit{Min} wins if the $\mathfrak{0}$ sink is reached or the game doesn't reach a sink vertex.
-Since the result of a play $\pi_{\sigma, \tau}(SSG, v_0)$ can be probablistic, it is assigned a probabilty to reach the $\mathfrak{1}$ sink rather than a fixed value. We display this probability as a rounded real number.
+Since the result of a play $\pi_{\sigma, \tau}(SSG, v_0)$ can be probablistic, it is assigned a probabilty to reach the $\mathfrak{1}$ sink rather than a fixed value.
 We say that a SSG is \textit{stopping} if for every possible combination of strategies $\sigma, \tau$, there still is a path to one of the sink vertices. All SSGs we will consider from here on out will be stopping-SSGs.\\
-The objective for \textit{Max} in a stopping-SSG is to maximize the chance to reach the $\mathfrak{1}$ vertex and for \textit{Min} to reach the $\mathfrak{0}$ vertex. Optimal strategies are those that maximize the chance to reach the desired sink-vertex of the respective player.\\
+The value $\Upsilon_{\sigma,\tau}(v)$ of a vertex $v$ is the probability to reach the $\mathfrak{1}$ sink vertex.
+The objective for \textit{Max} in a stopping-SSG is to maximize the chance to reach the $\mathfrak{1}$ vertex and for \textit{Min} to reach the $\mathfrak{0}$ vertex. Optimal strategies are those that maximize the chance to reach the desired sink-vertex of the respective player.
+
 \begin{wrapfigure}[7]{l}{5cm}
 	\begin{tikzpicture}
 		\node[style={regular polygon,regular polygon sides=4}, draw=black] (A) at (0,0) {$v_0$};
@@ -228,7 +230,7 @@ A Simple Stochastic Game
 	\{(v_1,\{\textcolor{c1}{(\mathfrak{0},.53)},\textcolor{c3}{(\mathfrak{1},.05)},\textcolor{c2}{(v_3,.42)}\}),\\
 	(v_3,\{\textcolor{c5}{(\mathfrak{0},.3)},\textcolor{c4}{(v_0,.16)},\textcolor{c6}{(v_2,.55)\})}\}).\\
 \end{gather*}\\
-Playing $SSG$ with $\sigma=\{(v_0,v_1)\}$ and $\tau=\{(v_2,v_0)\}$, the respective optimal strategies, results in the values $v_{\sigma,\tau}\colon v_0\mapsto .07,v_1\mapsto .07,v_2\mapsto .07,v_3\mapsto .05,\mathfrak{0}\mapsto 0,\mathfrak{1}\mapsto 1$.
+Playing $SSG$ with $\sigma=\{(v_0,v_1)\}$ and $\tau=\{(v_2,v_0)\}$, the respective optimal strategies, results in the values $\Upsilon_{\sigma,\tau}\colon v_0\mapsto .07,v_1\mapsto .07,v_2\mapsto .07,v_3\mapsto .05,\mathfrak{0}\mapsto 0,\mathfrak{1}\mapsto 1$.
 \subsection{Reductions}
 A \textit{reduction} describes an algorithm with which we can transform (reduce) one class of problems to another. For our purposes, we choose target problem classes that are already solved. Aside from reducing to an already solved problem class and therefore, per definition, also solving the original problem class, reducing and subsequent solving of instances of the original problem may be faster than any attempt to directly solve the original problem without reducing to another intermediary infinite game problem.\newline
 Formally, we express our problem classes as formal languages $A$ and $B$ over the alphabets $\Sigma^*$ and $\Gamma^*$. If $f$ is totally computable and
@@ -237,7 +239,7 @@ Formally, we express our problem classes as formal languages $A$ and $B$ over th
 	\forall w\in\Sigma^*\colon w\in A \iff f(w)\in B
 \end{gather*}
 then $f$ is a reduction from $\Sigma^*$ to $\Gamma^*$.\newline
-In practice our formal languages $A$ and $B$ will be some instances of types of infinite games together with statements about such games, such as the values under optimal play or optimal strategies. The reduction will then draw an equivalence to the other infinite game, e.g. if $w=``v(v_u)=5$ in $G$'' is a word in $A$ then $f(w) = ``v(v_v)=16$ in $H$'' is a word in $B$.\newpage
+In practice our formal languages $A$ and $B$ will be some instances of types of infinite games together with statements about such games, such as the values under optimal play or optimal strategies. The reduction will then draw an equivalence to the other infinite game, e.g. if $w=``\Upsilon(v_u)=5$ in $G$'' is a word in $A$ then $f(w) = ``\Upsilon(v_v)=16$ in $H$'' is a word in $B$.\newpage
 \section{Solutions and Reductions in Theory}
 Before we go into the specifics of the implementation of the algorithms used to solve the problems and the reductions we first want to comprehensively explain the theory behind each of them.
 \subsection{Solutions in Theory}
@@ -372,7 +374,7 @@ Recall from 3.2.1 that a play in an Arena eventually results in a repeat vertex 
 \end{align*}
 For DPGs we have the value being:
 \begin{align}
-	v(v_0)&=~(1-\lambda)\sum_{i=0}^{\infty}\left(\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
+	\Upsilon(v_0)&=~(1-\lambda)\sum_{i=0}^{\infty}\left(\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
 	\intertext{We want to rearrange that value, in dependance of $\lambda$, as to approach the value of an equivalent MPG. We factor out the part that pertains to the path of length $k$ that leads us to our terminal cycle.}
 	&=~(1-\lambda)\sum_{i=k}^{\infty}\left(\lambda^i\cdot w((v_i,v_{i+1}))\right)+(1-\lambda)\sum_{i=0}^{k-1}\left(\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
 	&=~(1-\lambda)\lambda^k\sum_{i=0}^{\infty}\left(\lambda^{i}\cdot w((v_{i+k},v_{i+1+k}))\right)+(1-\lambda)\sum_{i=0}^{k-1}\left(\lambda^i\cdot w((v_i,v_{i+1}))\right)\nonumber\\
@@ -388,9 +390,9 @@ Now if we let $\lambda\to 1^-$ we get:
 \end{align*}\footnotetext{$\lim_{\lambda\to 1^-}\frac{1-\lambda}{1-\lambda^l}=\frac{1}{l}$ via L'H\^opital's rule}
 
 We can't let $\lambda$ be 1, since both the normalizing $(1-\lambda)$ would result in a division by zero as well as the actual series diverging, we have to use a $\lambda<1$ that is close enough to 1, and by extension the value close enough to that of the equivalent MPG, as to enable us to truncate to the nearest rational number as was done in 3.1.4.1.
-We can take \hyperref[l_eins]{(1)} and add W to all the weights. This makes is so that all weights are effectively $\geq0$, the value of the game is increased by $W$ and we can simplify to a lower bound of $v(v_0)$:
+We can take \hyperref[l_eins]{(1)} and add W to all the weights. This makes is so that all weights are effectively $\geq0$, the value of the game is increased by $W$ and we can simplify to a lower bound of $\Upsilon(v_0)$:
 \begin{align*}
-	&v(v_0)+W\\
+	&\Upsilon(v_0)+W\\
 	=~&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\sum_{j=0}^{l-1}\left(\lambda^{j}\cdot \left(w((v_{j+k},v_{j+1+k}))+W\right)\right)+(1-\lambda)\sum_{i=0}^{k-1}\left(\lambda^i\cdot \left(w((v_i,v_{i+1}))+W\right)\right)\\
 	\geq~&\frac{(1-\lambda)\lambda^k}{1-\lambda^l}\sum_{j=0}^{l-1}\left(\lambda^{j}\cdot \left(w((v_{j+k},v_{j+1+k}))+W\right)\right)\\
 	\geq~&\frac{(1-\lambda)\lambda^{k+l-1}}{1-\lambda^l}\sum_{j=0}^{l-1}\left(w((v_{j+k},v_{j+1+k}))+W\right)\\
@@ -400,13 +402,13 @@ We can take \hyperref[l_eins]{(1)} and add W to all the weights. This makes is s
 \end{align*}
 Now if we revert the scaling we arrive at:
 \begin{align*}
-	v(v_0)\geq~&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\left(W+\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)\\
+	\Upsilon(v_0)\geq~&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\left(W+\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))\right)\\
 	\geq~&\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\cdot 2W
 \end{align*}
 Similarly, we can rescale by $-W$, such that all weights are $\leq0$ and in total we arrive at:
 \begin{gather*}
 	\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))+n(1-\lambda)\cdot 2W\\
-	\geq v(v_0)\geq\\
+	\geq \Upsilon(v_0)\geq\\
 	\frac{1}{l}\sum_{j=0}^{l-1}w((v_{j+k},v_{j+1+k}))-n(1-\lambda)\cdot 2W
 \end{gather*}
 From 3.1.4 we know that the minimum distance between two valid values of a MPG is $\frac{1}{n(n-1)}$, therefore we want to set $\lambda$ in such a way as to constrict the size of the just derived interval to at most:
@@ -421,9 +423,9 @@ The reduction from MPGs to EGs is the one described in \cite{Brim2011}.\\
 Unlike all other reductions in this paper, this particular reduction doesn't reduce a MPG to a singular EG which is equivalent to the original MPG in some sense.
 Rather it relies on repeatedly solving a rescaled EG, derived from the original MPG. Each of those solved EGs restricts the possible range of values any given vertex can assume and we repeat the process until only a single possible value remains for each vertex.
 
-Any vertex in $A, w$ from which \textit{Charging}/\textit{Max} can force to reach a terminal cycle with net-weight $\geq0$ is necessarily exactly equal to a vertex with value $v(v)\geq0$ if played as a MPG and a vertex with value $v(v)\neq\infty$ if played as a EG.
+Any vertex in $A, w$ from which \textit{Charging}/\textit{Max} can force to reach a terminal cycle with net-weight $\geq0$ is necessarily exactly equal to a vertex with value $\Upsilon(v)\geq0$ if played as a MPG and a vertex with value $\Upsilon(v)\neq\infty$ if played as a EG.
 We can use this to solve for the values of $A, w$ as an EG and subsequently make inferences about which vertices have a value $\geq0$ or $<0$ if played as a MPG.
-Furthermore $w$ can be rescaled into $w' = (w\cdot q)-p$ such that the $v(v)\neq\infty$ of the game solving as an EG corresponds to $\geq\frac{p}{q}, <\frac{p}{q}$ of solving as a MPG.
+Furthermore $w$ can be rescaled into $w' = (w\cdot q)-p$ such that the $\Upsilon(v)\neq\infty$ of the game solving as an EG corresponds to $\geq\frac{p}{q}, <\frac{p}{q}$ of solving as a MPG.
 This allows us to determine the value of vertices as $\geq\frac{p}{q}$ or $<\frac{p}{q}$ for any arbitrary $\frac{p}{q}$.
 Given that we know, as laid out in \hyperref[mpg_frac]{3.1.4}, that the value of the vertices of a MPG are all in the set
 \begin{align*}
@@ -544,7 +546,7 @@ The equivalent aspect of the weight of the edge in the DPG, $w(e)$, also needs t
 		\node at ($(boxzwei.north)+(0,0.3)$) {$SSG$};
 	\end{tikzpicture}
 \end{center}
-Random vertices then have value $v(u')=\lambda\cdot v(v)+(1-\lambda)\cdot w'(e)$ which exactly equal to the value of $u$ in the DPG with rescaled edge-weights given that $e$ is chosen as the outgoing edge. Since all outgoing edges will be replaced by this construct, the value of $u$ is equal in the rescaled DPG and the SSG regardless of the strategies played.
+Random vertices then have value $\Upsilon(u')=\lambda\cdot \Upsilon(v)+(1-\lambda)\cdot w'(e)$ which exactly equal to the value of $u$ in the DPG with rescaled edge-weights given that $e$ is chosen as the outgoing edge. Since all outgoing edges will be replaced by this construct, the value of $u$ is equal in the rescaled DPG and the SSG regardless of the strategies played.
 To translate back the optimal strategies generated on SSG one simply has to translate back every $(u,u')$ that is part of a strategy in SSG to it's equivalent $(u,v)$ in the DPG.\newpage
 \section{Solutions and Reductions in Practice}
 While the theoretical descriptions of the algorithms do a good job of explaining the idea of how the approaches work or ought to work, they may leave some room for interpretation about how exactly those should be implemented. We want to explain in detail how specifically we implemented them and what accommodations we made for the sake of performance.
